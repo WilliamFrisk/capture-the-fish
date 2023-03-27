@@ -1,6 +1,6 @@
 # Capture The Fish
 
-A project created in the course Agile Software project management.
+A project created in the course Agile Software Project Management at Chalmers University of Technology.
 The aim is to create a game which raises awareness for the UNs sustainability goals in a fun and engaging way.
 
 - Code is located in `capture-the-fish/code`
