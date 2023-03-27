@@ -67,7 +67,7 @@ When implementing a new feature or addressing an issue follow these steps:
 5. Your changes are now ready to be merged into the master branch. If you're unsure whether your code will work or just want another pair of eyes
    you can wait for someone else to review your pull request and ask them to merge it
 
-**Note:** When merging it is possible that merge conflicts arise. This are the most confusing part of git and if you're unsure about how to
+**Note:** When merging it is possible that merge conflicts arise. This is the most confusing part of git and if you're unsure about how to
 resolve these you can ask William
 
 ## Authors
