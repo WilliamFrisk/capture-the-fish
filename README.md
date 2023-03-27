@@ -57,6 +57,7 @@ When implementing a new feature or addressing an issue follow these steps:
 
 1. When you want to integrate your changes into the main app you need to go on to the GitHub website and navigate to "[Pull requests](https://github.com/WilliamFrisk/capture-the-fish/pulls)"
    and click "New pull request"
+2. Select which branch you would like to merge in the selector to the right of the arrow (make sure base is master)
 
 ## Authors
 
