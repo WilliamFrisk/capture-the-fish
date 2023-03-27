@@ -18,7 +18,7 @@ The aim is to create a game which raises awareness for the UNs sustainability go
 
 1. Open `capture-the-fish/code` in IntelliJ (This is done automatically if you've just followed the installing instructions)
 2. Click the button labeled "gradle" in the upper right side of the window
-3. Navigate the gradle hierarchy to `code/desktop/Tasks/other` then press the run `run` task
+3. Navigate the gradle hierarchy to `code/desktop/Tasks/other` then press the `run` task
 
 _If you would rather run the code in a local web server follow the same steps but navigate to_
 `code/html/Tasks/gwt` _and press the_ `superDev` _task_
@@ -44,20 +44,26 @@ When implementing a new feature or addressing an issue follow these steps:
 ### 2. Writing code
 
 1. After you've created a new branch or navigated onto to an already created branch you would like to make changes on you can start writing code
-2. Commit changes using `git commit -m <message>` or by clicking "Commit to 'branch name'" in GitHub Desktop. Give your commits descriptive messages
+2. If you've added or created a new file add them to git using `git add <file-name>`
+
+   **Note:** This step is not necessary if you use GitHub Desktop
+
+3. Commit changes using `git commit -m <message>` or by clicking "Commit to 'branch name'" in GitHub Desktop. Give your commits descriptive messages
 
    **Note:** Make sure to commit your changes regularly, many times in a single coding session (e.g after the implementation of (or part of) a new
    feature).
 
-3. When your done you need to push the code to the remote repo (the shared stuff)
-   - If you are using the cli enter `git push origin <branch-name>`
+4. When your done you need to push the code to the remote repo (the shared stuff)
+   - If you are using the CLI enter `git push origin <branch-name>`
    - If you are using GitHub Desktop click "Push origin"
 
-### 3. Creating a pull request and merging
+### 3. Creating a pull request and merging _Work In Progress_
 
 1. When you want to integrate your changes into the main app you need to go on to the GitHub website and navigate to "[Pull requests](https://github.com/WilliamFrisk/capture-the-fish/pulls)"
    and click "New pull request"
 2. Select which branch you would like to merge in the selector to the right of the arrow (make sure base is master)
+3. Add title to the pull request and a (high-level) description of the changes you've made
+4.
 
 ## Authors
 
@@ -68,6 +74,6 @@ When implementing a new feature or addressing an issue follow these steps:
 - Vendela Palmqvist - @vendelap
 - Fanny Sjöström - @fannysj
 - Jonathan Svantesson - @MorrisChalmers
-- Jacob Westerberg - @Jaegaen
+- Jacob Westerberg - @Jaegaren
 
 <sub>Last updated 2023-03-27</sub>
