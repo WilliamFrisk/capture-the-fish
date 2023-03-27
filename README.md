@@ -49,7 +49,13 @@ When implementing a new feature or addressing an issue follow these steps:
    **Note:** Make sure to commit your changes regularly, many times in a single coding session (e.g after the implementation of (or part of) a new
    feature).
 
-3. When your done you should go on to the GitHub website and navigate to "[Pull requests](https://github.com/WilliamFrisk/capture-the-fish/pulls)"
+3. When your done you need to push the code to the remote repo (the shared stuff)
+   - If you are using the cli enter `git push origin <branch-name>`
+   - If you are using GitHub Desktop click "Push origin"
+
+### 3. Creating a pull request and merging
+
+1. When you want to integrate your changes into the main app you need to go on to the GitHub website and navigate to "[Pull requests](https://github.com/WilliamFrisk/capture-the-fish/pulls)"
    and click "New pull request"
 
 ## Authors
