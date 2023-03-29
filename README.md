@@ -4,6 +4,8 @@ A project created in the course Agile Software Project Management at Chalmers Un
 The aim is to create a game which raises awareness for the UNs sustainability goals in a fun and engaging way.
 
 - Code is located in `capture-the-fish/code`
+   - Assets (images and sound) are located in `capture-the-fish/code/assets`
+   - Game implementation is written in `capture-the-fish/code/core/src`
 - Deliverables are located in `capture-the-fish/deliverables`
 - Kanban board can be found on [trello](https://trello.com/b/x1DcQ0eq)
 
