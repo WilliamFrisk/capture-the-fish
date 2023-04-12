@@ -1,4 +1,4 @@
-package com.group11.ctfish;
+package com.group11.ctfish.model;
 
 public class Fish {
     private int xPos;

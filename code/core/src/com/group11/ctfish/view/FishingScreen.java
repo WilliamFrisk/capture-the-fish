@@ -1,12 +1,12 @@
-package com.group11.ctfish;
+package com.group11.ctfish.view;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.Fish;
 
 public class FishingScreen implements Screen {
     final CtFish game;
