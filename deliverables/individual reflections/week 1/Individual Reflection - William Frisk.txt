@@ -1,0 +1,13 @@
+This sprint was shorter than coming sprints because of the Easter holidays 
+so I didn't achieve as much as I want to in the future. My focus right now 
+is getting a deeper understanding of libGDX which is the java library 
+we're using to develop our game. 
+
+This sprint my contributions were mainly 
+technical. I developed a first, very simple, draft of our game. I also 
+helped start building our system design using a UML diagram.
+
+I feel like I can provide a lot of technical expertise to the group so that is what I 
+aim to do over the coming sprint. However I do feel like I'm not as 
+engaged in the overall project scope as I could be so that is an area in 
+which I can improve over the coming sprint.
