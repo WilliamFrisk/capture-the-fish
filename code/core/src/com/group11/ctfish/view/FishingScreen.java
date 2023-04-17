@@ -1,16 +1,24 @@
 package com.group11.ctfish.view;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.group11.ctfish.CtFish;
-import com.group11.ctfish.model.Fish;
+import com.group11.ctfish.model.fish.Fish;
 
-import javax.swing.*;
+import com.group11.ctfish.model.fish.FishFactory;
+import com.group11.ctfish.model.fish.properties.Collectable;
+import com.group11.ctfish.model.fish.properties.Endangered;
+import com.group11.ctfish.model.fish.properties.FishProperty;
+import com.group11.ctfish.model.fish.sizes.FishSize;
+import com.group11.ctfish.model.fish.sizes.Large;
+import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.model.fish.sizes.Small;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class FishingScreen implements Screen {
@@ -26,20 +34,50 @@ public class FishingScreen implements Screen {
 
     final CtFish game;
 
+
     OrthographicCamera camera;
-    Fish[] fishes = {new Fish(0, 10), new Fish(-400, 50), new Fish(-800, 100)};
+    FishProperty endangered = new Endangered();
+    FishProperty collectable = new Collectable();
+    FishSize large = new Large();
+    FishSize medium = new Medium();
+    FishSize small = new Small();
+
+
+    List<Fish> fishes = new ArrayList<>();
+    //Fish[] fishes = {fish1,fish2,fish3};
+
+    private int totalFishes = 15;
+    private int timeDiffrens = -250;
+    private int rotation = 0;
+    Random rand = new Random();
+
+
+
+
+
 
     public FishingScreen(final CtFish game) {
-
+        produce(totalFishes,timeDiffrens);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         this.game = game;
-
         background = new Texture("backgroundfishing.jpg");
         backgroundOffset = 0;
-
         batch = new SpriteBatch();
     }
+
+
+    public void produce(int totalFishes, int timeDiffrens){
+        int time = 0;
+        rotation = 0;
+        while (rotation <= totalFishes){
+            rotation = rotation + 1;
+            time = time + timeDiffrens;
+            Fish fish = FishFactory.createFish(time,rand.nextInt(280 - 0 + 1) + 0, endangered, medium, "tuna.png");
+            fishes.add(fish);
+        }
+    }
+
 
     @Override
     public void show() {
@@ -51,6 +89,7 @@ public class FishingScreen implements Screen {
         batch.begin();
         batch.draw(background,0,0, 720, 480);
         batch.end();
+
         for (Fish fish : fishes) {
             fish.move();
             game.shape.setProjectionMatrix(camera.combined);
@@ -60,6 +99,7 @@ public class FishingScreen implements Screen {
             batch.end();
             game.shape.end();
         }
+
 
     }
 
