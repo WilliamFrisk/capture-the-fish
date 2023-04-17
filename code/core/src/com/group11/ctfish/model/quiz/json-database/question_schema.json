@@ -1,0 +1,40 @@
+{
+  "title": "List of all question",
+  "type": "array",
+  "items": {
+    "title": "Quiz question",
+    "type": "object",
+    "properties": {
+      "question": {
+        "type": "string",
+        "minLength": 1,
+        "title": "A question about the UN:s sustainability qoals"
+      },
+      "options": {
+        "type": "array",
+        "title": "A list of the answer options",
+        "items": {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string",
+              "minLength": 1,
+              "title": "answer text"
+            },
+            "isCorrect": {
+              "type": "boolean",
+              "title": "Is correct answer"
+            }
+          }
+        },
+        "minLength": 4,
+        "maxLength": 4,
+        "uniqueItems": true
+      }
+    },
+    "required": [
+      "question",
+      "options"
+    ]
+  }
+}
