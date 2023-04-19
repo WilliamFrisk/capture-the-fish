@@ -66,7 +66,7 @@ public class DatabaseConnection {
 
         writeQuestion(questionObject);
     }
-
+    
     public static void writeQuestion(JSONObject question) throws IOException{
         String jsonFileContent = readJsonFile();
 
