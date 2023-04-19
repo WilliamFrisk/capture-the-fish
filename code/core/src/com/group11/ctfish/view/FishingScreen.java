@@ -59,7 +59,7 @@ public class FishingScreen implements Screen {
     public FishingScreen(final CtFish game) {
         produce(totalFishes,timeDiffrens);
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, 1280, 720);
         this.game = game;
         background = new Texture("backgroundfishing.jpg");
         backgroundOffset = 0;
@@ -87,7 +87,7 @@ public class FishingScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(background,0,0, 720, 480);
+        batch.draw(background,0,0, 1280, 720);
         batch.end();
 
         for (Fish fish : fishes) {
