@@ -8,13 +8,8 @@ import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
-import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.properties.FishProperty;
-import com.group11.ctfish.model.fish.sizes.FishSize;
-import com.group11.ctfish.model.fish.sizes.Large;
 import com.group11.ctfish.model.fish.sizes.Medium;
-import com.group11.ctfish.model.fish.sizes.Small;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,52 +23,40 @@ public class FishingScreen implements Screen {
     private Texture background;
     private SpriteBatch batch;
 
-    // Timing
-
-    private int backgroundOffset;
-
     final CtFish game;
 
-
     OrthographicCamera camera;
-    FishProperty endangered = new Endangered();
-    FishProperty collectable = new Collectable();
-    FishSize large = new Large();
-    FishSize medium = new Medium();
-    FishSize small = new Small();
-
 
     List<Fish> fishes = new ArrayList<>();
-    //Fish[] fishes = {fish1,fish2,fish3};
 
-    private int totalFishes = 15;
-    private int timeDiffrens = -250;
-    private int rotation = 0;
+    private static final int TOTAL_FISHES = 15;
+    private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
 
 
-
-
-
-
     public FishingScreen(final CtFish game) {
-        produce(totalFishes,timeDiffrens);
+        produce(TOTAL_FISHES);
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1280, 720);
+        camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
-        background = new Texture("backgroundfishing.jpg");
-        backgroundOffset = 0;
+        background = new Texture("background.jpg");
         batch = new SpriteBatch();
     }
 
+    //TODO fix this mess
+    public void produce(int totalFishes){
+        int time = 1280;
+        int rotation = 0;
 
-    public void produce(int totalFishes, int timeDiffrens){
-        int time = 0;
-        rotation = 0;
-        while (rotation <= totalFishes){
+        while (rotation <= totalFishes) {
             rotation = rotation + 1;
-            time = time + timeDiffrens;
-            Fish fish = FishFactory.createFish(time,rand.nextInt(280 - 0 + 1) + 0, endangered, medium, "tuna.png");
+            time = time + TIME_DIFFERENCE;
+            Fish fish = FishFactory.createFish(
+                    time,
+                    rand.nextInt(281),
+                    new Endangered(),
+                    new Medium(), 
+                    "tuna.png");
             fishes.add(fish);
         }
     }
@@ -87,11 +70,15 @@ public class FishingScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(background,0,0, 1280, 720);
+        batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         batch.end();
 
+        //TODO move this to a new class for rendering fish
         for (Fish fish : fishes) {
             fish.move();
+            if (fish.getX() < 0) {
+                continue;
+            }
             game.shape.setProjectionMatrix(camera.combined);
             game.shape.begin(ShapeRenderer.ShapeType.Line);
             batch.begin();
@@ -99,8 +86,6 @@ public class FishingScreen implements Screen {
             batch.end();
             game.shape.end();
         }
-
-
     }
 
     @Override

@@ -28,7 +28,7 @@ public class Fish{
     }
 
     public void move() {
-        xPos++;
+        xPos--; //TODO implement this in a reasonable way
     }
 
     public int getX() {
@@ -39,7 +39,9 @@ public class Fish{
         return yPos;
     }
 
-    public Texture getTexture(){return texture;}
+    public Texture getTexture(){
+        return texture;
+    }
 
     public int getWidth() {
         return width;

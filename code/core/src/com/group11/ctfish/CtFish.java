@@ -12,6 +12,9 @@ public class CtFish extends Game {
 	Texture img;
 	public ShapeRenderer shape;
 
+	public static final int SCREEN_WIDTH = 1280;
+	public static final int SCREEN_HEIGHT = 720;
+
 	
 	@Override
 	public void create () {

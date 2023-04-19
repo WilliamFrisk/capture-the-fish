@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("capture-the-fish");
-		config.setWindowedMode(1280, 720);
+		config.setWindowedMode(CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
 		config.useVsync(true);
 		new Lwjgl3Application(new CtFish(), config);
 	}
