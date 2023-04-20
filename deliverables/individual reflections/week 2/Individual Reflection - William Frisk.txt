@@ -1,0 +1,14 @@
+This sprint was the first full length sprint for the project. I was 
+product owner this sprint but I realise that I don't know really why we 
+need a product owner and especially why we need a scrum master. So that's 
+what I'm going to look into for next sprint to help improve our teams 
+agile process.
+
+This week I developed a backend for the JSON database for our quiz 
+questions. Furthermore I did what I aimed to do in last week's reflection 
+and learned more about libGDX and used that knowledge to set up a way to unit
+test our code in the future to ensure code quality.
+
+I got more involved in our project scope this week through being the 
+product owner but still have a ways to go until I reach the stage of 
+involvement I want to be at.
