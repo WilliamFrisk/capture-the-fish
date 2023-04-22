@@ -1,16 +1,12 @@
 package com.group11.ctfish.view;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.Fish;
-
-import javax.swing.*;
+import com.group11.ctfish.model.Life;
 
 
 public class FishingScreen implements Screen {
@@ -28,6 +24,8 @@ public class FishingScreen implements Screen {
 
     OrthographicCamera camera;
     Fish[] fishes = {new Fish(0, 10), new Fish(-400, 50), new Fish(-800, 100)};
+
+    Life[] lives ={new Life(20,420),new Life(60,420),new Life(100,420)};
 
     public FishingScreen(final CtFish game) {
 
@@ -57,9 +55,16 @@ public class FishingScreen implements Screen {
             game.shape.begin(ShapeRenderer.ShapeType.Line);
             batch.begin();
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
+            for (Life life: lives){
+                batch.draw(life.getTexture(), life.getX(),life.getY(), life.getWidth(),life.getHeight());
+            }
             batch.end();
             game.shape.end();
+
+
         }
+
+
 
     }
 

@@ -2,10 +2,13 @@ package com.group11.ctfish;
 
 import com.badlogic.gdx.Game;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.view.FishingScreen;
+import com.group11.ctfish.view.QuestionScreen;
+import jdk.incubator.vector.VectorOperators;
 
 public class CtFish extends Game {
 	SpriteBatch batch;
@@ -19,6 +22,7 @@ public class CtFish extends Game {
 		img = new Texture("badlogic.jpg");
 		this.setScreen(new FishingScreen(this));
 		shape = new ShapeRenderer();
+
 	}
 
 	@Override
