@@ -26,7 +26,6 @@ public class FishingScreen implements Screen {
     final CtFish game;
 
     OrthographicCamera camera;
-
     List<Fish> fishes = new ArrayList<>();
 
     private static final int TOTAL_FISHES = 15;
@@ -85,7 +84,10 @@ public class FishingScreen implements Screen {
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
             batch.end();
             game.shape.end();
+
+
         }
+
     }
 
     @Override
