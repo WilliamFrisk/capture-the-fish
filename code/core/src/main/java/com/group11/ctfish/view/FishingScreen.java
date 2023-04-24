@@ -88,7 +88,7 @@ public class FishingScreen implements Screen {
         int time = 1280;
         int rotation = 0;
 
-        while (rotation <= totalFishes) {
+        while (rotation < totalFishes) {
             rotation = rotation + 1;
             time = time + TIME_DIFFERENCE;
             Fish fish = FishFactory.createFish(
