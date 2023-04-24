@@ -40,7 +40,7 @@ public class FishingScreen implements Screen {
     private static final int TOTAL_FISHES = 15;
     private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
-    private Hook hook = getHook();
+    Hook hook = new Hook();
 
 
 
@@ -96,17 +96,13 @@ public class FishingScreen implements Screen {
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
             HookController hookController = new HookController(hook);
             hookController.update();
+            hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
             batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
             batch.end();
             game.shape.end();
         }
     }
 
-    private Hook getHook() {
-        Hook hook = new Hook();
-        hookImage = new Texture(Gdx.files.internal("hookImage.png"));
-        return hook;
-    }
     @Override
     public void resize(int width, int height) {
 
