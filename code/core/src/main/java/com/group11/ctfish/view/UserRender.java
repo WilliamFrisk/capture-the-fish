@@ -1,6 +1,6 @@
 package com.group11.ctfish.view;
 
-public class LifeRender {
+public class UserRender {
 
 //    private int posX;
 //
@@ -10,7 +10,7 @@ public class LifeRender {
 
     private int height;
 
-    public LifeRender(){
+    public UserRender(){
 //        this.posX = x;
 //        this.posY = y;
         this.width = 50;

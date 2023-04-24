@@ -25,6 +25,7 @@ import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.quiz.DatabaseConnection;
 import com.group11.ctfish.model.quiz.Question;
+import com.group11.ctfish.model.user.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,8 +47,9 @@ public class QuestionScreen implements Screen {
 
     final Screen parent;
 
-    OrthographicCamera camera;
     Question[] questions;
+
+    User user = new User("");
 
 
 
@@ -89,9 +91,6 @@ public class QuestionScreen implements Screen {
 
     @Override
     public void show() {
-
-
-
     }
 
     @Override
