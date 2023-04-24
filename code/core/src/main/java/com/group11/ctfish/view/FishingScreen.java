@@ -29,6 +29,8 @@ public class FishingScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
+    private LifeRenderer lifeRenderer;
+
     final CtFish game;
 
     OrthographicCamera camera;
@@ -49,6 +51,7 @@ public class FishingScreen implements Screen {
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
         fishRender = new FishRender(batch,shapeRenderer,camera);
+        lifeRenderer = new LifeRenderer(10,10);
     }
 
     //TODO fix this mess
@@ -67,6 +70,7 @@ public class FishingScreen implements Screen {
                     "tuna.png");
             fishes.add(fish);
         }
+
     }
 
 
@@ -79,6 +83,11 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+        batch.draw(new Texture("heart.png"),50,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+        batch.draw(new Texture("heart.png"),120,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+
+        batch.draw(new Texture("heart.png"),190,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+
         batch.end();
         fishRender.render(fishes);
 
