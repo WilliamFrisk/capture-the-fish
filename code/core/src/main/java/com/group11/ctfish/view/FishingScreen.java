@@ -1,10 +1,16 @@
 package main.java.com.group11.ctfish.view;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.controller.HookController;
+import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
@@ -21,6 +27,8 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
+
+    private Texture hookImage;
     private SpriteBatch batch;
 
     final CtFish game;
@@ -32,6 +40,8 @@ public class FishingScreen implements Screen {
     private static final int TOTAL_FISHES = 15;
     private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
+    private Hook hook = getHook();
+
 
 
     public FishingScreen(final CtFish game) {
@@ -81,13 +91,22 @@ public class FishingScreen implements Screen {
             }
             game.shape.setProjectionMatrix(camera.combined);
             game.shape.begin(ShapeRenderer.ShapeType.Line);
+            camera.update();
             batch.begin();
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
+            HookController hookController = new HookController(hook);
+            hookController.update();
+            batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
             batch.end();
             game.shape.end();
         }
     }
 
+    private Hook getHook() {
+        Hook hook = new Hook();
+        hookImage = new Texture(Gdx.files.internal("hookImage.png"));
+        return hook;
+    }
     @Override
     public void resize(int width, int height) {
 
