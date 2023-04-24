@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -18,8 +19,11 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.quiz.DatabaseConnection;
+import com.group11.ctfish.model.quiz.Question;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.FileHandler;
 
 
@@ -31,14 +35,9 @@ public class QuestionScreen implements Screen {
 
     private ShapeRenderer shapeRenderer;
 
-    FileHandle fileHandler = Gdx.files.internal("file.json");
+    DatabaseConnection db = new DatabaseConnection("questions.json");
 
-    String jsonData = fileHandler.readString();
-
-    Json json = new Json();
-
-    //QuizData quizData = json.fromJson(QuizData.class, jsonData);
-
+    Skin skin;
     BitmapFont bitmapFont;
 
     final CtFish game;
@@ -46,9 +45,11 @@ public class QuestionScreen implements Screen {
     final Screen parent;
 
     OrthographicCamera camera;
+    Question[] questions;
 
 
-    public QuestionScreen(CtFish game, Screen parent) {
+
+    public QuestionScreen(CtFish game, Screen parent) throws IOException {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
@@ -58,9 +59,18 @@ public class QuestionScreen implements Screen {
         batch = new SpriteBatch();
         bitmapFont = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
+        questions = db.readQuestions();
+
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
 
 
     }
+
+    public Question getQuestion(){
+        return questions[1];
+    }
+
 
     @Override
     public void show() {
@@ -81,13 +91,12 @@ public class QuestionScreen implements Screen {
         game.shape.rect(330,30,270,100);
         game.shape.end();
 
-
-
-
-
         batch.begin();
         bitmapFont.setColor(Color.BLACK);
-        //bitmapFont.draw(batch,quizata.question, 100, 350);
+        bitmapFont.draw(batch, getQuestion().toString(), 100, 350);
+        Button button = new TextButton("Send", skin, "default");
+        System.out.println(button.getStyle());
+
         //bitmapFont.draw(batch, quizData.answers[0].answer, 150,200);
         batch.end();
 
@@ -95,9 +104,6 @@ public class QuestionScreen implements Screen {
         if(Gdx.input.isKeyPressed(Input.Keys.G)){
             game.setScreen(parent);
         }
-
-
-
 
     }
 

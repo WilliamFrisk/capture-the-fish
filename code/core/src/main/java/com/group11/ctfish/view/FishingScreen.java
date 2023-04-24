@@ -14,6 +14,7 @@ import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.sizes.Medium;
 import com.group11.ctfish.view.QuestionScreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -92,7 +93,11 @@ public class FishingScreen implements Screen {
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if(Gdx.input.isKeyPressed(Input.Keys.Q)){
-            game.setScreen(new QuestionScreen(game, this));
+            try {
+                game.setScreen(new QuestionScreen(game, this));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
