@@ -26,6 +26,8 @@ public class FishingScreen implements Screen {
 
     private Texture background;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
+    private FishRender fishRender;
 
     final CtFish game;
 
@@ -43,8 +45,10 @@ public class FishingScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
+        shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
+        fishRender = new FishRender(batch,shapeRenderer,camera);
     }
 
     //TODO fix this mess
@@ -76,20 +80,8 @@ public class FishingScreen implements Screen {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         batch.end();
+        fishRender.render(fishes);
 
-        //TODO move this to a new class for rendering fish
-        for (Fish fish : fishes) {
-            fish.move();
-            if (fish.getX() < 0) {
-                continue;
-            }
-            game.shape.setProjectionMatrix(camera.combined);
-            game.shape.begin(ShapeRenderer.ShapeType.Line);
-            batch.begin();
-            batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
-            batch.end();
-            game.shape.end();
-        }
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if(Gdx.input.isKeyPressed(Input.Keys.Q)){
