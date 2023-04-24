@@ -1,4 +1,4 @@
-package main.java.com.group11.ctfish.view;
+package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
