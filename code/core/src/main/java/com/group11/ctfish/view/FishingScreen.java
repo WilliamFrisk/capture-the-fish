@@ -101,21 +101,21 @@ public class FishingScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+        batch.draw(background, 0, 0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         hookRender();
         batch.end();
         fishRender.render(fishes);
-    }
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
-        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
             try {
                 game.setScreen(new QuestionScreen(game, this));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
 
 
     private void hookRender() {
