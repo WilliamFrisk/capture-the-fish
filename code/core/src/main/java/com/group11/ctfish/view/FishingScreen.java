@@ -8,8 +8,11 @@ import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
+import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.properties.Endangered;
+import com.group11.ctfish.model.fish.sizes.Large;
 import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.model.fish.sizes.Sizes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +24,13 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
+    private Texture texture = new Texture("tuna.png");
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
     final CtFish game;
+
 
     OrthographicCamera camera;
 
@@ -58,9 +63,8 @@ public class FishingScreen implements Screen {
             Fish fish = FishFactory.createFish(
                     time,
                     rand.nextInt(281),
-                    new Endangered(),
-                    new Medium(),
-                    "tuna.png");
+                    new Collectable(),
+                    Sizes.LARGE, texture);
             fishes.add(fish);
         }
     }

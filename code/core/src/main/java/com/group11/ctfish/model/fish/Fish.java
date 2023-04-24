@@ -1,8 +1,10 @@
 package com.group11.ctfish.model.fish;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.group11.ctfish.model.fish.properties.FishProperty;
 import com.group11.ctfish.model.fish.sizes.FishSize;
+import com.group11.ctfish.model.fish.sizes.Sizes;
 
 public class Fish{
     private int xPos;
@@ -10,17 +12,19 @@ public class Fish{
     private int width;
     private int height;
     private FishProperty property;
-    private FishSize size;
-    private Texture texture;
+    private Sizes size;
+    private TextureRegion texture;
 
-    public Fish(int x, int y, FishProperty property, FishSize size, Texture texture) {
+    public Fish(int x, int y, FishProperty property, Sizes size, TextureRegion texture) {
         xPos = x;
         yPos = y;
-        width = size.getWidth();
-        height = size.getHeight() ;
+        height = (int) (texture.getRegionHeight() * 0.3);
+        width = (int) (texture.getRegionWidth() * size.getScaleFactor());
         this.texture = texture;
         this.property = property;
         this.size = size;
+
+
     }
 
     public void onCaught() {
@@ -39,7 +43,7 @@ public class Fish{
         return yPos;
     }
 
-    public Texture getTexture(){
+    public TextureRegion getTexture(){
         return texture;
     }
 
