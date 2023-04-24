@@ -1,6 +1,8 @@
 package com.group11.ctfish.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -9,9 +11,6 @@ import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
 import com.group11.ctfish.model.fish.properties.Collectable;
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Large;
-import com.group11.ctfish.model.fish.sizes.Medium;
 import com.group11.ctfish.model.fish.sizes.Sizes;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
-    private Texture texture = new Texture("tuna.png");
+    private Texture texture1 = new Texture("fish/redoctopus/redoctopus4.png");
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
@@ -43,6 +42,12 @@ public class FishingScreen implements Screen {
 
     public FishingScreen(final CtFish game) {
         produce(TOTAL_FISHES);
+        Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
+
+        // start the playback of the background music immediately
+        rainMusic.setLooping(true);
+        rainMusic.play();
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
@@ -64,7 +69,7 @@ public class FishingScreen implements Screen {
                     time,
                     rand.nextInt(281),
                     new Collectable(),
-                    Sizes.LARGE, texture);
+                    Sizes.LARGE, texture1);
             fishes.add(fish);
         }
     }

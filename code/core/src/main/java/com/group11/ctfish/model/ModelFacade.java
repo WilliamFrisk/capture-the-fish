@@ -10,11 +10,10 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import java.util.List;
 
-public final class ModelFacade {
-    private List<Fish> fishList;
+public class ModelFacade {
 
+    private List<Fish> fishList;
     private static ModelFacade instance = new ModelFacade();
-    private FishFactory fishFactory = new FishFactory();
     private ModelFacade (){}
 
 

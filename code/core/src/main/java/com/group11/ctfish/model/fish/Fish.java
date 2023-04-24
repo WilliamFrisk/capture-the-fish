@@ -1,9 +1,7 @@
 package com.group11.ctfish.model.fish;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.group11.ctfish.model.fish.properties.FishProperty;
-import com.group11.ctfish.model.fish.sizes.FishSize;
 import com.group11.ctfish.model.fish.sizes.Sizes;
 
 public class Fish{
@@ -24,7 +22,6 @@ public class Fish{
         this.property = property;
         this.size = size;
 
-
     }
 
     public void onCaught() {
@@ -41,6 +38,10 @@ public class Fish{
 
     public int getY() {
         return yPos;
+    }
+
+    public void setTexture(TextureRegion texture){
+        this.texture = texture;
     }
 
     public TextureRegion getTexture(){
