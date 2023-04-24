@@ -13,12 +13,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.quiz.DatabaseConnection;
 import com.group11.ctfish.model.quiz.Question;
 
@@ -31,16 +35,14 @@ public class QuestionScreen implements Screen {
 
     // Graphics
 
-    private SpriteBatch batch;
-
-    private ShapeRenderer shapeRenderer;
-
     DatabaseConnection db = new DatabaseConnection("questions.json");
 
-    Skin skin;
-    BitmapFont bitmapFont;
+    private final CtFish game;
+    private Stage stage;
+    private TextField questionField;
 
-    final CtFish game;
+
+    ModelFacade facade = ModelFacade.getInstance();
 
     final Screen parent;
 
@@ -49,26 +51,39 @@ public class QuestionScreen implements Screen {
 
 
 
-    public QuestionScreen(CtFish game, Screen parent) throws IOException {
-
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+    public QuestionScreen(final CtFish game, final Screen parent) throws IOException {
         this.game = game;
+        this.stage = new Stage();
         this.parent = parent;
-
-        batch = new SpriteBatch();
-        bitmapFont = new BitmapFont();
-        shapeRenderer = new ShapeRenderer();
         questions = db.readQuestions();
 
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        // Create username input field
+        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        questionField = new TextField("", skin);
+        questionField.setMessageText(getQuestion());
+        questionField.setPosition(Gdx.graphics.getWidth() / 2 - questionField.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        stage.addActor(questionField);
 
+        // Create play button
+        TextButton playButton = new TextButton("Play", skin, "default");
+        playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 50);
+        playButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String username = questionField.getText();
+                facade.createUser(username);
+                game.setScreen(parent);
+            }
+        });
+        stage.addActor(playButton);
+
+        Gdx.input.setInputProcessor(stage);
 
 
     }
 
-    public Question getQuestion(){
-        return questions[1];
+    public String getQuestion(){
+        return questions[1].getQuestion();
     }
 
 
@@ -81,24 +96,29 @@ public class QuestionScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.SKY);
-        game.shape.begin(ShapeRenderer.ShapeType.Filled);
-        game.shape.setColor(Color.WHITE);;
-        game.shape.rect(40,270,560,170);
-        game.shape.rect(40,150,270,100);
-        game.shape.rect(330,150,270,100);
-        game.shape.rect(40,30,270,100);
-        game.shape.rect(330,30,270,100);
-        game.shape.end();
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        bitmapFont.setColor(Color.BLACK);
-        bitmapFont.draw(batch, getQuestion().toString(), 100, 350);
-        Button button = new TextButton("Send", skin, "default");
-        System.out.println(button.getStyle());
+        stage.act(delta);
+        stage.draw();
+        //ScreenUtils.clear(Color.SKY);
+        //game.shape.begin(ShapeRenderer.ShapeType.Filled);
+        //game.shape.setColor(Color.WHITE);;
+        //game.shape.rect(40,270,560,170);
+        //game.shape.rect(40,150,270,100);
+        //game.shape.rect(330,150,270,100);
+        //game.shape.rect(40,30,270,100);
+        //game.shape.rect(330,30,270,100);
+        //game.shape.end();
+
+        //batch.begin();
+        //bitmapFont.setColor(Color.BLACK);
+        //bitmapFont.draw(batch, getQuestion().toString(), 100, 350);
+        //Button button = new TextButton("Send", skin, "default");
+        //System.out.println(button.getStyle());
 
         //bitmapFont.draw(batch, quizData.answers[0].answer, 150,200);
-        batch.end();
+        //batch.end();
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILLBAKA TILL FISHINGSCREEN
         if(Gdx.input.isKeyPressed(Input.Keys.G)){

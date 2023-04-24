@@ -29,7 +29,7 @@ public class FrontScreen implements Screen {
         this.stage = new Stage();
 
         // Create username input field
-        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         usernameField = new TextField("", skin);
         usernameField.setMessageText("Enter your username");
         usernameField.setPosition(Gdx.graphics.getWidth() / 2 - usernameField.getWidth() / 2, Gdx.graphics.getHeight() / 2);
