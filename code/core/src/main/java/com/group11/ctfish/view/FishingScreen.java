@@ -24,6 +24,7 @@ import com.group11.ctfish.model.fish.sizes.Sizes;
 
 import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.model.user.User;
 import com.group11.ctfish.view.QuestionScreen;
 
 
@@ -120,7 +121,7 @@ public class FishingScreen implements Screen {
 
         batch.end();
         fishRender.render(fishes);
-    }
+
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
