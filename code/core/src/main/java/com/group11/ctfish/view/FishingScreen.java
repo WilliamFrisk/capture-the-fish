@@ -1,6 +1,7 @@
 package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -16,8 +17,14 @@ import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
 
+
 import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.sizes.Sizes;
+
+
+import com.group11.ctfish.model.fish.properties.Endangered;
+import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.view.QuestionScreen;
 
 
 import java.io.IOException;
@@ -53,8 +60,8 @@ public class FishingScreen implements Screen {
     Hook hook = new Hook();
     HookController hookController = new HookController(hook);
 
-
     User user = new User("");
+
 
 
     public FishingScreen(final CtFish game) {
@@ -102,6 +109,7 @@ public class FishingScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
+
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         int posX = 50;
         for (int i = 0; i <= user.getLives(); i++){
@@ -115,20 +123,20 @@ public class FishingScreen implements Screen {
     }
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
-        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
             try {
                 game.setScreen(new QuestionScreen(game, this));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
 
 
     private void hookRender() {
         hookController.update();
         hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
         batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
-
     }
     
 
