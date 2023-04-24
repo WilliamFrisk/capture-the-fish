@@ -1,4 +1,4 @@
-package main.java.com.group11.ctfish.view;
+package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -30,6 +30,8 @@ public class FishingScreen implements Screen {
 
     private Texture hookImage;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
+    private FishRender fishRender;
 
     final CtFish game;
 
@@ -50,8 +52,10 @@ public class FishingScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
+        shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
+        fishRender = new FishRender(batch,shapeRenderer,camera);
     }
 
     //TODO fix this mess
@@ -82,29 +86,17 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
-
-        //TODO move this to a new class for rendering fish
-        for (Fish fish : fishes) {
-            fish.move();
-            if (fish.getX() < 0) {
-                continue;
-            }
-            game.shape.setProjectionMatrix(camera.combined);
-            game.shape.begin(ShapeRenderer.ShapeType.Line);
-            camera.update();
-            batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
-            hookRender();
-            batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
-
-            game.shape.end();
-        }
+        hookRender()
         batch.end();
+        fishRender.render(fishes);
     }
 
     private void hookRender() {
         hookController.update();
         hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
+        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
     }
+    
 
     @Override
     public void resize(int width, int height) {

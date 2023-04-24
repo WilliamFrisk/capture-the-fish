@@ -5,7 +5,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import main.java.com.group11.ctfish.view.FishingScreen;
+import com.group11.ctfish.view.FishingScreen;
+
 
 public class CtFish extends Game {
 
