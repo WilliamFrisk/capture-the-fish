@@ -17,12 +17,14 @@ import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
 
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Medium;
-import com.group11.ctfish.view.QuestionScreen;
 
 import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.sizes.Sizes;
+
+
+import com.group11.ctfish.model.fish.properties.Endangered;
+import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.view.QuestionScreen;
 
 
 import java.io.IOException;
@@ -43,6 +45,8 @@ public class FishingScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
+    private UserRender lifeRenderer;
+
     final CtFish game;
 
 
@@ -55,6 +59,8 @@ public class FishingScreen implements Screen {
     Random rand = new Random();
     Hook hook = new Hook();
     HookController hookController = new HookController(hook);
+
+    User user = new User("");
 
 
 
@@ -73,6 +79,7 @@ public class FishingScreen implements Screen {
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
         fishRender = new FishRender(batch,shapeRenderer,camera);
+        lifeRenderer = new UserRender();
     }
 
     //TODO fix this mess
@@ -90,6 +97,7 @@ public class FishingScreen implements Screen {
                     Sizes.LARGE, texture1);
             fishes.add(fish);
         }
+
     }
 
 
@@ -101,11 +109,18 @@ public class FishingScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(background, 0, 0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+
+        batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+        int posX = 50;
+        for (int i = 0; i <= user.getLives(); i++){
+            batch.draw(new Texture("heart.png"), posX,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            posX+=70;
+        }
         hookRender();
+
         batch.end();
         fishRender.render(fishes);
-
+    }
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {

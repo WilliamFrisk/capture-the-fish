@@ -39,6 +39,7 @@ public class FrontScreen implements Screen {
         */
 
         // Create username input field
+
         usernameField = new TextField("", skin);
         usernameField.setMessageText("Enter your username");
         usernameField.setWidth(200f); // set minimum width for usernameField;
