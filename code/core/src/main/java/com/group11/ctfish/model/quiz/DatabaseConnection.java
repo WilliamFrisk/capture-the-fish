@@ -13,9 +13,28 @@ import java.util.Map;
 
 public class DatabaseConnection {
 
-    private static final String JSON_FILE_NAME = "questions.json";
+    private String jsonFileName;
 
-    public static Question[] readQuestions() throws IOException{
+    /**
+     * Default constructor
+     * @param jsonFileName
+     */
+    public DatabaseConnection(String jsonFileName) {
+        this.jsonFileName = "../core/src/main/resources/questions" + jsonFileName;
+    }
+
+    /**
+     * Only to be used for testing purposes
+     */
+    private DatabaseConnection() {}
+
+    static DatabaseConnection getTestInstance(String jsonFileName) {
+        DatabaseConnection testInstance = new DatabaseConnection();
+        testInstance.jsonFileName = "../core/src/test/resources/questions/" + jsonFileName;
+        return testInstance;
+    }
+
+    public Question[] readQuestions() throws IOException{
         String jsonFileContent = readJsonFile();
         JSONArray jsonArray = new JSONArray(jsonFileContent);
 
@@ -44,11 +63,11 @@ public class DatabaseConnection {
         return result;
     }
 
-    public static void writeQuestion(String question, Map<String, Boolean> answerMap) throws IOException {
+    public void writeQuestion(String question, Map<String, Boolean> answerMap) throws IOException {
         writeQuestion(new Question(question, answerMap));
     }
 
-    public static void writeQuestion(Question question) throws IOException {
+    public void writeQuestion(Question question) throws IOException {
         JSONObject questionObject = new JSONObject();
         questionObject.put("question", question.getQuestion());
 
@@ -67,19 +86,19 @@ public class DatabaseConnection {
         writeQuestion(questionObject);
     }
 
-    public static void writeQuestion(JSONObject question) throws IOException{
+    public void writeQuestion(JSONObject question) throws IOException{
         String jsonFileContent = readJsonFile();
 
         JSONArray jsonArray = new JSONArray(jsonFileContent);
         jsonArray.put(question);
 
-        try (FileWriter fileWriter = new FileWriter("../core/src/com/group11/ctfish/model/quiz/json-database/" + JSON_FILE_NAME)) {
+        try (FileWriter fileWriter = new FileWriter(jsonFileName)) {
             fileWriter.write(jsonArray.toString());
         }
     }
 
-    private static String readJsonFile() throws IOException {
-        Path path = Paths.get("../core/src/com/group11/ctfish/model/quiz/json-database/" + JSON_FILE_NAME);
+    private String readJsonFile() throws IOException {
+        Path path = Paths.get(jsonFileName);
         byte[] bytes = Files.readAllBytes(path);
 
         return new String(bytes, StandardCharsets.UTF_8);

@@ -1,4 +1,4 @@
-package com.group11.ctfish.view;
+package main.java.com.group11.ctfish.view;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
@@ -55,7 +55,7 @@ public class FishingScreen implements Screen {
                     time,
                     rand.nextInt(281),
                     new Endangered(),
-                    new Medium(), 
+                    new Medium(),
                     "tuna.png");
             fishes.add(fish);
         }
