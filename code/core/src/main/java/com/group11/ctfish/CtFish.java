@@ -2,10 +2,11 @@ package com.group11.ctfish;
 
 import com.badlogic.gdx.Game;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import main.java.com.group11.ctfish.view.FishingScreen;
+import com.group11.ctfish.view.FishingScreen;
 
 public class CtFish extends Game {
 	SpriteBatch batch;
@@ -15,7 +16,7 @@ public class CtFish extends Game {
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
 
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
