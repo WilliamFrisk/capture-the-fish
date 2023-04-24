@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.view.FishingScreen;
 
+
 public class CtFish extends Game {
+
 	SpriteBatch batch;
 	Texture img;
 	public ShapeRenderer shape;
