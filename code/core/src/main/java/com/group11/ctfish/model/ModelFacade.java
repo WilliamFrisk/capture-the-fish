@@ -4,6 +4,7 @@ import com.group11.ctfish.model.fish.Fish;
 import com.group11.ctfish.model.fish.FishFactory;
 import com.group11.ctfish.model.fish.properties.FishProperty;
 import com.group11.ctfish.model.fish.sizes.FishSize;
+import com.group11.ctfish.model.user.User;
 
 import com.group11.ctfish.model.fish.sizes.Sizes;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -27,7 +28,16 @@ public class ModelFacade {
         return fishList;
     }
 
+
+    public void createUser(String username){
+        User user = new User(username);
+        System.out.print(user.getUsername() + "is created!");
+    }
+
+
+
     private void createFish(int x, int y, FishProperty property, Sizes size, Texture texture) {
+
         fishList.add(FishFactory.createFish(x,y,property, size, texture));
     }
 }

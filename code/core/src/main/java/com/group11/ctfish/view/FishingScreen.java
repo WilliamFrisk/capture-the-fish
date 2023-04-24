@@ -16,9 +16,16 @@ import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
+
+import com.group11.ctfish.model.fish.properties.Endangered;
+import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.view.QuestionScreen;
+
 import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.sizes.Sizes;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -99,6 +106,17 @@ public class FishingScreen implements Screen {
         batch.end();
         fishRender.render(fishes);
     }
+
+
+        //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
+        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+            try {
+                game.setScreen(new QuestionScreen(game, this));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
     private void hookRender() {
         hookController.update();
