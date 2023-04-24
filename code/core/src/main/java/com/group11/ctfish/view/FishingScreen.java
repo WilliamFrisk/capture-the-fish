@@ -86,7 +86,7 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
-        hookRender()
+        hookRender();
         batch.end();
         fishRender.render(fishes);
     }
