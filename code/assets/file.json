@@ -1,0 +1,22 @@
+{
+
+  "question" : "How many percent of the planet´s water do the oceans contain?",
+  "answers": [
+    {
+      "answer" : "aaa",
+      "isCorrect" : true
+    },
+    {
+      "answer" : "bbb",
+      "isCorrect" : false
+    },
+    {
+      "answer" : "ccc",
+      "isCorrect" : false
+    },
+    {
+      "answer" : "ddd",
+      "isCorrect" : false
+    }
+  ]
+}

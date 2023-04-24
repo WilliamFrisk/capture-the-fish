@@ -1,5 +1,7 @@
 package com.group11.ctfish.view;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,7 +12,9 @@ import com.group11.ctfish.model.fish.Fish;
 import com.group11.ctfish.model.fish.FishFactory;
 import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.view.QuestionScreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -77,6 +81,16 @@ public class FishingScreen implements Screen {
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         batch.end();
         fishRender.render(fishes);
+
+
+        //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
+        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+            try {
+                game.setScreen(new QuestionScreen(game, this));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 
