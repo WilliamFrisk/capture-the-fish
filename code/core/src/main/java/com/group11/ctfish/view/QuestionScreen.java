@@ -101,24 +101,6 @@ public class QuestionScreen implements Screen {
 
         stage.act(delta);
         stage.draw();
-        //ScreenUtils.clear(Color.SKY);
-        //game.shape.begin(ShapeRenderer.ShapeType.Filled);
-        //game.shape.setColor(Color.WHITE);;
-        //game.shape.rect(40,270,560,170);
-        //game.shape.rect(40,150,270,100);
-        //game.shape.rect(330,150,270,100);
-        //game.shape.rect(40,30,270,100);
-        //game.shape.rect(330,30,270,100);
-        //game.shape.end();
-
-        //batch.begin();
-        //bitmapFont.setColor(Color.BLACK);
-        //bitmapFont.draw(batch, getQuestion().toString(), 100, 350);
-        //Button button = new TextButton("Send", skin, "default");
-        //System.out.println(button.getStyle());
-
-        //bitmapFont.draw(batch, quizData.answers[0].answer, 150,200);
-        //batch.end();
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILLBAKA TILL FISHINGSCREEN
         if(Gdx.input.isKeyPressed(Input.Keys.G)){

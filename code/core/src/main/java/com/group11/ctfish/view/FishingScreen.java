@@ -12,7 +12,7 @@ import com.group11.ctfish.model.fish.Fish;
 import com.group11.ctfish.model.fish.FishFactory;
 import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.sizes.Medium;
-import com.group11.ctfish.view.QuestionScreen;
+import com.group11.ctfish.model.user.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class FishingScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
-    private LifeRenderer lifeRenderer;
+    private LifeRender lifeRenderer;
 
     final CtFish game;
 
@@ -41,6 +41,8 @@ public class FishingScreen implements Screen {
     private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
 
+    User user = new User("");
+
 
     public FishingScreen(final CtFish game) {
         produce(TOTAL_FISHES);
@@ -51,7 +53,7 @@ public class FishingScreen implements Screen {
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
         fishRender = new FishRender(batch,shapeRenderer,camera);
-        lifeRenderer = new LifeRenderer(10,10);
+        lifeRenderer = new LifeRender();
     }
 
     //TODO fix this mess
@@ -83,10 +85,13 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
-        batch.draw(new Texture("heart.png"),50,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
-        batch.draw(new Texture("heart.png"),120,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+        int posX = 50;
+        for (int i = 0; i <= user.getLives(); i++){
+            batch.draw(new Texture("heart.png"), posX,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            posX+=70;
+        }
 
-        batch.draw(new Texture("heart.png"),190,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+
 
         batch.end();
         fishRender.render(fishes);
