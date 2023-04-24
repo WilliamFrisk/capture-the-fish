@@ -29,7 +29,7 @@ public class FishingScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
-    private LifeRender lifeRenderer;
+    private UserRender lifeRenderer;
 
     final CtFish game;
 
@@ -53,7 +53,7 @@ public class FishingScreen implements Screen {
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
         fishRender = new FishRender(batch,shapeRenderer,camera);
-        lifeRenderer = new LifeRender();
+        lifeRenderer = new UserRender();
     }
 
     //TODO fix this mess
