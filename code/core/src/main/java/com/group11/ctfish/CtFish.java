@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import main.java.com.group11.ctfish.view.FishingScreen;
 
 public class CtFish extends Game {
+
 	SpriteBatch batch;
 	Texture img;
 	public ShapeRenderer shape;
@@ -28,6 +29,7 @@ public class CtFish extends Game {
 	public void render () {
 		super.render();
 	}
+
 	
 	@Override
 	public void dispose () {
