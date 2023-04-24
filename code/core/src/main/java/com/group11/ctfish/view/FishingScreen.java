@@ -1,8 +1,10 @@
 package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -14,8 +16,8 @@ import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.model.fish.properties.Collectable;
+import com.group11.ctfish.model.fish.sizes.Sizes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +30,14 @@ public class FishingScreen implements Screen {
 
     private Texture background;
 
+    private Texture texture1 = new Texture("fish/redoctopus/redoctopus4.png");
     private Texture hookImage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
     final CtFish game;
+
 
     OrthographicCamera camera;
 
@@ -49,6 +53,12 @@ public class FishingScreen implements Screen {
 
     public FishingScreen(final CtFish game) {
         produce(TOTAL_FISHES);
+        Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
+
+        // start the playback of the background music immediately
+        rainMusic.setLooping(true);
+        rainMusic.play();
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
@@ -69,9 +79,8 @@ public class FishingScreen implements Screen {
             Fish fish = FishFactory.createFish(
                     time,
                     rand.nextInt(281),
-                    new Endangered(),
-                    new Medium(),
-                    "tuna.png");
+                    new Collectable(),
+                    Sizes.LARGE, texture1);
             fishes.add(fish);
         }
     }
