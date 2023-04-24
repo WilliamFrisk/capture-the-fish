@@ -41,6 +41,7 @@ public class FishingScreen implements Screen {
     private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
     Hook hook = new Hook();
+    HookController hookController = new HookController(hook);
 
 
 
@@ -81,7 +82,6 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
-        batch.end();
 
         //TODO move this to a new class for rendering fish
         for (Fish fish : fishes) {
@@ -92,15 +92,18 @@ public class FishingScreen implements Screen {
             game.shape.setProjectionMatrix(camera.combined);
             game.shape.begin(ShapeRenderer.ShapeType.Line);
             camera.update();
-            batch.begin();
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
-            HookController hookController = new HookController(hook);
-            hookController.update();
-            hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
+            hookRender();
             batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
-            batch.end();
+
             game.shape.end();
         }
+        batch.end();
+    }
+
+    private void hookRender() {
+        hookController.update();
+        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
     }
 
     @Override
