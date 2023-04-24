@@ -20,7 +20,7 @@ public class DatabaseConnection {
      * @param jsonFileName
      */
     public DatabaseConnection(String jsonFileName) {
-        this.jsonFileName = "../core/src/main/resources/questions" + jsonFileName;
+        this.jsonFileName = "../core/src/main/resources/questions/" + jsonFileName;
     }
 
     /**
@@ -32,6 +32,10 @@ public class DatabaseConnection {
         DatabaseConnection testInstance = new DatabaseConnection();
         testInstance.jsonFileName = "../core/src/test/resources/questions/" + jsonFileName;
         return testInstance;
+    }
+
+    void setCompletePath(String path) {
+        jsonFileName = path;
     }
 
     public Question[] readQuestions() throws IOException{
