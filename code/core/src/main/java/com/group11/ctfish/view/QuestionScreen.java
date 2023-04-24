@@ -2,6 +2,7 @@ package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
@@ -42,21 +43,21 @@ public class QuestionScreen implements Screen {
 
     final CtFish game;
 
+    final Screen parent;
+
     OrthographicCamera camera;
 
 
-    public QuestionScreen(final CtFish game) {
+    public QuestionScreen(CtFish game, Screen parent) {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         this.game = game;
+        this.parent = parent;
 
         batch = new SpriteBatch();
         bitmapFont = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
-
-
-
 
 
     }
@@ -86,9 +87,14 @@ public class QuestionScreen implements Screen {
 
         batch.begin();
         bitmapFont.setColor(Color.BLACK);
-        //bitmapFont.draw(batch,quizData.question, 100, 350);
+        //bitmapFont.draw(batch,quizata.question, 100, 350);
         //bitmapFont.draw(batch, quizData.answers[0].answer, 150,200);
         batch.end();
+
+        //PLACEHOLDER-KOD FÖR ATT BYTA TILLBAKA TILL FISHINGSCREEN
+        if(Gdx.input.isKeyPressed(Input.Keys.G)){
+            game.setScreen(parent);
+        }
 
 
 

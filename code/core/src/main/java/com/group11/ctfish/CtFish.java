@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.view.QuestionScreen;
+import main.java.com.group11.ctfish.view.FishingScreen;
 
 public class CtFish extends Game {
 	SpriteBatch batch;
@@ -19,7 +20,7 @@ public class CtFish extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		this.setScreen(new QuestionScreen(this));
+		this.setScreen(new FishingScreen(this));
 		shape = new ShapeRenderer();
 	}
 
