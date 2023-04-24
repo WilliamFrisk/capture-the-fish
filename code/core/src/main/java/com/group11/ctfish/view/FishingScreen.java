@@ -6,7 +6,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.controller.HookController;
+import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
@@ -25,6 +29,8 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
+
+    private Texture hookImage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
@@ -38,6 +44,9 @@ public class FishingScreen implements Screen {
     private static final int TOTAL_FISHES = 15;
     private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
+    Hook hook = new Hook();
+    HookController hookController = new HookController(hook);
+
 
 
     public FishingScreen(final CtFish game) {
@@ -79,8 +88,10 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+        hookRender();
         batch.end();
         fishRender.render(fishes);
+    }
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
@@ -92,7 +103,13 @@ public class FishingScreen implements Screen {
             }
         }
 
+
+    private void hookRender() {
+        hookController.update();
+        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
+        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
     }
+    
 
     @Override
     public void resize(int width, int height) {

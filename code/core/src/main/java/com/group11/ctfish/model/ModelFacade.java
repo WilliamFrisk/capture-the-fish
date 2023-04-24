@@ -8,7 +8,7 @@ import com.group11.ctfish.model.user.User;
 
 import java.util.List;
 
-public final class ModelFacade {
+public class ModelFacade {
     private List<Fish> fishList;
 
     private static ModelFacade instance = new ModelFacade();
