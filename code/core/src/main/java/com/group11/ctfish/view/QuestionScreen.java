@@ -17,8 +17,6 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.group11.ctfish.CtFish;
-import com.group11.ctfish.model.Fish;
-import com.group11.ctfish.model.QuizData;
 
 import java.io.File;
 import java.util.logging.FileHandler;
@@ -38,7 +36,7 @@ public class QuestionScreen implements Screen {
 
     Json json = new Json();
 
-    QuizData quizData = json.fromJson(QuizData.class, jsonData);
+    //QuizData quizData = json.fromJson(QuizData.class, jsonData);
 
     BitmapFont bitmapFont;
 
@@ -88,8 +86,8 @@ public class QuestionScreen implements Screen {
 
         batch.begin();
         bitmapFont.setColor(Color.BLACK);
-        bitmapFont.draw(batch,quizData.question, 100, 350);
-        bitmapFont.draw(batch, quizData.answers[0].answer, 150,200);
+        //bitmapFont.draw(batch,quizData.question, 100, 350);
+        //bitmapFont.draw(batch, quizData.answers[0].answer, 150,200);
         batch.end();
 
 
