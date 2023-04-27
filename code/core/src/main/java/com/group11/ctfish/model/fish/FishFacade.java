@@ -1,7 +1,11 @@
 package com.group11.ctfish.model.fish;
 
+import com.group11.ctfish.CtFish;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class FishFacade {
 
@@ -9,18 +13,50 @@ public class FishFacade {
 
     private final List<Fish> fishes = new ArrayList<>();
 
+    private final int fishLimit = 10;
+    private int deltaTime = 0;
+
     public static FishFacade getInstance() {
         return INSTANCE;
     }
 
-    public void update() {
-        for (Fish fish : fishes) {
-            fish.move();
-        }
+    private FishFacade() {
     }
 
     public List<Fish> getFishes() {
         return fishes;
     }
 
+    public void update() {
+        updateFishes();
+
+        Iterator<Fish> iterator = fishes.iterator();
+        while (iterator.hasNext()) {
+            Fish fish = iterator.next();
+
+            if (fish.getX() < 0 || fish.getX() > CtFish.SCREEN_WIDTH) {
+                iterator.remove();
+            } else {
+                fish.update(fishes);
+                fish.move();
+            }
+        }
+    }
+
+    private void updateFishes() {
+        Random random = new Random();
+        deltaTime++;
+
+        if (fishes.size() >= fishLimit) {
+            return;
+        } else if (fishes.size() == 0) {
+            fishes.add(FishFactory.createStandardLeftFish());
+        }
+
+        if (random.nextInt(1000) - deltaTime < 0) {
+            deltaTime = 0;
+            fishes.add(FishFactory.createStandardLeftFish());
+            fishes.add(FishFactory.createStandardRightFish());
+        }
+    }
 }

@@ -8,30 +8,17 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
 import com.group11.ctfish.model.Hook;
-import com.group11.ctfish.model.fish.Fish;
 
-import com.group11.ctfish.model.fish.FishFactory;
-
-
-import com.group11.ctfish.model.fish.properties.Collectable;
-import com.group11.ctfish.model.fish.sizes.Sizes;
+import com.group11.ctfish.model.fish.FishFacade;
 
 
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Medium;
 import com.group11.ctfish.model.user.User;
-import com.group11.ctfish.view.QuestionScreen;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 public class FishingScreen implements Screen {
@@ -39,25 +26,18 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
-
-    private Texture texture1 = new Texture("fish/redoctopus/redoctopus4.png");
     private Texture hookImage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-    private FishRender fishRender;
-
+    private FishRender fishRenderer;
     private UserRender lifeRenderer;
+
+    private FishFacade fishFacade;
 
     final CtFish game;
 
-
     OrthographicCamera camera;
 
-    List<Fish> fishes = new ArrayList<>();
-
-    private static final int TOTAL_FISHES = 15;
-    private static final int TIME_DIFFERENCE = 250;
-    Random rand = new Random();
     Hook hook = new Hook();
     HookController hookController = new HookController(hook);
 
@@ -66,7 +46,6 @@ public class FishingScreen implements Screen {
 
 
     public FishingScreen(final CtFish game) {
-        produce(TOTAL_FISHES);
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
@@ -79,27 +58,12 @@ public class FishingScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
-        fishRender = new FishRender(batch,shapeRenderer,camera);
+        fishRenderer = new FishRender(batch);
         lifeRenderer = new UserRender();
+
+        fishFacade = FishFacade.getInstance();
     }
 
-    //TODO fix this mess
-    public void produce(int totalFishes){
-        int time = 1280;
-        int rotation = 0;
-
-        while (rotation < totalFishes) {
-            rotation = rotation + 1;
-            time = time + TIME_DIFFERENCE;
-            Fish fish = FishFactory.createFish(
-                    time,
-                    rand.nextInt(281),
-                    new Collectable(),
-                    Sizes.LARGE, texture1);
-            fishes.add(fish);
-        }
-
-    }
 
 
     @Override
@@ -118,9 +82,10 @@ public class FishingScreen implements Screen {
             posX+=70;
         }
         hookRender();
+        fishFacade.update();
+        fishRenderer.render(fishFacade.getFishes());
 
         batch.end();
-        fishRender.render(fishes);
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN

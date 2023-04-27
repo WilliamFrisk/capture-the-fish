@@ -15,9 +15,8 @@ public class HookController {
 
     public void update() {
         if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(0, Gdx.input.getY(), 0);
-            hook.setHookY(touchPos.y);
+
+            hook.setHookY(CtFish.SCREEN_HEIGHT - Gdx.input.getY());
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) hook.setHookY(hook.getHook().y - 20 * Gdx.graphics.getDeltaTime());
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) hook.setHookY(hook.getHook().y + 20 * Gdx.graphics.getDeltaTime());
