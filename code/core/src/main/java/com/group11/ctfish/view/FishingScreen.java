@@ -84,7 +84,6 @@ public class FishingScreen implements Screen {
             }else {
                 fish.moveLeft();
             }
-
             if (fish.getX() < 0) {
                 continue;
             }

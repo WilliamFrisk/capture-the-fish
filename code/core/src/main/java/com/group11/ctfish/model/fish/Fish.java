@@ -1,6 +1,7 @@
 package com.group11.ctfish.model.fish;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
 import com.group11.ctfish.model.fish.properties.FishProperty;
 import com.group11.ctfish.model.fish.sizes.FishSize;
 
@@ -16,7 +17,6 @@ public class Fish{
     private FishProperty property;
     private FishSize size;
     private Texture texture;
-
     static Random rand = new Random();
 
     public Fish(int x, int y, boolean isRight, FishProperty property, FishSize size, Texture texture) {
@@ -34,10 +34,14 @@ public class Fish{
         property.applyProperty();
     }
 
-    public void moveLeft() {
-        int deltaY = rand.nextInt(-1,1);
-        xPos--; //TODO implement this in a reasonable way
-//        yPos = yPos + deltaY; //to be corrected
+    public void moveLeft() { // TODO: Fix moving pattern so that fish moves in both x and y direction
+//        int deltaY = rand.nextInt(2)-1;
+//        if(this.getY()+deltaY > 0 && this.getY()+deltaY < 281){
+//            yPos = yPos + deltaY;
+//        }else if (this.getY() == 0){
+//            yPos++;
+//        }else yPos--;
+        xPos--;
     }
 
     public void moveRight(){xPos++;}

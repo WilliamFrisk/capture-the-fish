@@ -34,7 +34,6 @@ public class FishFactory {
             texture = "fish/red-fish/red-fish-left.png";
         }
         return new Fish(x, y, direction,new Collectable(), new Medium(), new Texture(texture));
-
     }
 
     public static Fish createSwordFish(int x, int y, boolean direction){
