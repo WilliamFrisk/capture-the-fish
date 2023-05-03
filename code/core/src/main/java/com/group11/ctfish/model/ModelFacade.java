@@ -36,7 +36,7 @@ public class ModelFacade {
         while (rotation <= TOTAL_FISHES) {
             rotation = rotation + 1;
             time = time + TIME_DIFFERENCE;
-            createFish(time, rand.nextInt(281), new Endangered(), new Medium(), "tuna.png");
+            createFish(time, rand.nextInt(281), new Endangered(), new Medium(), new Texture("tuna.png"));
 
         }
     }

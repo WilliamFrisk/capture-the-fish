@@ -9,7 +9,6 @@ import com.group11.ctfish.model.fish.Fish;
 import java.util.List;
 
 public class FishRender {
-    private int x = 0;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private Camera camera;
@@ -25,14 +24,13 @@ public class FishRender {
 
 
         for (Fish fish : fishes) {
-            fish.moveRight();
+            fish.moveLeft();
 
 
             if (fish.getX() < -225) {
                 continue;
             }
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
-            shapeRenderer.end();
         }
     }
 }

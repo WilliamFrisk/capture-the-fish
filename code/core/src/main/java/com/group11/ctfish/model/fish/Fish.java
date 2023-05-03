@@ -48,10 +48,8 @@ public class Fish implements Object2D {
         xPos--;
     }
 
-    public float getX() {
-
     public void moveRight(){xPos++;}
-    public int getX() {
+    public float getX() {
         return xPos;
     }
 

@@ -62,12 +62,11 @@ public class FishingScreen implements Screen {
 
 
     public FishingScreen(final CtFish game) {
-        produce(TOTAL_FISHES);
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
-        rainMusic.play();
+        //rainMusic.play();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
