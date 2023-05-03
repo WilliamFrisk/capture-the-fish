@@ -52,7 +52,6 @@ public class FishingScreen implements Screen, LifeObserver {
     Hookline hookline;
 
 
-
     public FishingScreen(final CtFish game) {
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 

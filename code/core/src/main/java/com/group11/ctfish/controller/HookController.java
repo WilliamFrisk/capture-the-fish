@@ -17,7 +17,6 @@ public class HookController {
     private Hook hook;
     ModelFacade facade = ModelFacade.getInstance();
 
-
     public HookController(Hook hook) {
         this.hook = hook;
     }

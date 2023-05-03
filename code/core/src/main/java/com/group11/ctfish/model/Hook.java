@@ -21,21 +21,22 @@ public class Hook implements Object2D {
         width = 64;
         height = 64;
         texture = new Texture("hookImage.png");
+
     }
 
-    public float getX(){
+    public float getX() {
         return x;
     }
 
-    public float getY(){
+    public float getY() {
         return y;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return (int) width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return (int) height;
     }
 
