@@ -5,6 +5,7 @@ import java.util.List;
 
 public class User {
     private List<LifeObserver> lifeObservers = new ArrayList<>();
+    private List<ScoreObserver> scoreObservers = new ArrayList<>();
     private String username;
     private int score;
     private int highscore;
@@ -21,6 +22,9 @@ public class User {
     private void updateLifeObservers() {
         lifeObservers.forEach(observer -> observer.update(lives));
     }
+    private void updateScoreObservers() {
+        scoreObservers.forEach(observer -> observer.updateScore(score));
+    }
 
     public String getUsername() {
         return this.username;
@@ -33,10 +37,10 @@ public class User {
     public int getScore() {
         return score;
     }
-    /*
+
     public void setScore(int score) {
         this.score = score;
-    }*/
+    }
 
     public int getLives() {
         return lives;
@@ -45,9 +49,9 @@ public class User {
     public void setLives(int lives) {
         this.lives = lives;
     }*/
-    public int updateScore(int score){
+    public void updateScore(int score){
         this.score += score;
-        return this.score;
+        updateScoreObservers();
     }
 
     public void addLife(){
@@ -76,6 +80,7 @@ public class User {
 
     public void observeScore(ScoreObserver observer) {
         observer.updateScore(score);
+        scoreObservers.add(observer);
 
     }
 }
