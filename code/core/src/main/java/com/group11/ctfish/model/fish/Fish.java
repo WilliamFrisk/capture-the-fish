@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.group11.ctfish.model.fish.properties.FishProperty;
 import com.group11.ctfish.model.fish.sizes.Size;
+import com.group11.ctfish.model.util.Object2D;
 
 import java.util.List;
 import java.util.Random;
 
-public class Fish{
+public class Fish implements Object2D {
 
     private FishProperty property;
 
@@ -67,8 +68,7 @@ public class Fish{
         sprite.setRotation(vel.angleDeg());
         acc.scl(0);
 
-        sprite.setCenterY(pos.y);
-        sprite.setCenterX(pos.x);
+        sprite.setPosition(pos.x, pos.y);
     }
 
     private Vector2 moveTowardsEdge() {
@@ -140,6 +140,10 @@ public class Fish{
 
     public Sprite getSprite(){
         return sprite;
+    }
+
+    public void setTextureWhite(){
+        this.sprite.setTexture(new Texture("fish/red-fish/red-fish-left.png"));
     }
 
     public int getWidth() {

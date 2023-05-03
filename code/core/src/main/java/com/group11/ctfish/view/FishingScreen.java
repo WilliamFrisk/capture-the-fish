@@ -7,9 +7,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
+
+import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
 
 import com.group11.ctfish.model.fish.FishFacade;
@@ -35,11 +38,11 @@ public class FishingScreen implements Screen {
     private FishFacade fishFacade;
 
     final CtFish game;
+    ModelFacade facade = ModelFacade.getInstance();
 
     OrthographicCamera camera;
 
-    Hook hook = new Hook();
-    HookController hookController = new HookController(hook);
+    HookController hookController = new HookController(facade.getHookObject());
 
     User user = new User("");
 
@@ -50,8 +53,7 @@ public class FishingScreen implements Screen {
 
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
-        rainMusic.play();
-
+        //rainMusic.play();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
@@ -63,8 +65,6 @@ public class FishingScreen implements Screen {
 
         fishFacade = FishFacade.getInstance();
     }
-
-
 
     @Override
     public void show() {
@@ -84,6 +84,7 @@ public class FishingScreen implements Screen {
         hookRender();
         fishFacade.update();
         fishRenderer.render(fishFacade.getFishes());
+        facade.CollisionUpdate();
 
         batch.end();
 
@@ -101,8 +102,8 @@ public class FishingScreen implements Screen {
 
     private void hookRender() {
         hookController.update();
-        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
-        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
+        hookImage = new TextureRegion(new Texture(Gdx.files.internal(facade.getHookObject().getTexture()) + ".png")).getTexture();
+        batch.draw(hookImage, facade.getHookObject().getHook().x, facade.getHookObject().getHook().y);
     }
     
 
