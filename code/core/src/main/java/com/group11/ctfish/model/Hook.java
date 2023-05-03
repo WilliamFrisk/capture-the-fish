@@ -15,7 +15,6 @@ public class Hook implements Object2D {
     private final float width;
     private final float height;
 
-
     public Hook() {
         x = CtFish.SCREEN_WIDTH - 515;
         y = CtFish.SCREEN_HEIGHT;
@@ -28,15 +27,15 @@ public class Hook implements Object2D {
         return x;
     }
 
-    public float getY(){
+    public float getY() {
         return y;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return (int) width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return (int) height;
     }
 
@@ -47,4 +46,6 @@ public class Hook implements Object2D {
     public Texture getTexture() {
         return texture;
     }
+
+
 }

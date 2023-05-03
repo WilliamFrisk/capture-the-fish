@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
 import com.group11.ctfish.model.Hook;
+import com.group11.ctfish.model.Hookline;
 import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.user.LifeObserver;
 import com.group11.ctfish.model.user.ScoreObserver;
@@ -41,6 +42,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private int score;
     BitmapFont font = new BitmapFont();
 
+    Hookline hookline;
 
 
     public FishingScreen(final CtFish game, String username) {
@@ -93,7 +95,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         facade.update();
         fishRenderer.render(facade.getFishes());
         batch.end();
-
+        hookline = new Hookline(facade.getHookObject().getY());
 
 
 
