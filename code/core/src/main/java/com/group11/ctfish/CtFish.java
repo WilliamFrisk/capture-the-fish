@@ -27,7 +27,7 @@ public class CtFish extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		this.setScreen(new FishingScreen(this));
+		this.setScreen(new FrontScreen(this));
 		shape = new ShapeRenderer();
 	}
 
