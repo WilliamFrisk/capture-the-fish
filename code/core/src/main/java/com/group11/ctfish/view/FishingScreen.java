@@ -7,11 +7,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
+
+import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.Fish;
 
@@ -49,17 +50,12 @@ public class FishingScreen implements Screen {
     private UserRender lifeRenderer;
 
     final CtFish game;
+    ModelFacade facade = ModelFacade.getInstance();
 
 
     OrthographicCamera camera;
 
-    List<Fish> fishes = new ArrayList<>();
-
-    private static final int TOTAL_FISHES = 15;
-    private static final int TIME_DIFFERENCE = 250;
-    Random rand = new Random();
-    Hook hook = new Hook();
-    HookController hookController = new HookController(hook);
+    HookController hookController = new HookController(facade.getHookObject());
 
     User user = new User("");
 
@@ -72,7 +68,6 @@ public class FishingScreen implements Screen {
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
         rainMusic.play();
-
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
@@ -82,30 +77,6 @@ public class FishingScreen implements Screen {
         fishRender = new FishRender(batch,shapeRenderer,camera);
         lifeRenderer = new UserRender();
     }
-
-    //TODO fix this mess
-    public void produce(int totalFishes){
-        int time = 0;
-        int count = 0;
-
-        while (count <= totalFishes) {
-            boolean direction = rand.nextBoolean();
-            if(direction){
-                time = 10 - count*TIME_DIFFERENCE;
-            }else {
-                time = 1280 + count*TIME_DIFFERENCE;
-            }
-
-            Fish fish = FishFactory.createRandomFish(
-                    time,
-                    rand.nextInt(281),
-                    direction);
-            fishes.add(fish);
-            count++;
-        }
-
-    }
-
 
     @Override
     public void show() {
@@ -123,9 +94,10 @@ public class FishingScreen implements Screen {
             posX+=70;
         }
         hookRender();
+        fishRender.render(facade.getFishList());
+        facade.CollisionUpdate();
 
         batch.end();
-        fishRender.render(fishes);
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
@@ -140,8 +112,8 @@ public class FishingScreen implements Screen {
 
     private void hookRender() {
         hookController.update();
-        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
-        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
+        hookImage = new TextureRegion(new Texture(Gdx.files.internal(facade.getHookObject().getTexture()) + ".png")).getTexture();
+        batch.draw(hookImage, facade.getHookObject().getHook().x, facade.getHookObject().getHook().y);
     }
     
 

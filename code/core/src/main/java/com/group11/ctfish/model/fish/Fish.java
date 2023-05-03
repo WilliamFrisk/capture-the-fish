@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.group11.ctfish.model.fish.properties.FishProperty;
 import com.group11.ctfish.model.fish.sizes.FishSize;
+import com.group11.ctfish.model.util.Object2D;
 import com.group11.ctfish.model.fish.sizes.Sizes;
 
 import java.util.Random;
 
-public class Fish{
+
+public class Fish implements Object2D {
     private int xPos;
     private int yPos;
     private int width;
@@ -46,12 +48,14 @@ public class Fish{
         xPos--;
     }
 
+    public float getX() {
+
     public void moveRight(){xPos++;}
     public int getX() {
         return xPos;
     }
 
-    public int getY() {
+    public float getY() {
         return yPos;
     }
 
@@ -62,6 +66,8 @@ public class Fish{
     public Texture getTexture(){
         return texture;
     }
+
+    public void setTextureWhite(){this.texture = new Texture("fish/red-fish/red-fish-left.png");}
 
     public int getWidth() {
         return width;
