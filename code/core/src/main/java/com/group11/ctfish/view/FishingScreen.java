@@ -18,13 +18,14 @@ import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.FishFacade;
 
 
+import com.group11.ctfish.model.user.LifeObserver;
 import com.group11.ctfish.model.user.User;
 
 
 import java.io.IOException;
 
 
-public class FishingScreen implements Screen {
+public class FishingScreen implements Screen, LifeObserver {
 
     // Graphics
 
@@ -130,5 +131,10 @@ public class FishingScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public void update(int lives) {
+        //rita lives hjärtan
     }
 }

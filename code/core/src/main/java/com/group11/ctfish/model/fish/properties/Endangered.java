@@ -5,9 +5,6 @@ public class Endangered implements FishProperty {
 
     @Override
     public void applyProperty() {
-
+        //user.loseLife()
     }
-
-
-
 }
