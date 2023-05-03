@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
+import com.group11.ctfish.model.quiz.QuizLogic;
+
 import java.io.IOException;
 
 
@@ -56,7 +58,7 @@ public class QuestionScreen implements Screen {
         A1Button.add(A1label).expand().fill();
         A1Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                facade.addLife();
+                facade.addLife(facade.getSpecificAnswer(1));
         }});
 
         TextButton A2Button = new TextButton(facade.getSpecificAnswer(2), skin, "default");

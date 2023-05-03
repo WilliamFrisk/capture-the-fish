@@ -4,6 +4,7 @@ import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.user.User;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
@@ -13,11 +14,13 @@ public class QuizLogic {
     int random = randomizeNumber();
     Question[] questions;
     Question currentQuestion;
-    ModelFacade facade = ModelFacade.getInstance();
-    User currentUser = facade.getUser();
+    ModelFacade facade;
+    User currentUser;
 
-    public QuizLogic() {
+    public QuizLogic(ModelFacade facade) {
         try {
+            this.facade = facade;
+            currentUser = facade.getUser();
             questions = db.readQuestions();
             currentQuestion = questions[random];
         } catch (IOException e) {
@@ -62,8 +65,15 @@ public class QuizLogic {
     }
 
     public void addLives(){
-        currentUser =  facade.getUser();
-        if (getRightAnswer() == getSpecificAnswer(1) && currentUser.getLives() < 3){
+        currentUser = facade.getUser();
+        if (Objects.equals(getRightAnswer(), getSpecificAnswer(1)) && currentUser.getLives() < 3){
+            currentUser.addLife();
+            System.out.println("RIGHT ANSWER");
+        }
+    }
+
+    public void answer(String answer) {
+        if (Objects.equals(getRightAnswer(), answer) && currentUser.getLives() < 3){
             currentUser.addLife();
             System.out.println("RIGHT ANSWER");
         }

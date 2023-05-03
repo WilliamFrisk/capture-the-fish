@@ -17,11 +17,12 @@ public class ModelFacade {
 
 
     private User user;
-    private final QuizLogic QL = new QuizLogic();
+    private final QuizLogic QL;
     private final FishFacade fishFacade = FishFacade.getInstance();
     private final Hook hook = new Hook();
 
     private ModelFacade() {
+        QL = new QuizLogic(this);
     }
 
     public static ModelFacade getInstance(){
