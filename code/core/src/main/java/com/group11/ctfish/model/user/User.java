@@ -8,7 +8,7 @@ public class User {
 
     public User(String username) {
         this.username = username;
-        lives= 3;
+        lives = 2;
         score = 0;
         highscore = 0;
     }
@@ -42,7 +42,7 @@ public class User {
     }
 
     public void addLife(){
-        if(lives < 3)
+        if(lives < 2)
             this.lives++;
     }
 
