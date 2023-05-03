@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -18,13 +19,16 @@ import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.FishFacade;
 import com.group11.ctfish.model.user.LifeObserver;
 
+import com.group11.ctfish.model.user.ScoreObserver;
+
+
 import com.group11.ctfish.model.user.User;
 
 
 import java.io.IOException;
 
 
-public class FishingScreen implements Screen, LifeObserver {
+public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     // Graphics
 
@@ -35,7 +39,7 @@ public class FishingScreen implements Screen, LifeObserver {
 
     private FishRender fishRenderer;
     private UserRender lifeRenderer;
-
+    private UserRender scoreBoard;
     private FishFacade fishFacade;
 
     final CtFish game;
@@ -47,11 +51,13 @@ public class FishingScreen implements Screen, LifeObserver {
 
     HookController hookController = new HookController(facade.getHookObject());
 
-    User user = new User("");
+    private String username;
+    private int score;
+    BitmapFont font = new BitmapFont();
 
 
 
-    public FishingScreen(final CtFish game) {
+    public FishingScreen(final CtFish game, String username) {
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
@@ -65,8 +71,11 @@ public class FishingScreen implements Screen, LifeObserver {
         batch = new SpriteBatch();
         fishRenderer = new FishRender(batch);
         lifeRenderer = new UserRender();
-
+        scoreBoard = new UserRender();
         fishFacade = FishFacade.getInstance();
+        this.username = username;
+
+
     }
 
     @Override
@@ -78,12 +87,21 @@ public class FishingScreen implements Screen, LifeObserver {
     public void render(float delta) {
         batch.begin();
 
+        // setup background
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+
         int posX = 50;
         for (int i = 1; i<=hearts; i++) {
             batch.draw(new Texture("heart.png"), posX,630,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
             posX += 70;
         }
+
+        // setup scoreboard
+
+        font.draw(batch, username, 1100,680);
+        font.draw(batch, "Score: "+ score, 1100,650);
+
+
 
         hookRender();
         fishFacade.update();
@@ -146,5 +164,11 @@ public class FishingScreen implements Screen, LifeObserver {
     @Override
     public void update(int lives) {
         hearts = lives;
+    }
+
+    @Override
+    public void updateScore(int score) {
+        this.score = score;
+
     }
 }

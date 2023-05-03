@@ -73,4 +73,9 @@ public class User {
         observer.update(lives);
         lifeObservers.add(observer);
     }
+
+    public void observeScore(ScoreObserver observer) {
+        observer.updateScore(score);
+
+    }
 }

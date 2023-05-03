@@ -1,11 +1,16 @@
 package com.group11.ctfish.model;
 
 import com.group11.ctfish.model.fish.Fish;
+
+import com.group11.ctfish.model.quiz.QuizLogic;
+
 import com.group11.ctfish.model.fish.FishFacade;
+
 import com.group11.ctfish.model.user.LifeObserver;
 import com.group11.ctfish.model.util.Utils;
 
-import java.awt.desktop.UserSessionEvent;
+import com.group11.ctfish.model.user.ScoreObserver;
+
 import java.util.ArrayList;
 
 import com.group11.ctfish.model.user.User;
@@ -13,12 +18,19 @@ import com.group11.ctfish.view.FishingScreen;
 
 
 import java.util.List;
+
+import java.util.Set;
 import java.util.Random;
 
 public class ModelFacade {
     User user;
     private List<Fish> fishList;
+
+    User user;
     private static ModelFacade instance = new ModelFacade();
+
+    QuizLogic QL = new QuizLogic();
+
     Hook hook = new Hook();
 
     private static final int TOTAL_FISHES = 15;
@@ -43,7 +55,8 @@ public class ModelFacade {
 
     public void createUser(String username){
         user = new User(username);
-        System.out.print(user.getUsername() + "is created!");
+        System.out.print(user.getUsername() + " is created!");
+
     }
 
     public User getUser(){
@@ -62,6 +75,25 @@ public class ModelFacade {
         return FishFacade.getInstance().getFishes();
     }
 
+    public void subscribeToScores(ScoreObserver observer) {
+        user.observeScore(observer);
+    }
 
+    public String getSpecificAnswer(int integer){
+        return QL.getSpecificAnswer(integer);
+    }
+
+    public String getQuestion(){
+        return QL.getQuestion();
+    }
+
+    public Set<String> getAnswers(){
+        return QL.getAnswers();
+    }
+
+    public String getRightAnswer(){
+        return QL.getRightAnswer();
+
+    }
 
 }
