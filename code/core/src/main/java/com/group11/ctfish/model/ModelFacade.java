@@ -9,7 +9,6 @@ import com.group11.ctfish.model.fish.sizes.FishSize;
 import com.group11.ctfish.model.user.User;
 
 import com.group11.ctfish.model.fish.sizes.Sizes;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 
 
 import java.util.List;
