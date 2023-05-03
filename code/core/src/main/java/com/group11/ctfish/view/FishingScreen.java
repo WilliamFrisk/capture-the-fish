@@ -14,6 +14,8 @@ import com.group11.ctfish.controller.HookController;
 
 import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
+import com.group11.ctfish.model.Hookline;
+
 
 import com.group11.ctfish.model.fish.FishFacade;
 import com.group11.ctfish.model.user.LifeObserver;
@@ -46,6 +48,8 @@ public class FishingScreen implements Screen, LifeObserver {
     HookController hookController = new HookController(facade.getHookObject());
 
     User user = new User("");
+
+    Hookline hookline;
 
 
 
@@ -86,9 +90,8 @@ public class FishingScreen implements Screen, LifeObserver {
         fishFacade.update();
         fishRenderer.render(fishFacade.getFishes());
         facade.CollisionUpdate();
-
         batch.end();
-
+        hookline = new Hookline(facade.getHookObject().getY());
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {

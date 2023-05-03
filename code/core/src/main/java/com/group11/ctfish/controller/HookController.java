@@ -18,7 +18,6 @@ public class HookController {
     ModelFacade facade = ModelFacade.getInstance();
 
 
-
     public HookController(Hook hook) {
         this.hook = hook;
     }
@@ -36,3 +35,4 @@ public class HookController {
 
 
 }
+
