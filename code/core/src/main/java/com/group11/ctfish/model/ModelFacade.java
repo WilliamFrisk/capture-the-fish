@@ -2,17 +2,21 @@ package com.group11.ctfish.model;
 
 import com.group11.ctfish.model.fish.Fish;
 import com.group11.ctfish.model.fish.FishFacade;
+import com.group11.ctfish.model.user.LifeObserver;
 import com.group11.ctfish.model.util.Utils;
 
+import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
 
 import com.group11.ctfish.model.user.User;
+import com.group11.ctfish.view.FishingScreen;
 
 
 import java.util.List;
 import java.util.Random;
 
 public class ModelFacade {
+    User user;
     private List<Fish> fishList;
     private static ModelFacade instance = new ModelFacade();
     Hook hook = new Hook();
@@ -38,8 +42,16 @@ public class ModelFacade {
     }
 
     public void createUser(String username){
-        User user = new User(username);
+        user = new User(username);
         System.out.print(user.getUsername() + "is created!");
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void subscribeToLives(LifeObserver observer) {
+        user.observeLife(observer);
     }
 
     public Hook getHookObject(){
@@ -49,4 +61,7 @@ public class ModelFacade {
     public List<Fish> getFishList() {
         return FishFacade.getInstance().getFishes();
     }
+
+
+
 }

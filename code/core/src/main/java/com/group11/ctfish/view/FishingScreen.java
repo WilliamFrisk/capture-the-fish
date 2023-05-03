@@ -41,6 +41,8 @@ public class FishingScreen implements Screen, LifeObserver {
     final CtFish game;
     ModelFacade facade = ModelFacade.getInstance();
 
+    private int hearts;
+
     OrthographicCamera camera;
 
     HookController hookController = new HookController(facade.getHookObject());
@@ -78,16 +80,18 @@ public class FishingScreen implements Screen, LifeObserver {
 
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         int posX = 50;
-        for (int i = 0; i <= user.getLives(); i++){
-            batch.draw(new Texture("heart.png"), posX,630, lifeRenderer.getWidth(), lifeRenderer.getHeight());
-            posX+=70;
+        for (int i = 1; i<=hearts; i++) {
+            batch.draw(new Texture("heart.png"), posX,630,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            posX += 70;
         }
+
         hookRender();
         fishFacade.update();
         fishRenderer.render(fishFacade.getFishes());
         facade.CollisionUpdate();
-
         batch.end();
+
+
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
@@ -98,6 +102,12 @@ public class FishingScreen implements Screen, LifeObserver {
                 throw new RuntimeException(e);
             }
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            System.out.println("tjo");
+            facade.getUser().removeLife();
+            System.out.println(hearts);
+            }
+
     }
 
 
@@ -135,6 +145,6 @@ public class FishingScreen implements Screen, LifeObserver {
 
     @Override
     public void update(int lives) {
-        //rita lives hjärtan
+        hearts = lives;
     }
 }
