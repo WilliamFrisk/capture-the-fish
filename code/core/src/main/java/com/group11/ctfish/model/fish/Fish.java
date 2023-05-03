@@ -3,7 +3,7 @@ package com.group11.ctfish.model.fish;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.group11.ctfish.model.fish.properties.FishProperty;
-import com.group11.ctfish.model.fish.sizes.FishSize;
+import com.group11.ctfish.model.fish.sizes.Sizes;
 
 import java.util.Random;
 
@@ -28,6 +28,7 @@ public class Fish{
         this.texture = texture;
         this.property = property;
         this.size = size;
+
     }
 
     public void onCaught() {

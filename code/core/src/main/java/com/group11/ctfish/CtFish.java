@@ -2,12 +2,19 @@ package com.group11.ctfish;
 
 import com.badlogic.gdx.Game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import main.java.com.group11.ctfish.view.FishingScreen;
+import com.group11.ctfish.view.QuestionScreen;
+import com.group11.ctfish.view.FishingScreen;
+import com.group11.ctfish.view.FrontScreen;
+
+
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class CtFish extends Game {
+
 	SpriteBatch batch;
 	Texture img;
 	public ShapeRenderer shape;
@@ -28,10 +35,14 @@ public class CtFish extends Game {
 	public void render () {
 		super.render();
 	}
+
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+	}
+	public Skin getSkin() {
+		return new Skin(Gdx.files.internal("skin/button.json"));
 	}
 }

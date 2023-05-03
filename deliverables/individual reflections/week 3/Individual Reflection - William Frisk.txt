@@ -1,0 +1,10 @@
+This week I focused mainly on implementing a more reactive and advanced movement system for the 
+fish. Moreover, I helped my team mates by providing some feedback on their code as well as input on 
+how I think our code should be structured.
+
+I learned more about the roles of PO and SM like I aimed to do in last week's reflection. More 
+specifically I learned that a scrum master is important because he or she makes sure that everyone 
+is heard and that everyone gets to contribute to the team.
+
+For next week I aim to be a larger part of the team reflection writing because I feel like I could 
+contribute more to this document than I do at the moment.

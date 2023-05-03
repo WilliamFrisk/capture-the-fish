@@ -1,16 +1,34 @@
-package main.java.com.group11.ctfish.view;
+package com.group11.ctfish.view;
 
+import com.badlogic.gdx.Gdx;
+
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.controller.HookController;
+import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
+
+
+import com.group11.ctfish.model.fish.properties.Collectable;
+import com.group11.ctfish.model.fish.sizes.Sizes;
+
+
 import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.sizes.Medium;
+import com.group11.ctfish.model.user.User;
+import com.group11.ctfish.view.QuestionScreen;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,9 +39,17 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
+
+    private Texture texture1 = new Texture("fish/redoctopus/redoctopus4.png");
+    private Texture hookImage;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
+    private FishRender fishRender;
+
+    private UserRender lifeRenderer;
 
     final CtFish game;
+
 
     OrthographicCamera camera;
 
@@ -32,15 +58,29 @@ public class FishingScreen implements Screen {
     private static final int TOTAL_FISHES = 15;
     private static final int TIME_DIFFERENCE = 250;
     Random rand = new Random();
+    Hook hook = new Hook();
+    HookController hookController = new HookController(hook);
+
+    User user = new User("");
+
 
 
     public FishingScreen(final CtFish game) {
         produce(TOTAL_FISHES);
+        Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
+
+        // start the playback of the background music immediately
+        rainMusic.setLooping(true);
+        rainMusic.play();
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
+        shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
+        fishRender = new FishRender(batch,shapeRenderer,camera);
+        lifeRenderer = new UserRender();
     }
 
     //TODO fix this mess
@@ -63,6 +103,7 @@ public class FishingScreen implements Screen {
             fishes.add(fish);
             count++;
         }
+
     }
 
 
@@ -74,28 +115,35 @@ public class FishingScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
+
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+        int posX = 50;
+        for (int i = 0; i <= user.getLives(); i++){
+            batch.draw(new Texture("heart.png"), posX,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            posX+=70;
+        }
+        hookRender();
+
         batch.end();
+        fishRender.render(fishes);
 
-        //TODO move this to a new class for rendering fish
-        for (Fish fish : fishes) {
-            if(fish.movesRight()){
-                fish.moveRight();
-            }else {
-                fish.moveLeft();
+        //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            try {
+                game.setScreen(new QuestionScreen(game, this));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            if (fish.getX() < 0) {
-                continue;
-            }
-
-            game.shape.setProjectionMatrix(camera.combined);
-            game.shape.begin(ShapeRenderer.ShapeType.Line);
-            batch.begin();
-            batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
-            batch.end();
-            game.shape.end();
         }
     }
+
+
+    private void hookRender() {
+        hookController.update();
+        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
+        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
+    }
+    
 
     @Override
     public void resize(int width, int height) {
