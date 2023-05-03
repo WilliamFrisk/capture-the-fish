@@ -46,28 +46,17 @@ public class FishFactory {
     }
 
     public static Fish createRandomFish() {
-        int direction = random.nextInt(2);
         int type = random.nextInt(TEXTURE_PROPERTY_LIST.size());
+        Direction dir = Direction.getRandomDirection();
+        return new Fish(
+                dir == Direction.RIGHT ? -200 : 1280,
+                random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
+                TEXTURE_PROPERTY_LIST.get(type).getRight().get(),
+                Size.getRandomSize(),
+                new Texture(TEXTURE_PROPERTY_LIST.get(type).getLeft()),
+                dir
+        );
 
-        if (direction == 1) {
-            return new Fish(
-                  -200,
-                    random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
-                    TEXTURE_PROPERTY_LIST.get(type).getRight().get(),
-                    Size.getRandomSize(),
-                    new Texture(TEXTURE_PROPERTY_LIST.get(type).getLeft()),
-                    Direction.RIGHT
-            );
-        } else {
-            return new Fish(
-                    1280,
-                    random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
-                    TEXTURE_PROPERTY_LIST.get(type).getRight().get(),
-                    Size.getRandomSize(),
-                    new Texture(TEXTURE_PROPERTY_LIST.get(type).getLeft()),
-                    Direction.LEFT
-            );
-        }
     }
 }
 
