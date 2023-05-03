@@ -85,18 +85,23 @@ public class FishingScreen implements Screen {
 
     //TODO fix this mess
     public void produce(int totalFishes){
-        int time = 1280;
-        int rotation = 0;
+        int time = 0;
+        int count = 0;
 
-        while (rotation <= totalFishes) {
-            rotation = rotation + 1;
-            time = time + TIME_DIFFERENCE;
-            Fish fish = FishFactory.createFish(
+        while (count <= totalFishes) {
+            boolean direction = rand.nextBoolean();
+            if(direction){
+                time = 10 - count*TIME_DIFFERENCE;
+            }else {
+                time = 1280 + count*TIME_DIFFERENCE;
+            }
+
+            Fish fish = FishFactory.createRandomFish(
                     time,
                     rand.nextInt(281),
-                    new Collectable(),
-                    Sizes.LARGE, texture1);
+                    direction);
             fishes.add(fish);
+            count++;
         }
 
     }
@@ -121,7 +126,6 @@ public class FishingScreen implements Screen {
 
         batch.end();
         fishRender.render(fishes);
-
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
