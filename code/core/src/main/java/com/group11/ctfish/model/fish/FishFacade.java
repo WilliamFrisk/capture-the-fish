@@ -2,6 +2,7 @@ package com.group11.ctfish.model.fish;
 
 import com.group11.ctfish.CtFish;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -34,7 +35,7 @@ public class FishFacade {
         while (iterator.hasNext()) {
             Fish fish = iterator.next();
 
-            if (fish.getX() < 0 || fish.getX() > CtFish.SCREEN_WIDTH) {
+            if (fish.getX() < -200 || fish.getX() > CtFish.SCREEN_WIDTH) {
                 iterator.remove();
             } else {
                 fish.update(fishes);
@@ -53,10 +54,9 @@ public class FishFacade {
             fishes.add(FishFactory.createRandomFish());
         }
 
-        if (random.nextInt(1000) - deltaTime < 0) {
+        if (random.nextInt(500) - deltaTime < 0) {
             deltaTime = 0;
-            fishes.add(FishFactory.createStandardLeftFish());
-            fishes.add(FishFactory.createStandardRightFish());
+            fishes.add(FishFactory.createRandomFish());
         }
     }
 }

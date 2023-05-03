@@ -18,7 +18,6 @@ public class ModelFacade {
 
     private final FishFacade fishFacade;
     private static final ModelFacade INSTANCE = new ModelFacade();
-    private final Hook hook = new Hook();
 
     private ModelFacade() {
         this.fishFacade = FishFacade.getInstance();
