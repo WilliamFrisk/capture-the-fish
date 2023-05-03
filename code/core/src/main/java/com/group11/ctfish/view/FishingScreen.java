@@ -14,25 +14,14 @@ import com.group11.ctfish.controller.HookController;
 
 import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
-import com.group11.ctfish.model.fish.Fish;
 
-import com.group11.ctfish.model.fish.FishFactory;
-
-
-import com.group11.ctfish.model.fish.properties.Collectable;
-import com.group11.ctfish.model.fish.sizes.Sizes;
+import com.group11.ctfish.model.fish.FishFacade;
 
 
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Medium;
 import com.group11.ctfish.model.user.User;
-import com.group11.ctfish.view.QuestionScreen;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 public class FishingScreen implements Screen {
@@ -40,18 +29,16 @@ public class FishingScreen implements Screen {
     // Graphics
 
     private Texture background;
-
-    private Texture texture1 = new Texture("fish/redoctopus/redoctopus4.png");
     private Texture hookImage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-    private FishRender fishRender;
-
+    private FishRender fishRenderer;
     private UserRender lifeRenderer;
+
+    private FishFacade fishFacade;
 
     final CtFish game;
     ModelFacade facade = ModelFacade.getInstance();
-
 
     OrthographicCamera camera;
 
@@ -73,8 +60,10 @@ public class FishingScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
-        fishRender = new FishRender(batch,shapeRenderer,camera);
+        fishRenderer = new FishRender(batch);
         lifeRenderer = new UserRender();
+
+        fishFacade = FishFacade.getInstance();
     }
 
     @Override
@@ -93,10 +82,12 @@ public class FishingScreen implements Screen {
             posX+=70;
         }
         hookRender();
-        fishRender.render(facade.getFishList());
+        fishFacade.update();
+        fishRenderer.render(fishFacade.getFishes());
         facade.CollisionUpdate();
 
         batch.end();
+
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {

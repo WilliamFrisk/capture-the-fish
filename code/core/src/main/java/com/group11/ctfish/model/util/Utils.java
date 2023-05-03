@@ -10,10 +10,7 @@ public class Utils {
         Rectangle rectangleObject1 = new Rectangle(object1.getX(), object1.getY(), object1.getWidth(), object1.getHeight());
         Rectangle rectangleObject2 = new Rectangle(object2.getX(), object2.getY(), object2.getWidth(), object2.getHeight());
 
-        if (rectangleObject1.overlaps(rectangleObject2)) {
-            return true;
-        }
-        else return false;
+        return rectangleObject1.overlaps(rectangleObject2);
     }
 }
 
