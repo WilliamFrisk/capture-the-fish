@@ -26,7 +26,6 @@ public class ModelFacade {
     User user;
     private List<Fish> fishList;
 
-    User user;
     private static ModelFacade instance = new ModelFacade();
 
     QuizLogic QL = new QuizLogic();
