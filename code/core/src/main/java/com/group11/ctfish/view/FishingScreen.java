@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
@@ -41,6 +40,8 @@ public class FishingScreen implements Screen, LifeObserver {
     private FishFacade fishFacade;
 
     final CtFish game;
+
+    private Texture hookTexture;
     ModelFacade facade = ModelFacade.getInstance();
 
     OrthographicCamera camera;
@@ -106,7 +107,8 @@ public class FishingScreen implements Screen, LifeObserver {
     private void hookRender() {
         hookController.update();
         Hook hook = facade.getHookObject();
-        batch.draw(hook.getTexture(), hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
+        hookTexture = new Texture(hook.getTexture() + ".png");
+        batch.draw(hookTexture, hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
     }
     
 

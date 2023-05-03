@@ -9,18 +9,18 @@ public class Hook implements Object2D {
     private float x;
 
     private float y;
-    private Texture texture;
 
     private float width;
 
     private float height;
+    private String texture;
 
     public Hook() {
         x = CtFish.SCREEN_WIDTH - 515;
         y = CtFish.SCREEN_HEIGHT;
         width = 64;
         height = 64;
-        texture = new Texture("hookImage.png");
+        texture = "HookImage";
 
     }
 
@@ -44,7 +44,9 @@ public class Hook implements Object2D {
         this.y = y;
     }
 
-    public Texture getTexture() {
+    public String getTexture() {
         return texture;
     }
+
+
 }
