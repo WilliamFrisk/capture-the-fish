@@ -1,25 +1,14 @@
 package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
-import com.group11.ctfish.model.Hook;
-import com.group11.ctfish.model.fish.Fish;
-
-import com.group11.ctfish.model.fish.FishFactory;
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Medium;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.group11.ctfish.model.ModelFacade;
 
 
 public class FishingScreen implements Screen {
@@ -34,21 +23,15 @@ public class FishingScreen implements Screen {
     private FishRender fishRender;
 
     final CtFish game;
+    ModelFacade facade = ModelFacade.getInstance();
 
     OrthographicCamera camera;
 
-    List<Fish> fishes = new ArrayList<>();
-
-    private static final int TOTAL_FISHES = 15;
-    private static final int TIME_DIFFERENCE = 250;
-    Random rand = new Random();
-    Hook hook = new Hook();
-    HookController hookController = new HookController(hook);
+    HookController hookController = new HookController(facade.getHookObject());
 
 
 
     public FishingScreen(final CtFish game) {
-        produce(TOTAL_FISHES);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
@@ -58,23 +41,7 @@ public class FishingScreen implements Screen {
         fishRender = new FishRender(batch,shapeRenderer,camera);
     }
 
-    //TODO fix this mess
-    public void produce(int totalFishes){
-        int time = 1280;
-        int rotation = 0;
 
-        while (rotation <= totalFishes) {
-            rotation = rotation + 1;
-            time = time + TIME_DIFFERENCE;
-            Fish fish = FishFactory.createFish(
-                    time,
-                    rand.nextInt(281),
-                    new Endangered(),
-                    new Medium(),
-                    "tuna.png");
-            fishes.add(fish);
-        }
-    }
 
 
     @Override
@@ -87,14 +54,16 @@ public class FishingScreen implements Screen {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         hookRender();
+        fishRender.render(facade.getFishList());
+        facade.CollisionUpdate();
         batch.end();
-        fishRender.render(fishes);
+
     }
 
     private void hookRender() {
         hookController.update();
-        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
-        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
+        hookImage = new TextureRegion(new Texture(Gdx.files.internal(facade.getHookObject().getTexture()) + ".png")).getTexture();
+        batch.draw(hookImage, facade.getHookObject().getHook().x, facade.getHookObject().getHook().y);
     }
     
 

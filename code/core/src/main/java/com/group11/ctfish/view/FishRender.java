@@ -10,9 +10,9 @@ import java.util.List;
 public class FishRender {
 
 
-        private SpriteBatch batch;
-        private ShapeRenderer shapeRenderer;
-        private Camera camera;
+    private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
+    private Camera camera;
 
     public FishRender(SpriteBatch batch, ShapeRenderer shapeRenderer, Camera camera) {
         this.batch = batch;
@@ -26,11 +26,7 @@ public class FishRender {
             if (fish.getX() < 0) {
                 continue;
             }
-            shapeRenderer.setProjectionMatrix(camera.combined);
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-            batch.begin();
             batch.draw(fish.getTexture(), fish.getX(), fish.getY(), fish.getWidth(), fish.getHeight());
-            batch.end();
             shapeRenderer.end();
         }
     }

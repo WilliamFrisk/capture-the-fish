@@ -2,8 +2,9 @@ package com.group11.ctfish.model;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.util.Object2D;
 
-public class Hook {
+public class Hook implements Object2D {
 
 
     private Rectangle hook;
@@ -19,6 +20,7 @@ public class Hook {
         hook.width = 32;
         hook.height = 32;
         texture = "hookImage";
+
     }
 
     public Rectangle getHook(){
@@ -34,4 +36,23 @@ public class Hook {
     }
 
 
+    @Override
+    public float getX() {
+        return hook.x;
+    }
+
+    @Override
+    public float getY() {
+        return hook.y;
+    }
+
+    @Override
+    public int getWidth() {
+        return (int) hook.width;
+    }
+
+    @Override
+    public int getHeight() {
+        return (int) hook.width;
+    }
 }
