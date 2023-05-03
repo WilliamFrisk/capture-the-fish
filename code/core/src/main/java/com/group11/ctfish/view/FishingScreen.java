@@ -43,7 +43,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
 
 
-    public FishingScreen(final CtFish game) {
+    public FishingScreen(final CtFish game, String username) {
         Music music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately

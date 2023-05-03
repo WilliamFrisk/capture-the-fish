@@ -12,15 +12,15 @@ import java.util.List;
 import java.util.Set;
 
 public class ModelFacade {
-    private User user;
 
-    QuizLogic QL = new QuizLogic();
-
-    private final FishFacade fishFacade;
     private static final ModelFacade INSTANCE = new ModelFacade();
 
+    private User user;
+    private final QuizLogic QL = new QuizLogic();
+    private final FishFacade fishFacade = FishFacade.getInstance();
+    private final Hook hook = new Hook();
+
     private ModelFacade() {
-        this.fishFacade = FishFacade.getInstance();
     }
 
     public static ModelFacade getInstance(){
