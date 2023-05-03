@@ -97,6 +97,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         }
 
         // setup scoreboard
+        font.setColor(Color.BLACK);
 
         font.draw(batch, username, 1100,680);
         font.draw(batch, "Score: "+ score, 1100,650);
@@ -121,15 +122,13 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
-            System.out.println("tjo");
             facade.getUser().removeLife();
             System.out.println(hearts);
             }
 
         if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-            System.out.println("tjo");
             facade.getUser().updateScore(100);
-            System.out.println(hearts);
+            System.out.println(facade.getUser().getScore());
         }
     }
 
