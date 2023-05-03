@@ -1,18 +1,71 @@
 package com.group11.ctfish.model.fish;
+import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.group11.ctfish.model.fish.properties.*;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.group11.ctfish.model.fish.properties.FishProperty;
-import com.group11.ctfish.model.fish.sizes.FishSize;
-import com.group11.ctfish.model.fish.sizes.Sizes;
+
+import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.fish.properties.Collectable;
+import com.group11.ctfish.model.fish.sizes.Size;
 
 public class FishFactory {
+    private static Random random = new Random();
 
-    //TODO Implement createRandomFish
+    public static Fish createStandardLeftFish() {
+        return new Fish(
+                1280,
+                //CtFish.SCREEN_HEIGHT / 2,
+                random.nextInt((CtFish.SCREEN_HEIGHT - 300 ) + 1),
+                new Collectable(),
+                Size.MEDIUM,
+                new Texture("tuna.png"),
+                Direction.LEFT
+                );
+    }
 
-    public static Fish createFish(int x, int y, FishProperty property, Sizes size, Texture texture) {
-        return new Fish(x, y, property, size, new TextureRegion(texture));
+    public static Fish createStandardRightFish() {
+        return new Fish(
+                0,
+                //CtFish.SCREEN_HEIGHT / 2,
+                random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
+                new Collectable(),
+                Size.MEDIUM,
+                new Texture("tuna.png"),
+                Direction.RIGHT
+        );
+    }
+
+    public static Fish createRandomFish(int x, int y, Direction direction){
+        int nextInt = random.nextInt(3);
+        if(nextInt==1){
+            return createRedFish(x,y,direction);
+        } else if (nextInt == 2) {
+            return createSwordFish(x,y,direction);
+        } else {
+            return createUglyFish(x,y,direction);
+        }
+    }
+
+    public static Fish createRedFish(int x, int y, Direction direction){
+        return new Fish(x, y,
+                new Collectable(),
+                Size.MEDIUM,
+                new Texture("fish/red-fish/red-fish-right.png"),
+                direction);
+    }
+
+    public static Fish createSwordFish(int x, int y, Direction direction){
+        return new Fish(x, y, new Endangered(), Size.LARGE,
+                new Texture("fish/sword-fish/sword-fish-right.png"),
+                direction);
+    }
+
+    public static Fish createUglyFish(int x, int y, Direction direction){
+        return new Fish(x, y,
+                new Collectable(), Size.SMALL,
+                new Texture("fish/ugly-fish/ugly-fish-left.png"),
+                direction);
     }
 }
 

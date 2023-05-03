@@ -7,7 +7,4 @@ public class Collectable implements FishProperty{
     public void applyProperty() {
 
     }
-
-
-
 }

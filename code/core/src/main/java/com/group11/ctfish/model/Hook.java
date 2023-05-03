@@ -1,13 +1,15 @@
 package com.group11.ctfish.model;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.util.Object2D;
 
-public class Hook {
+public class Hook implements Object2D {
 
     private float x;
 
     private float y;
-    private String texture;
+    private Texture texture;
 
     private float width;
 
@@ -19,7 +21,8 @@ public class Hook {
         y = CtFish.SCREEN_HEIGHT;
         width = 64;
         height = 64;
-        texture = "hookImage";
+        texture = new Texture("hookImage.png");
+
     }
 
     public Hook getHook(){
@@ -34,22 +37,19 @@ public class Hook {
         return y;
     }
 
-    public float getWidth(){
-        return width;
+    public int getWidth(){
+        return (int) width;
     }
 
-    public float getHeight(){
-        return height;
+    public int getHeight(){
+        return (int) height;
     }
 
     public void setY(float y) {
         this.y = y;
     }
 
-    public String getTexture() {
+    public Texture getTexture() {
         return texture;
     }
-
-
-
 }

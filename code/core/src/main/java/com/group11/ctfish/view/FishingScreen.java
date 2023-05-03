@@ -7,95 +7,65 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
+
+import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
-import com.group11.ctfish.model.fish.Fish;
 
-import com.group11.ctfish.model.fish.FishFactory;
-
-
-import com.group11.ctfish.model.fish.properties.Collectable;
-import com.group11.ctfish.model.fish.sizes.Sizes;
-
+import com.group11.ctfish.model.fish.FishFacade;
+import com.group11.ctfish.model.user.LifeObserver;
 
 import com.group11.ctfish.model.user.User;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
-public class FishingScreen implements Screen {
+public class FishingScreen implements Screen, LifeObserver {
 
     // Graphics
 
     private Texture background;
-
-    private Texture texture1 = new Texture("fish/redoctopus/redoctopus4.png");
     private Texture hookImage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-    private FishRender fishRender;
 
-    private UserRender lifeRender;
+    private FishRender fishRenderer;
+    private UserRender lifeRenderer;
+
+    private FishFacade fishFacade;
 
     final CtFish game;
-
+    ModelFacade facade = ModelFacade.getInstance();
 
     OrthographicCamera camera;
 
-    List<Fish> fishes = new ArrayList<>();
-
-    private static final int TOTAL_FISHES = 15;
-    private static final int TIME_DIFFERENCE = 250;
-    Random rand = new Random();
-    Hook hook = new Hook();
-    HookController hookController = new HookController(hook);
+    HookController hookController = new HookController(facade.getHookObject());
 
     User user = new User("");
 
 
 
     public FishingScreen(final CtFish game) {
-        produce(TOTAL_FISHES);
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
-        rainMusic.play();
-
+        //rainMusic.play();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         this.game = game;
         shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
-        fishRender = new FishRender(batch,shapeRenderer,camera);
-        lifeRender = new UserRender();
+        fishRenderer = new FishRender(batch);
+        lifeRenderer = new UserRender();
+
+        fishFacade = FishFacade.getInstance();
     }
-
-    //TODO fix this mess
-    public void produce(int totalFishes){
-        int time = 1280;
-        int rotation = 0;
-
-        while (rotation <= totalFishes) {
-            rotation = rotation + 1;
-            time = time + TIME_DIFFERENCE;
-            Fish fish = FishFactory.createFish(
-                    time,
-                    rand.nextInt(281),
-                    new Collectable(),
-                    Sizes.LARGE, texture1);
-            fishes.add(fish);
-        }
-
-    }
-
 
     @Override
     public void show() {
@@ -109,13 +79,15 @@ public class FishingScreen implements Screen {
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         int posX = 50;
         for (int i = 0; i <= user.getLives(); i++){
-            batch.draw(new Texture("heart.png"), posX,630, lifeRender.getWidth(), lifeRender.getHeight());
+            batch.draw(new Texture("heart.png"), posX,630, lifeRenderer.getWidth(), lifeRenderer.getHeight());
             posX+=70;
         }
         hookRender();
+        fishFacade.update();
+        fishRenderer.render(fishFacade.getFishes());
+        facade.CollisionUpdate();
 
         batch.end();
-        fishRender.render(fishes);
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
@@ -131,8 +103,8 @@ public class FishingScreen implements Screen {
 
     private void hookRender() {
         hookController.update();
-        hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
-        batch.draw(hookImage, hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
+        Hook hook = facade.getHookObject();
+        batch.draw(hook.getTexture(), hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
     }
     
 
@@ -159,5 +131,10 @@ public class FishingScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public void update(int lives) {
+        //rita lives hjärtan
     }
 }
