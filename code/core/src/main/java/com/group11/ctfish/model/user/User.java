@@ -57,6 +57,7 @@ public class User {
     public void addLife(){
         if(lives < 2)
             this.lives++;
+            updateLifeObservers();
     }
 
     public void removeLife(){

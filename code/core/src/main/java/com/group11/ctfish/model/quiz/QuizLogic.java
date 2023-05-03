@@ -1,5 +1,8 @@
 package com.group11.ctfish.model.quiz;
 
+import com.group11.ctfish.model.ModelFacade;
+import com.group11.ctfish.model.user.User;
+
 import java.io.IOException;
 import java.util.Random;
 import java.util.Set;
@@ -10,6 +13,8 @@ public class QuizLogic {
     int random = randomizeNumber();
     Question[] questions;
     Question currentQuestion;
+    ModelFacade facade = ModelFacade.getInstance();
+    User currentUser = facade.getUser();
 
     public QuizLogic() {
         try {
@@ -54,5 +59,13 @@ public class QuizLogic {
     public String getRightAnswer(){
         return currentQuestion.getCorrectAnswer();
 
+    }
+
+    public void addLives(){
+        currentUser =  facade.getUser();
+        if (getRightAnswer() == getSpecificAnswer(1) && currentUser.getLives() < 3){
+            currentUser.addLife();
+            System.out.println("RIGHT ANSWER");
+        }
     }
 }
