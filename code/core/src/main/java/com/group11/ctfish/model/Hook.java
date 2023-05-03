@@ -1,37 +1,55 @@
 package com.group11.ctfish.model;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.Texture;
 import com.group11.ctfish.CtFish;
+import com.group11.ctfish.model.util.Object2D;
 
-public class Hook {
+public class Hook implements Object2D {
 
+    private float x;
 
-    private Rectangle hook;
+    private float y;
+    private Texture texture;
 
-    private String texture;
+    private float width;
 
+    private float height;
 
 
     public Hook() {
-        hook = new Rectangle();
-        hook.x = CtFish.SCREEN_WIDTH - 535;
-        hook.y = CtFish.SCREEN_HEIGHT - 100;
-        hook.width = 32;
-        hook.height = 32;
-        texture = "hookImage";
+        x = CtFish.SCREEN_WIDTH - 515;
+        y = CtFish.SCREEN_HEIGHT;
+        width = 64;
+        height = 64;
+        texture = new Texture("hookImage.png");
+
     }
 
-    public Rectangle getHook(){
-        return hook;
+    public Hook getHook(){
+        return this;
     }
 
-    public void setHookY(float y) {
-        this.hook.y = y;
+    public float getX(){
+        return x;
     }
 
-    public String getTexture() {
+    public float getY(){
+        return y;
+    }
+
+    public int getWidth(){
+        return (int) width;
+    }
+
+    public int getHeight(){
+        return (int) height;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public Texture getTexture() {
         return texture;
     }
-
-
 }
