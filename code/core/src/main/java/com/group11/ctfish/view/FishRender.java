@@ -27,7 +27,7 @@ public class FishRender {
 
 
         for (Fish fish : fishes) {
-            fish.move();
+            fish.moveRight();
 
 
             if (fish.getX() < -225) {

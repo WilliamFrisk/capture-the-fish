@@ -33,7 +33,7 @@ public class ModelFacade {
         System.out.print(user.getUsername() + "is created!");
     }
 
-    private void createFish(int x, int y, FishProperty property, Sizes size, Texture texture) {
+    private void createFish(int x, int y, FishProperty property, FishSize size, Texture texture) {
 
         fishList.add(FishFactory.createFish(x,y,property, size, texture));
     }

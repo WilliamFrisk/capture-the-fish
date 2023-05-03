@@ -62,8 +62,8 @@ public class FishFactory {
 
     }
 
-    public static Fish createFish(int x, int y, FishProperty property, Sizes size, Texture texture) {
-        return new Fish(x, y, property, size, new TextureRegion(texture));
+    public static Fish createFish(int x, int y, FishProperty property, FishSize size, Texture texture) {
+        return new Fish(x, y, false, property, size, texture);
     }
 }
 
