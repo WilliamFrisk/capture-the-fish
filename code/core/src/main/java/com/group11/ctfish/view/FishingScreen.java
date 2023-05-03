@@ -1,29 +1,20 @@
 package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Gdx;
-
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
-
-import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
-
-import com.group11.ctfish.model.fish.FishFacade;
+import com.group11.ctfish.model.Hookline;
+import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.user.LifeObserver;
-
 import com.group11.ctfish.model.user.ScoreObserver;
-
-
-import com.group11.ctfish.model.user.User;
-
 
 import java.io.IOException;
 
@@ -31,50 +22,47 @@ import java.io.IOException;
 public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     // Graphics
-
-    private Texture background;
-    private Texture hookImage;
-    private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
+    private final Texture background;
+    private final SpriteBatch batch;
+    private final UserRender scoreBoard;
 
     private FishRender fishRenderer;
     private UserRender lifeRenderer;
-    private UserRender scoreBoard;
-    private FishFacade fishFacade;
 
     final CtFish game;
-    ModelFacade facade = ModelFacade.getInstance();
+    private final ModelFacade facade = ModelFacade.getInstance();
 
     private int hearts;
 
     OrthographicCamera camera;
 
-    HookController hookController = new HookController(facade.getHookObject());
+    private final HookController hookController = new HookController(facade.getHookObject());
 
     private String username;
     private int score;
     BitmapFont font = new BitmapFont();
 
+    Hookline hookline;
 
 
     public FishingScreen(final CtFish game, String username) {
-        Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
-        rainMusic.setLooping(true);
-        //rainMusic.play();
+        music.setLooping(true);
+        //music.play();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+
         this.game = game;
-        shapeRenderer = new ShapeRenderer();
         background = new Texture("background.jpg");
+
         batch = new SpriteBatch();
+
         fishRenderer = new FishRender(batch);
         lifeRenderer = new UserRender();
         scoreBoard = new UserRender();
-        fishFacade = FishFacade.getInstance();
         this.username = username;
-
 
     }
 
@@ -104,11 +92,10 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
 
         hookRender();
-        fishFacade.update();
-        fishRenderer.render(fishFacade.getFishes());
-        facade.CollisionUpdate();
+        facade.update();
+        fishRenderer.render(facade.getFishes());
         batch.end();
-
+        hookline = new Hookline(facade.getHookObject().getY());
 
 
 
@@ -126,8 +113,12 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
             System.out.println(hearts);
             }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+            System.out.println("tjo");
+            facade.getUser().updateScore(100);
+            System.out.println(hearts);
+        }
     }
-
 
     private void hookRender() {
         hookController.update();

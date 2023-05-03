@@ -1,53 +1,45 @@
 package com.group11.ctfish.model;
 
 import com.group11.ctfish.model.fish.Fish;
-
-import com.group11.ctfish.model.quiz.QuizLogic;
-
 import com.group11.ctfish.model.fish.FishFacade;
-
+import com.group11.ctfish.model.quiz.QuizLogic;
 import com.group11.ctfish.model.user.LifeObserver;
+import com.group11.ctfish.model.user.ScoreObserver;
+import com.group11.ctfish.model.user.User;
 import com.group11.ctfish.model.util.Utils;
 
-import com.group11.ctfish.model.user.ScoreObserver;
-
-import java.util.ArrayList;
-
-import com.group11.ctfish.model.user.User;
-import com.group11.ctfish.view.FishingScreen;
-
-
 import java.util.List;
-
 import java.util.Set;
-import java.util.Random;
 
 public class ModelFacade {
-    User user;
-    private List<Fish> fishList;
 
-    private static ModelFacade instance = new ModelFacade();
+    private static final ModelFacade INSTANCE = new ModelFacade();
 
-    QuizLogic QL  = new QuizLogic();
 
-    Hook hook = new Hook();
+    private User user;
+    private final QuizLogic QL;
+    private final FishFacade fishFacade = FishFacade.getInstance();
+    private final Hook hook = new Hook();
 
-    private static final int TOTAL_FISHES = 15;
-    private static final int TIME_DIFFERENCE = 250;
-    Random rand = new Random();
-
-    private ModelFacade (){
-        this.fishList = new ArrayList<>();
+    private ModelFacade() {
+        QL = new QuizLogic(this);
     }
 
     public static ModelFacade getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
-    public void CollisionUpdate(){
-        for(Fish i : getFishList()) {
+    public void update() {
+        fishFacade.update();
+        collisionUpdate();
+    }
+
+    public void collisionUpdate(){
+        for(Fish i : getFishes()) {
             if (Utils.collides(i, hook)) {
                 i.setTextureWhite();
+                i.onCaught();
+                System.out.println(user.getScore());
             }
         }
     }
@@ -70,8 +62,8 @@ public class ModelFacade {
         return hook;
     }
 
-    public List<Fish> getFishList() {
-        return FishFacade.getInstance().getFishes();
+    public List<Fish> getFishes() {
+        return fishFacade.getFishes();
     }
 
     public void subscribeToScores(ScoreObserver observer) {
@@ -92,8 +84,8 @@ public class ModelFacade {
 
     public String getRightAnswer(){ return QL.getRightAnswer(); }
 
-    public void addLife(){
-        QL.addLives();
+    public void addLife(String answer){
+        QL.addLives(answer);
     }
 
 }

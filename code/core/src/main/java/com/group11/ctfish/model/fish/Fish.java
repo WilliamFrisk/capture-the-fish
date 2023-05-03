@@ -4,11 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.group11.ctfish.model.fish.properties.FishProperty;
-import com.group11.ctfish.model.fish.sizes.Size;
 import com.group11.ctfish.model.util.Object2D;
 
 import java.util.List;
-import java.util.Random;
 
 public class Fish implements Object2D {
 
@@ -136,6 +134,10 @@ public class Fish implements Object2D {
 
     public Vector2 getPos() {
         return new Vector2(pos);
+    }
+
+    public int getScore(){
+        return this.getScore();
     }
 
     public Sprite getSprite(){
