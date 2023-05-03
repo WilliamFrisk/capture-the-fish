@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
 import com.group11.ctfish.model.Hook;
+import com.group11.ctfish.model.Hookline;
 import com.group11.ctfish.model.fish.Fish;
 
 import com.group11.ctfish.model.fish.FishFactory;
@@ -44,6 +45,8 @@ public class FishingScreen implements Screen {
     Random rand = new Random();
     Hook hook = new Hook();
     HookController hookController = new HookController(hook);
+
+    Hookline hookline;
 
 
 
@@ -86,8 +89,9 @@ public class FishingScreen implements Screen {
     public void render(float delta) {
         batch.begin();
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
-        hookRender()
+        hookRender();
         batch.end();
+        hookline = new Hookline(hook.getHook().y);
         fishRender.render(fishes);
     }
 
@@ -95,6 +99,7 @@ public class FishingScreen implements Screen {
         hookController.update();
         hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
         batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
+
     }
     
 

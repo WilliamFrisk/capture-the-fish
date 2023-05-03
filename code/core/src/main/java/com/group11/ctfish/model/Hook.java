@@ -10,15 +10,18 @@ public class Hook {
 
     private String texture;
 
+    private Hookline hookline;
 
 
     public Hook() {
+        hookline = new Hookline(CtFish.SCREEN_HEIGHT - 50);
         hook = new Rectangle();
-        hook.x = CtFish.SCREEN_WIDTH - 535;
-        hook.y = CtFish.SCREEN_HEIGHT - 100;
+        hook.x = CtFish.SCREEN_WIDTH - ((420*CtFish.SCREEN_WIDTH)/1000);
+        hook.y = CtFish.SCREEN_HEIGHT - ((180*CtFish.SCREEN_HEIGHT)/1000);
         hook.width = 32;
         hook.height = 32;
         texture = "hookImage";
+
     }
 
     public Rectangle getHook(){
@@ -32,6 +35,4 @@ public class Hook {
     public String getTexture() {
         return texture;
     }
-
-
 }
