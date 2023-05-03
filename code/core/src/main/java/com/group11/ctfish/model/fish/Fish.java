@@ -55,22 +55,18 @@ public class Fish{
     }
 
     public void update(List<Fish> others) {
-        Random random = new Random();
         acc.add(moveTowardsEdge());
         acc.add(avoidTopAndBottom());
         acc.add(avoid(others));
-        acc.add(0, random.nextFloat() - 0.5f);
     }
 
     public void move() {
         pos.add(vel);
         vel.add(acc);
         vel.limit(maxSpeed);
-        System.out.println(vel.angleDeg());
         sprite.setRotation(vel.angleDeg());
         acc.scl(0);
 
-       // sprite.setOrigin(pos.x, pos.y);
         sprite.setCenterY(pos.y);
         sprite.setCenterX(pos.x);
     }
@@ -103,7 +99,7 @@ public class Fish{
     }
 
     private Vector2 avoid(List<Fish> others) {
-        int perceptionRadius = 100;
+        int perceptionRadius = 150;
         Vector2 steering = new Vector2();
         int total = 0;
 
