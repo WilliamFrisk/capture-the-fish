@@ -25,13 +25,14 @@ public class HookController {
 
     public void update() {
         if (Gdx.input.isTouched()) {
-
-            hook.setHookY(CtFish.SCREEN_HEIGHT - Gdx.input.getY());
+            hook.setY(CtFish.SCREEN_HEIGHT - Gdx.input.getY());
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) hook.setHookY(hook.getHook().y - 20 * Gdx.graphics.getDeltaTime());
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) hook.setHookY(hook.getHook().y + 20 * Gdx.graphics.getDeltaTime());
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) hook.setY(hook.getY() - 20 * Gdx.graphics.getDeltaTime()*10);
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) hook.setY(hook.getY() + 20 * Gdx.graphics.getDeltaTime()*10);
 
-        if(hook.getHook().y < 0) hook.setHookY(0);
-        if(hook.getHook().y > CtFish.SCREEN_HEIGHT-125) hook.setHookY(CtFish.SCREEN_HEIGHT-125);
+        if(hook.getY() < 0) hook.setY(0);
+        if(hook.getY() > CtFish.SCREEN_HEIGHT-95) hook.setY(CtFish.SCREEN_HEIGHT-95);
     }
+
+
 }

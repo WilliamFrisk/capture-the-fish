@@ -17,10 +17,11 @@ import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.Hook;
 
 import com.group11.ctfish.model.fish.FishFacade;
-
-
 import com.group11.ctfish.model.user.LifeObserver;
+
 import com.group11.ctfish.model.user.ScoreObserver;
+
+
 import com.group11.ctfish.model.user.User;
 
 
@@ -35,6 +36,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private Texture hookImage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+
     private FishRender fishRenderer;
     private UserRender lifeRenderer;
     private UserRender scoreBoard;
@@ -89,10 +91,18 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
 
 
+
         // setup scoreboard
 
         font.draw(batch, username, 1100,680);
         font.draw(batch, "Score: "+ score, 1100,650);
+
+
+        int posX = 50;
+        for (int i = 0; i <= user.getLives(); i++){
+            batch.draw(new Texture("heart.png"), posX,630, lifeRenderer.getWidth(), lifeRenderer.getHeight());
+            posX+=70;
+        }
 
         hookRender();
         fishFacade.update();
@@ -115,8 +125,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     private void hookRender() {
         hookController.update();
-        hookImage = new TextureRegion(new Texture(Gdx.files.internal(facade.getHookObject().getTexture()) + ".png")).getTexture();
-        batch.draw(hookImage, facade.getHookObject().getHook().x, facade.getHookObject().getHook().y);
+        Hook hook = facade.getHookObject();
+        batch.draw(hook.getTexture(), hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
     }
     
 

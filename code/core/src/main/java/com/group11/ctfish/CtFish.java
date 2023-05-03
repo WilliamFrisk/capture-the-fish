@@ -6,11 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.group11.ctfish.view.QuestionScreen;
-import com.group11.ctfish.view.FishingScreen;
 import com.group11.ctfish.view.FrontScreen;
-
-
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class CtFish extends Game {
@@ -22,6 +18,7 @@ public class CtFish extends Game {
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
 
+
 	
 	@Override
 	public void create () {
@@ -29,6 +26,10 @@ public class CtFish extends Game {
 		img = new Texture("badlogic.jpg");
 		this.setScreen(new FrontScreen(this));
 		shape = new ShapeRenderer();
+	}
+
+	public Skin getSkin() {
+		return new Skin(Gdx.files.internal("skin/button.json"));
 	}
 
 	@Override
@@ -42,7 +43,5 @@ public class CtFish extends Game {
 		batch.dispose();
 		img.dispose();
 	}
-	public Skin getSkin() {
-		return new Skin(Gdx.files.internal("skin/button.json"));
-	}
+
 }
