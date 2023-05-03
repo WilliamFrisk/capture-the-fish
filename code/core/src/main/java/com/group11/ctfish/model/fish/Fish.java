@@ -138,6 +138,10 @@ public class Fish implements Object2D {
         return new Vector2(pos);
     }
 
+    public int getScore(){
+        return this.getScore();
+    }
+
     public Sprite getSprite(){
         return sprite;
     }

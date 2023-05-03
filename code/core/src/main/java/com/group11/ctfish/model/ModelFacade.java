@@ -16,6 +16,7 @@ public class ModelFacade {
     private List<Fish> fishList;
     private static ModelFacade instance = new ModelFacade();
     Hook hook = new Hook();
+    private User player;
 
     private static final int TOTAL_FISHES = 15;
     private static final int TIME_DIFFERENCE = 250;
@@ -33,13 +34,19 @@ public class ModelFacade {
         for(Fish i : getFishList()) {
             if (Utils.collides(i, hook)) {
                 i.setTextureWhite();
+                i.onCaught();
+                System.out.println(player.getScore());
             }
         }
     }
 
     public void createUser(String username){
-        User user = new User(username);
-        System.out.print(user.getUsername() + "is created!");
+        player = new User(username);
+        System.out.print(player.getUsername() + "is created!");
+    }
+
+    public User getPlayer(){
+        return this.player;
     }
 
     public Hook getHookObject(){
