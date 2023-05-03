@@ -14,10 +14,8 @@ public class Hook implements Object2D {
     private float width;
 
     private float height;
-    private Hookline hookline;
 
     public Hook() {
-        hookline = new Hookline(CtFish.SCREEN_HEIGHT - 50);
         x = CtFish.SCREEN_WIDTH - 515;
         y = CtFish.SCREEN_HEIGHT;
         width = 64;
