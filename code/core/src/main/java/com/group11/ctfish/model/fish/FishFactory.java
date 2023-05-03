@@ -17,7 +17,7 @@ public class FishFactory {
                 1280,
                 //CtFish.SCREEN_HEIGHT / 2,
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300 ) + 1),
-                new Collectable(),
+                new Collectable(1),
                 Size.MEDIUM,
                 new Texture("tuna.png"),
                 Direction.LEFT
@@ -29,7 +29,7 @@ public class FishFactory {
                 0,
                 //CtFish.SCREEN_HEIGHT / 2,
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
-                new Collectable(),
+                new Collectable(1),
                 Size.MEDIUM,
                 new Texture("tuna.png"),
                 Direction.RIGHT
@@ -49,7 +49,7 @@ public class FishFactory {
 
     public static Fish createRedFish(int x, int y, Direction direction){
         return new Fish(x, y,
-                new Collectable(),
+                new Collectable(3),
                 Size.MEDIUM,
                 new Texture("fish/red-fish/red-fish-right.png"),
                 direction);
@@ -63,7 +63,7 @@ public class FishFactory {
 
     public static Fish createUglyFish(int x, int y, Direction direction){
         return new Fish(x, y,
-                new Collectable(), Size.SMALL,
+                new Collectable(4), Size.SMALL,
                 new Texture("fish/ugly-fish/ugly-fish-left.png"),
                 direction);
     }
