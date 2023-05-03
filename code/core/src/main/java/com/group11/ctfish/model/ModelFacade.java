@@ -5,12 +5,14 @@ import com.group11.ctfish.model.fish.Fish;
 import com.group11.ctfish.model.quiz.QuizLogic;
 
 import com.group11.ctfish.model.fish.FishFacade;
+import com.group11.ctfish.model.user.ScoreObserver;
 import com.group11.ctfish.model.util.Utils;
 
 
 import java.util.ArrayList;
 
 import com.group11.ctfish.model.user.User;
+import com.group11.ctfish.view.FishingScreen;
 
 
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.Random;
 
 public class ModelFacade {
     private List<Fish> fishList;
+
+    User user;
     private static ModelFacade instance = new ModelFacade();
 
     QuizLogic QL = new QuizLogic();
@@ -47,8 +51,8 @@ public class ModelFacade {
     }
 
     public void createUser(String username){
-        User user = new User(username);
-        System.out.print(user.getUsername() + "is created!");
+        user = new User(username);
+        System.out.print(user.getUsername() + " is created!");
     }
 
     public Hook getHookObject(){
@@ -58,6 +62,10 @@ public class ModelFacade {
     public List<Fish> getFishList() {
         return FishFacade.getInstance().getFishes();
     }
+
+
+    public void subscribeToScores(ScoreObserver observer) {
+        user.observeScore(observer);
 
     public String getSpecificAnswer(int integer){
         return QL.getSpecificAnswer(integer);
@@ -73,5 +81,6 @@ public class ModelFacade {
 
     public String getRightAnswer(){
         return QL.getRightAnswer();
+
     }
 }
