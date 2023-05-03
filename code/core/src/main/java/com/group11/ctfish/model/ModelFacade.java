@@ -28,7 +28,7 @@ public class ModelFacade {
 
     private static ModelFacade instance = new ModelFacade();
 
-    QuizLogic QL = new QuizLogic();
+    QuizLogic QL  = new QuizLogic();
 
     Hook hook = new Hook();
 
@@ -90,9 +90,10 @@ public class ModelFacade {
         return QL.getAnswers();
     }
 
-    public String getRightAnswer(){
-        return QL.getRightAnswer();
+    public String getRightAnswer(){ return QL.getRightAnswer(); }
 
+    public void addLife(){
+        QL.addLives();
     }
 
 }

@@ -56,14 +56,8 @@ public class QuestionScreen implements Screen {
         A1Button.add(A1label).expand().fill();
         A1Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                if (facade.getRightAnswer() == facade.getSpecificAnswer(1)){
-                    Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-                    questionArea = new TextArea("THAT IS RIGHT!!!!", skin);
-                    questionArea.setWidth(200);
-                    questionArea.setHeight(150);
-                    questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
-                    stage.addActor(questionArea);
-        }}});
+                facade.addLife();
+        }});
 
         TextButton A2Button = new TextButton(facade.getSpecificAnswer(2), skin, "default");
         A2Button.setWidth(200);
@@ -71,14 +65,8 @@ public class QuestionScreen implements Screen {
         A2Button.setPosition(Gdx.graphics.getWidth() / 2 + 20 , Gdx.graphics.getHeight() / 2 - 75);
         A2Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                if (facade.getRightAnswer() == facade.getSpecificAnswer(2)){
-                    Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-                    questionArea = new TextArea("THAT IS RIGHT!!!!", skin);
-                    questionArea.setWidth(200);
-                    questionArea.setHeight(150);
-                    questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
-                    stage.addActor(questionArea);
-                }}});
+                facade.addLife();
+            }});
 
         TextButton A3Button = new TextButton(facade.getSpecificAnswer(3), skin, "default");
         A3Button.setWidth(200);
@@ -86,14 +74,7 @@ public class QuestionScreen implements Screen {
         A3Button.setPosition(Gdx.graphics.getWidth() / 2 - A3Button.getWidth() - 20, Gdx.graphics.getHeight() / 2 -200);
         A3Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                if (facade.getRightAnswer() == facade.getSpecificAnswer(3)){
-                    Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-                    questionArea = new TextArea("THAT IS RIGHT!!!!", skin);
-                    questionArea.setWidth(200);
-                    questionArea.setHeight(150);
-                    questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
-                    stage.addActor(questionArea);
-                }}});
+                facade.addLife();}});
 
         TextButton A4Button = new TextButton(facade.getSpecificAnswer(4), skin, "default");
         A4Button.setWidth(200);
@@ -101,15 +82,8 @@ public class QuestionScreen implements Screen {
         A4Button.setPosition(Gdx.graphics.getWidth() / 2  + 20, Gdx.graphics.getHeight() / 2 - 200);
         A4Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                if (facade.getRightAnswer() == facade.getSpecificAnswer(4)){
-                    //HÄR SKA MAN LÄGGA IN VAD SOM HÄNDER NÄR DETTA ALTENATIV
-                    Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-                    questionArea = new TextArea("THAT IS RIGHT!!!!", skin);
-                    questionArea.setWidth(200);
-                    questionArea.setHeight(150);
-                    questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
-                    stage.addActor(questionArea);
-                }}});
+                facade.addLife();
+            }});
 
         stage.addActor(A1Button);
         stage.addActor(A2Button);
