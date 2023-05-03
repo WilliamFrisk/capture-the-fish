@@ -1,35 +1,24 @@
 package com.group11.ctfish.view;
 
-import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.files.FileHandle;
+
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
-import com.badlogic.gdx.utils.ScreenUtils;
+
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.quiz.DatabaseConnection;
 import com.group11.ctfish.model.quiz.Question;
 import com.group11.ctfish.model.user.User;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.logging.FileHandler;
 
 
 public class QuestionScreen implements Screen {
@@ -46,7 +35,6 @@ public class QuestionScreen implements Screen {
     ModelFacade facade = ModelFacade.getInstance();
 
     final Screen parent;
-
     Question[] questions;
 
     User user = new User("");
