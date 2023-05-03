@@ -50,7 +50,7 @@ public class FishFacade {
         if (fishes.size() >= fishLimit) {
             return;
         } else if (fishes.size() == 0) {
-            fishes.add(FishFactory.createStandardLeftFish());
+            fishes.add(FishFactory.createRandomFish());
         }
 
         if (random.nextInt(1000) - deltaTime < 0) {
