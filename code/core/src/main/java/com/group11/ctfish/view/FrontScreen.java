@@ -78,9 +78,13 @@ public class FrontScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 String username = usernameField.getText();
                 facade.createUser(username);
+
                 FishingScreen fishingScreen = new FishingScreen(game, username);
+                facade.subscribeToLives(fishingScreen);
                 facade.subscribeToScores(fishingScreen);
-                game.setScreen(new FishingScreen(game, username));
+                
+                game.setScreen(fishingScreen);
+
             }
         });
         stage.addActor(playButton);

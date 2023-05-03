@@ -13,8 +13,8 @@ public class UserRender {
     public UserRender(){
 //        this.posX = x;
 //        this.posY = y;
-        this.width = 50;
-        this.height = 50;
+        this.width = 32;
+        this.height = 32;
     }
 
     public int getWidth(){

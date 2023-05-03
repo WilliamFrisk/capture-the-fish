@@ -45,6 +45,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     final CtFish game;
     ModelFacade facade = ModelFacade.getInstance();
 
+    private int hearts;
+
     OrthographicCamera camera;
 
     HookController hookController = new HookController(facade.getHookObject());
@@ -88,9 +90,11 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         // setup background
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
 
-
-
-
+        int posX = 50;
+        for (int i = 1; i<=hearts; i++) {
+            batch.draw(new Texture("heart.png"), posX,630,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            posX += 70;
+        }
 
         // setup scoreboard
 
@@ -103,8 +107,9 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         fishFacade.update();
         fishRenderer.render(fishFacade.getFishes());
         facade.CollisionUpdate();
-
         batch.end();
+
+
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
@@ -115,6 +120,12 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
                 throw new RuntimeException(e);
             }
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            System.out.println("tjo");
+            facade.getUser().removeLife();
+            System.out.println(hearts);
+            }
+
     }
 
 
@@ -151,12 +162,13 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     }
 
     @Override
-    public void updateLives(int lives) {
-        //update lives hjärtan
+    public void update(int lives) {
+        hearts = lives;
     }
 
     @Override
     public void updateScore(int score) {
         this.score = score;
+
     }
 }
