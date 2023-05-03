@@ -126,6 +126,11 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
             System.out.println(hearts);
             }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+            System.out.println("tjo");
+            facade.getUser().updateScore(100);
+            System.out.println(hearts);
+        }
     }
 
 
