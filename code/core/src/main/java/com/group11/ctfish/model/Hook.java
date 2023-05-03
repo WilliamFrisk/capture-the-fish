@@ -1,37 +1,55 @@
 package com.group11.ctfish.model;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.group11.ctfish.CtFish;
 
 public class Hook {
 
+    private float x;
 
-    private Rectangle hook;
-
+    private float y;
     private String texture;
 
+    private float width;
+
+    private float height;
 
 
     public Hook() {
-        hook = new Rectangle();
-        hook.x = CtFish.SCREEN_WIDTH - 535;
-        hook.y = CtFish.SCREEN_HEIGHT - 100;
-        hook.width = 32;
-        hook.height = 32;
+        x = CtFish.SCREEN_WIDTH - 515;
+        y = CtFish.SCREEN_HEIGHT;
+        width = 64;
+        height = 64;
         texture = "hookImage";
     }
 
-    public Rectangle getHook(){
-        return hook;
+    public Hook getHook(){
+        return this;
     }
 
-    public void setHookY(float y) {
-        this.hook.y = y;
+    public float getX(){
+        return x;
+    }
+
+    public float getY(){
+        return y;
+    }
+
+    public float getWidth(){
+        return width;
+    }
+
+    public float getHeight(){
+        return height;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 
     public String getTexture() {
         return texture;
     }
+
 
 
 }

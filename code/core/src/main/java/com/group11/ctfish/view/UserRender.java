@@ -3,7 +3,7 @@ package com.group11.ctfish.view;
 public class UserRender {
 
 //    private int posX;
-//
+
 //    private int posY;
 
     private int width;

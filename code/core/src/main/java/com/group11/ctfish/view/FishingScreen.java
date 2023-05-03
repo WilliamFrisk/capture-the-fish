@@ -8,8 +8,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
 import com.group11.ctfish.model.Hook;
@@ -22,10 +20,7 @@ import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.sizes.Sizes;
 
 
-import com.group11.ctfish.model.fish.properties.Endangered;
-import com.group11.ctfish.model.fish.sizes.Medium;
 import com.group11.ctfish.model.user.User;
-import com.group11.ctfish.view.QuestionScreen;
 
 
 import java.io.IOException;
@@ -46,7 +41,7 @@ public class FishingScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private FishRender fishRender;
 
-    private UserRender lifeRenderer;
+    private UserRender lifeRender;
 
     final CtFish game;
 
@@ -80,7 +75,7 @@ public class FishingScreen implements Screen {
         background = new Texture("background.jpg");
         batch = new SpriteBatch();
         fishRender = new FishRender(batch,shapeRenderer,camera);
-        lifeRenderer = new UserRender();
+        lifeRender = new UserRender();
     }
 
     //TODO fix this mess
@@ -114,7 +109,7 @@ public class FishingScreen implements Screen {
         batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
         int posX = 50;
         for (int i = 0; i <= user.getLives(); i++){
-            batch.draw(new Texture("heart.png"), posX,630,lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            batch.draw(new Texture("heart.png"), posX,630, lifeRender.getWidth(), lifeRender.getHeight());
             posX+=70;
         }
         hookRender();
@@ -137,7 +132,7 @@ public class FishingScreen implements Screen {
     private void hookRender() {
         hookController.update();
         hookImage = new Texture(Gdx.files.internal(hook.getTexture()) + ".png");
-        batch.draw(hookImage, hook.getHook().x, hook.getHook().y);
+        batch.draw(hookImage, hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
     }
     
 
