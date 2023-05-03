@@ -36,6 +36,8 @@ public class ModelFacade {
         for(Fish i : getFishes()) {
             if (Utils.collides(i, hook)) {
                 i.setTextureWhite();
+                i.onCaught();
+                System.out.println(user.getScore());
             }
         }
     }

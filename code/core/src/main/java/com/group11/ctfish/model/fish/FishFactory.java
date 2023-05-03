@@ -4,8 +4,6 @@ import java.util.function.Supplier;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.group11.ctfish.model.fish.properties.*;
-
-
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.properties.Collectable;
 import org.apache.commons.lang3.tuple.Pair;
