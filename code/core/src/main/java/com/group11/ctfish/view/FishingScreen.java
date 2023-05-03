@@ -98,11 +98,6 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         font.draw(batch, "Score: "+ score, 1100,650);
 
 
-        int posX = 50;
-        for (int i = 0; i <= user.getLives(); i++){
-            batch.draw(new Texture("heart.png"), posX,630, lifeRenderer.getWidth(), lifeRenderer.getHeight());
-            posX+=70;
-        }
 
         hookRender();
         fishFacade.update();

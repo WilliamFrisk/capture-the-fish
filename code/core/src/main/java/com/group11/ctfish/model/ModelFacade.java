@@ -66,6 +66,7 @@ public class ModelFacade {
 
     public void subscribeToScores(ScoreObserver observer) {
         user.observeScore(observer);
+    }
 
     public String getSpecificAnswer(int integer){
         return QL.getSpecificAnswer(integer);
