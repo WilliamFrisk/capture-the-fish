@@ -8,9 +8,7 @@ import com.group11.ctfish.model.ModelFacade;
 
 public class HookController {
 
-
-    private Hook hook;
-    ModelFacade facade = ModelFacade.getInstance();
+    private final Hook hook;
 
     public HookController(Hook hook) {
         this.hook = hook;
