@@ -15,12 +15,14 @@ public class ModelFacade {
 
     private static final ModelFacade INSTANCE = new ModelFacade();
 
+
     private User user;
-    private final QuizLogic QL = new QuizLogic();
+    private final QuizLogic QL;
     private final FishFacade fishFacade = FishFacade.getInstance();
     private final Hook hook = new Hook();
 
     private ModelFacade() {
+        QL = new QuizLogic(this);
     }
 
     public static ModelFacade getInstance(){
@@ -80,9 +82,10 @@ public class ModelFacade {
         return QL.getAnswers();
     }
 
-    public String getRightAnswer(){
-        return QL.getRightAnswer();
+    public String getRightAnswer(){ return QL.getRightAnswer(); }
 
+    public void addLife(String answer){
+        QL.addLives(answer);
     }
 
 }
