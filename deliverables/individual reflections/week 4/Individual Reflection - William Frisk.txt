@@ -1,0 +1,14 @@
+This week I continued my work from last week and integrated my changes to the fish's movement with 
+the changes the team made. We made a lot of progress in the code this and last sprint so I also 
+spent a lot of time helping out the team with resolving the many merge conflicts. Furthermore I 
+spent some time cleaning up the code base of minor code smells to make it easier for the team to 
+extend in the coming sprints.
+
+I feel like the team is starting to get the hang of the agile work process and it's becoming second 
+nature to update our trello board and taking a task from the backlog as well as updating the backlog 
+with new tasks. It's exciting to see our progress.
+
+This week I took a more active role in the writing of our "text" deliverables but I feel like I'm 
+most helpful when it comes to technical matters. During the whole project so far I've helped the 
+team with git, gradle and object-oriented design. Next sprint I aim to improve my strengths and 
+continue to provide help in this department.  
