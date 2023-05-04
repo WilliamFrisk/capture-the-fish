@@ -1,5 +1,4 @@
 package com.group11.ctfish.model.quiz;
-
 import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.user.User;
 
@@ -11,9 +10,10 @@ import java.util.Set;
 public class QuizLogic {
 
     DatabaseConnection db = new DatabaseConnection("questions.json");
-    int random = randomizeNumber();
+    int index = randomizeNumber();
     Question[] questions;
     Question currentQuestion;
+    boolean rightAnswer;
 
     ModelFacade facade;
     User currentUser;
@@ -23,7 +23,8 @@ public class QuizLogic {
             this.facade = facade;
             currentUser = facade.getUser();
             questions = db.readQuestions();
-            currentQuestion = questions[random];
+            currentQuestion = questions[index];
+            rightAnswer = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,8 +71,24 @@ public class QuizLogic {
         if (Objects.equals(getRightAnswer(), answer) && currentUser.getLives() < 3){
             currentUser.addLife();
             System.out.println("RIGHT ANSWER");
+            rightAnswer = true;
+
         }
     }
+
+    public boolean getAnswerBoolean(){return rightAnswer;}
+
+    public void moveToNextQuestion(){
+        try {
+            index++;
+            currentQuestion = questions[index];
+            rightAnswer = false;
+        }
+        catch (IndexOutOfBoundsException e){
+            index = 0;
+        }
+    }
+
 
 }
 
