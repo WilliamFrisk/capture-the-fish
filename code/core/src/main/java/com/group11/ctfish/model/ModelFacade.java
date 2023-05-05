@@ -78,14 +78,12 @@ public class ModelFacade {
         return QL.getQuestion();
     }
 
-    public Set<String> getAnswers(){
-        return QL.getAnswers();
-    }
-
-    public String getRightAnswer(){ return QL.getRightAnswer(); }
-
     public void addLife(String answer){
         QL.addLives(answer);
     }
+
+    public boolean getAnswerBoolean() { return QL.getAnswerBoolean();}
+
+    public void moveToNextQuestion(){ QL.moveToNextQuestion(); }
 
 }

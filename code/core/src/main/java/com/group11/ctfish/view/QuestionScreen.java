@@ -1,19 +1,16 @@
 package com.group11.ctfish.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
-import com.group11.ctfish.model.quiz.QuizLogic;
 
 import java.io.IOException;
 
@@ -48,14 +45,14 @@ public class QuestionScreen implements Screen {
         questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
         stage.addActor(questionArea);
 
+
         // Create buttons for answers
-        Label A1label = new Label(facade.getSpecificAnswer(1), skin, "default");
-        A1label.setWrap(true);
-        TextButton A1Button = new TextButton("", skin, "default");
+
+
+        TextButton A1Button = new TextButton(facade.getSpecificAnswer(1), skin, "default");
         A1Button.setWidth(200);
         A1Button.setHeight(100);
         A1Button.setPosition(Gdx.graphics.getWidth() / 2 - A1Button.getWidth() - 20, Gdx.graphics.getHeight() / 2 - 75);
-        A1Button.add(A1label).expand().fill();
         A1Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 facade.addLife(facade.getSpecificAnswer(1));
@@ -115,8 +112,7 @@ public class QuestionScreen implements Screen {
         stage.draw();
 
 
-        //PLACEHOLDER-KOD FÖR ATT BYTA TILLBAKA TILL FISHINGSCREEN
-        if(Gdx.input.isKeyPressed(Input.Keys.G)){
+        if(facade.getAnswerBoolean()){
             game.setScreen(parent);
         }
 
