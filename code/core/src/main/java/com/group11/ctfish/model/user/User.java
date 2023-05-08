@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private List<LifeObserver> lifeObservers = new ArrayList<>();
-    private List<ScoreObserver> scoreObservers = new ArrayList<>();
-    private String username;
+    private final List<LifeObserver> lifeObservers = new ArrayList<>();
+    private final List<ScoreObserver> scoreObservers = new ArrayList<>();
+    private final String username;
     private int score;
-    private int highscore;
+    private int highScore;
     private int lives;
 
     public User(String username) {
-
         this.username = username;
         lives = 3;
         score = 0;
-        highscore = 0;
+        highScore = 0;
     }
 
     private void updateLifeObservers() {
@@ -30,10 +29,6 @@ public class User {
         return this.username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public int getScore() {
         return score;
     }
@@ -45,10 +40,7 @@ public class User {
     public int getLives() {
         return lives;
     }
-    /*
-    public void setLives(int lives) {
-        this.lives = lives;
-    }*/
+
     public void updateScore(int score){
         this.score += score;
         updateScoreObservers();
@@ -65,12 +57,11 @@ public class User {
         if(lives >= 1) {
             this.lives--;
             updateLifeObservers();
-
         }
     }
     public void resetGame(){
-        if(score >= highscore){
-            highscore = score;
+        if(score >= highScore){
+            highScore = score;
         }
         lives= 3;
         score = 0;

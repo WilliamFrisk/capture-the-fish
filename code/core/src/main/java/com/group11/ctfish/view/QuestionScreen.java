@@ -39,8 +39,7 @@ public class QuestionScreen implements Screen, LifeObserver {
 
 
 
-
-    public QuestionScreen(final CtFish game, Screen parent) throws IOException {
+    public QuestionScreen(final CtFish game, final Screen parent) throws IOException {
 
         this.game = game;
         this.stage = new Stage();
@@ -55,7 +54,7 @@ public class QuestionScreen implements Screen, LifeObserver {
         questionArea.setDisabled(true);
         questionArea.setWidth(200);
         questionArea.setHeight(150);
-        questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
+        questionArea.setPosition(Gdx.graphics.getWidth() / 2f - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2f + questionArea.getHeight()/2);
         stage.addActor(questionArea);
 
 
@@ -85,7 +84,7 @@ public class QuestionScreen implements Screen, LifeObserver {
                 else {
                     if (hearts == 0) {
                         System.out.println("game over");
-                        
+
 
                     }
                 }
@@ -182,7 +181,6 @@ public class QuestionScreen implements Screen, LifeObserver {
 
 
     }
-
 
 
 

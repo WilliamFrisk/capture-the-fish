@@ -1,12 +1,16 @@
 package com.group11.ctfish.model.fish;
-import java.util.*;
-import java.util.function.Supplier;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.group11.ctfish.model.fish.properties.*;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.properties.Collectable;
+import com.group11.ctfish.model.fish.properties.Endangered;
+import com.group11.ctfish.model.fish.properties.FishProperty;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class FishFactory {
     private static final Random random = new Random();
@@ -22,7 +26,6 @@ public class FishFactory {
     static Fish createStandardLeftFish() {
         return new Fish(
                 1280,
-                //CtFish.SCREEN_HEIGHT / 2,
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300 ) + 1),
                 new Collectable(1),
                 Size.MEDIUM,
@@ -34,7 +37,6 @@ public class FishFactory {
     static Fish createStandardRightFish() {
         return new Fish(
                 0,
-                //CtFish.SCREEN_HEIGHT / 2,
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
                 new Collectable(1),
                 Size.MEDIUM,

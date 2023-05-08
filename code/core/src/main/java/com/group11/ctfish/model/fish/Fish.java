@@ -16,13 +16,11 @@ public class Fish implements Object2D {
     private final ModelFacade modelFacade = ModelFacade.getInstance();
     private final Hook hook = modelFacade.getHookObject();
 
-    private FishProperty property;
+    private final FishProperty property;
 
     private final Size size;
     private final Sprite sprite;
     private final Direction direction;
-
-
 
     private Vector2 pos;
     private final Vector2 vel = new Vector2();
@@ -30,6 +28,9 @@ public class Fish implements Object2D {
 
     private final int maxSpeed = 5;
     private final float maxForce = .4f;
+
+    private boolean onHook = false;
+    private boolean caught = false;
 
     public Fish(int x,
                 int y,
@@ -57,31 +58,33 @@ public class Fish implements Object2D {
         }
     }
 
-    public void onCaught(Fish fish) {
-        property.applyProperty(fish);
+    public void onCaught() {
+        property.applyProperty();
     }
 
     public boolean collected(){
-        if (this.getY() >= 519){
-            return true;
-        }
-        return false;
+        return caught;
     }
 
-
-
     public void update(List<Fish> others) {
-        acc.add(moveTowardsEdge());
-        acc.add(avoidTopAndBottom());
-        acc.add(avoid(others));
+        if (!onHook) {
+            acc.add(moveTowardsEdge());
+            acc.add(avoidTopAndBottom());
+            acc.add(avoid(others));
+        }
     }
 
     public void move() {
-        pos.add(vel);
-        vel.add(acc);
-        vel.limit(maxSpeed);
-        sprite.setRotation(vel.angleDeg());
-        acc.scl(0);
+        if (!onHook) {
+            pos.add(vel);
+            vel.add(acc);
+            vel.limit(maxSpeed);
+            sprite.setRotation(vel.angleDeg());
+            acc.scl(0);
+        } else if (pos.y >= 519) {
+            onCaught();
+            caught = true;
+        }
 
         sprite.setPosition(pos.x, pos.y);
     }
@@ -141,11 +144,14 @@ public class Fish implements Object2D {
         return steering;
     }
 
-    public void hooked(){
-        this.setVector(hook.getX(),hook.getY());
+    public void followVector(Vector2 vector) {
+        onHook = true;
+        pos = vector;
     }
 
-    public void setVector(float x, float y){this.pos = new Vector2(x,y);}
+    public void setVector(float x, float y){
+        this.pos = new Vector2(x,y);
+    }
 
     public float getX() {
         return pos.x;
@@ -157,10 +163,6 @@ public class Fish implements Object2D {
 
     public Vector2 getPos() {
         return new Vector2(pos);
-    }
-
-    public int getScore(){
-        return this.getScore();
     }
 
     public Sprite getSprite(){

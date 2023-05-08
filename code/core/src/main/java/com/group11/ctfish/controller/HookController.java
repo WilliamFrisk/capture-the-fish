@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.Hook;
 
-
 public class HookController {
 
     private final Hook hook;

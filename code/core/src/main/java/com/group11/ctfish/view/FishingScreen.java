@@ -28,8 +28,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private final SpriteBatch batch;
     private final UserRender scoreBoard;
 
-    private FishRender fishRenderer;
-    private UserRender lifeRenderer;
+    private final FishRender fishRenderer;
+    private final UserRender lifeRenderer;
 
     final CtFish game;
     private final ModelFacade facade = ModelFacade.getInstance();
@@ -40,7 +40,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     private final HookController hookController = new HookController(facade.getHookObject());
 
-    private String username;
+    private final String username;
     private int score;
     BitmapFont font = new BitmapFont();
 
@@ -75,52 +75,51 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     @Override
     public void render(float delta) {
+        batch.begin();
+
+        // setup background
+        batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
+
+        int posX = 50;
+        for (int i = 1; i<=hearts; i++) {
+            batch.draw(new Texture("heart.png"), posX,630,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            posX += 70;
+        }
+
+        // setup scoreboard
+        font.setColor(Color.BLACK);
+
+        font.draw(batch, username, 1100,680);
+        font.draw(batch, "Score: "+ score, 1100,650);
 
 
 
-            batch.begin();
+        hookRender();
+        facade.update();
+        fishRenderer.render(facade.getFishes());
+        batch.end();
+        hookline = new Hookline(facade.getHookObject().getY());
 
-            // setup background
-            batch.draw(background, 0, 0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
 
-            int posX = 50;
-            for (int i = 1; i <= hearts; i++) {
-                batch.draw(new Texture("heart.png"), posX, 630, lifeRenderer.getWidth(), lifeRenderer.getHeight());
-                posX += 70;
+
+        //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            try {
+                facade.moveToNextQuestion();
+                game.setScreen(new QuestionScreen(game, this));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            facade.getUser().removeLife();
+            System.out.println(hearts);
             }
 
-            // setup scoreboard
-            font.setColor(Color.BLACK);
-
-            font.draw(batch, username, 1100, 680);
-            font.draw(batch, "Score: " + score, 1100, 650);
-
-
-            hookRender();
-            facade.update();
-            fishRenderer.render(facade.getFishes());
-            batch.end();
-            hookline = new Hookline(facade.getHookObject().getY());
-
-
-            //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
-            if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-                {
-                    facade.moveToNextQuestion();
-                    //game.setScreen(new QuestionScreen(game, this));
-                }
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.L)) {
-                facade.getUser().removeLife();
-
-            }
-
-
-            if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-                facade.getUser().updateScore(100);
-                System.out.println(facade.getUser().getScore());
-            }
-
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+            facade.getUser().updateScore(100);
+            System.out.println(facade.getUser().getScore());
+        }
     }
 
     private void hookRender() {
@@ -148,7 +147,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     }
 
 
-    
+
 
     @Override
     public void resize(int width, int height) {
@@ -157,7 +156,6 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     @Override
     public void pause() {
-
 
     }
 
