@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -43,6 +44,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private final String username;
     private int score;
     BitmapFont font = new BitmapFont();
+
+    boolean underSurface = false;
 
     Hookline hookline;
 
@@ -99,7 +102,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         fishRenderer.render(facade.getFishes());
         batch.end();
         hookline = new Hookline(facade.getHookObject().getY());
-
+        splashSoundGenerator();
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
@@ -112,6 +115,17 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         if (Gdx.input.isKeyPressed(Input.Keys.M)) {
             facade.getUser().updateScore(100);
             System.out.println(facade.getUser().getScore());
+        }
+    }
+
+    private void splashSoundGenerator() {
+        Sound splash = Gdx.audio.newSound(Gdx.files.internal("tinysplash.mp3"));
+        if (facade.getHookObject().getY() < 490 && !underSurface){
+            splash.play();
+            underSurface = true;
+        }
+        if (facade.getHookObject().getY() > 490 && underSurface){
+            underSurface = false;
         }
     }
 
