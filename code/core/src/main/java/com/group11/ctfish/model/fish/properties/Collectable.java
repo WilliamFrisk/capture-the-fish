@@ -15,5 +15,6 @@ public class Collectable implements FishProperty{
     @Override
     public void applyProperty() {
         player.updateScore(this.score);
+
     }
 }

@@ -8,6 +8,7 @@ import com.group11.ctfish.model.user.ScoreObserver;
 import com.group11.ctfish.model.user.User;
 import com.group11.ctfish.model.util.Utils;
 
+import java.security.Key;
 import java.util.List;
 import java.util.Set;
 
@@ -80,6 +81,10 @@ public class ModelFacade {
 
     public void addLife(String answer){
         QL.addLives(answer);
+    }
+
+    public String getCorrectAnswer(){
+        return QL.getRightAnswer();
     }
 
     public boolean getAnswerBoolean() { return QL.getAnswerBoolean();}

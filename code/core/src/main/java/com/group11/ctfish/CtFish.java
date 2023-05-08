@@ -6,8 +6,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.group11.ctfish.view.FishingScreen;
 import com.group11.ctfish.view.FrontScreen;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.group11.ctfish.view.QuestionScreen;
 
 public class CtFish extends Game {
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -110,9 +111,10 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
-            facade.getUser().removeLife();
-            System.out.println(hearts);
-            }
+                facade.getUser().removeLife();
+
+        }
+
 
         if (Gdx.input.isKeyPressed(Input.Keys.M)) {
             facade.getUser().updateScore(100);
