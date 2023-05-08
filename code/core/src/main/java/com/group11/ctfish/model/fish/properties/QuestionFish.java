@@ -2,7 +2,7 @@ package com.group11.ctfish.model.fish.properties;
 
 import com.group11.ctfish.model.fish.Fish;
 
-public class Question implements FishProperty{
+public class QuestionFish implements FishProperty{
 
 
     @Override

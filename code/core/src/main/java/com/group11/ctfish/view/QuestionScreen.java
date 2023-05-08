@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
+import com.group11.ctfish.model.fish.properties.QuestionFish;
 import com.group11.ctfish.model.user.LifeObserver;
 
 import java.io.IOException;
@@ -44,12 +45,14 @@ public class QuestionScreen implements Screen, LifeObserver {
         this.game = game;
         this.stage = new Stage();
         this.parent = parent;
+        facade.moveToNextQuestion();
 
 
 
         // Create text field for question
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         questionArea = new TextArea(facade.getQuestion(), skin);
+        questionArea.setDisabled(true);
         questionArea.setWidth(200);
         questionArea.setHeight(150);
         questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
@@ -79,10 +82,12 @@ public class QuestionScreen implements Screen, LifeObserver {
                     A1Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(1));
                 }
-                else if(hearts == 0){
-                    System.out.println("game over");
-                    game.setScreen(new FrontScreen(game));
+                else {
+                    if (hearts == 0) {
+                        System.out.println("game over");
+                        
 
+                    }
                 }
 
         }});
@@ -106,11 +111,11 @@ public class QuestionScreen implements Screen, LifeObserver {
                     A2Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(2));
                 }
-                else if(hearts == 0){
-                    System.out.println("game over");
-                    game.setScreen(new FrontScreen(game));
-
-                }
+//                else if(hearts == 0){
+//                    System.out.println("game over");
+//                    game.setScreen(new FrontScreen(game));
+//
+//                }
 
 
             }});
@@ -133,10 +138,10 @@ public class QuestionScreen implements Screen, LifeObserver {
                     System.out.println("NU DÅ");
                     A3Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(3));
-                }else if(hearts == 0){
-                    System.out.println("game over");
-                    game.setScreen(new FrontScreen(game));
-
+//                }else if(hearts == 0){
+//                    System.out.println("game over");
+//                    game.setScreen(new FrontScreen(game));
+//
                 }
 
 
@@ -160,10 +165,10 @@ public class QuestionScreen implements Screen, LifeObserver {
                 if (facade.getSpecificAnswer(4).equalsIgnoreCase(facade.getCorrectAnswer())){
                     A4Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(4));
-                }else if(hearts == 0){
-                    System.out.println("game over");
-                    game.setScreen(new FrontScreen(game));
-
+//                }else if(hearts == 0){
+//                    System.out.println("game over");
+//                    game.setScreen(new FrontScreen(game));
+//
                 }
 
             }});
@@ -205,7 +210,6 @@ public class QuestionScreen implements Screen, LifeObserver {
 
                 }
             }, 1f);
-
         }
 
     }
