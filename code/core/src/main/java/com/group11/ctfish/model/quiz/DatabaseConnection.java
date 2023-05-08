@@ -17,7 +17,6 @@ public class DatabaseConnection {
 
     /**
      * Default constructor
-     * @param jsonFileName
      */
     public DatabaseConnection(String jsonFileName) {
         this.jsonFileName = "../core/src/main/resources/questions/" + jsonFileName;
