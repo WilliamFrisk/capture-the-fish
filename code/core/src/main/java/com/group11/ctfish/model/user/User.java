@@ -55,15 +55,17 @@ public class User {
     }
 
     public void addLife(){
-        if(lives < 3)
+        if(lives < 3) {
             this.lives++;
             updateLifeObservers();
+        }
     }
 
     public void removeLife(){
         if(lives >= 1) {
             this.lives--;
             updateLifeObservers();
+
         }
     }
     public void resetGame(){

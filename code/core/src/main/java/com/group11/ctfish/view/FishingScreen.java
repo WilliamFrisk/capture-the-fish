@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
 import com.group11.ctfish.model.Hook;
@@ -74,52 +75,52 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     @Override
     public void render(float delta) {
-        batch.begin();
-
-        // setup background
-        batch.draw(background,0,0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
-
-        int posX = 50;
-        for (int i = 1; i<=hearts; i++) {
-            batch.draw(new Texture("heart.png"), posX,630,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
-            posX += 70;
-        }
-
-        // setup scoreboard
-        font.setColor(Color.BLACK);
-
-        font.draw(batch, username, 1100,680);
-        font.draw(batch, "Score: "+ score, 1100,650);
 
 
 
-        hookRender();
-        facade.update();
-        fishRenderer.render(facade.getFishes());
-        batch.end();
-        hookline = new Hookline(facade.getHookObject().getY());
+            batch.begin();
 
+            // setup background
+            batch.draw(background, 0, 0, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
 
-
-        //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            try {
-                facade.moveToNextQuestion();
-                game.setScreen(new QuestionScreen(game, this));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            int posX = 50;
+            for (int i = 1; i <= hearts; i++) {
+                batch.draw(new Texture("heart.png"), posX, 630, lifeRenderer.getWidth(), lifeRenderer.getHeight());
+                posX += 70;
             }
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+
+            // setup scoreboard
+            font.setColor(Color.BLACK);
+
+            font.draw(batch, username, 1100, 680);
+            font.draw(batch, "Score: " + score, 1100, 650);
+
+
+            hookRender();
+            facade.update();
+            fishRenderer.render(facade.getFishes());
+            batch.end();
+            hookline = new Hookline(facade.getHookObject().getY());
+
+
+            //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
+            if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+                {
+                    facade.moveToNextQuestion();
+                    //game.setScreen(new QuestionScreen(game, this));
+                }
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.L)) {
                 facade.getUser().removeLife();
 
-        }
+            }
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-            facade.getUser().updateScore(100);
-            System.out.println(facade.getUser().getScore());
-        }
+            if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+                facade.getUser().updateScore(100);
+                System.out.println(facade.getUser().getScore());
+            }
+
     }
 
     private void hookRender() {
@@ -127,6 +128,26 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         Hook hook = facade.getHookObject();
         batch.draw(hook.getTexture(), hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
     }
+
+    public void switchScreen() throws IOException {
+        FishingScreen fishingScreenInstance = this;
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                try {
+
+                    game.setScreen(new QuestionScreen(game, fishingScreenInstance));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, 1f);
+
+
+    }
+
+
     
 
     @Override
@@ -136,6 +157,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     @Override
     public void pause() {
+
 
     }
 
@@ -157,6 +179,13 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     @Override
     public void update(int lives) {
         hearts = lives;
+        if (hearts == 0) {
+            try {
+                switchScreen();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
