@@ -1,7 +1,5 @@
 package com.group11.ctfish.model.quiz;
 
-import com.badlogic.gdx.Game;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

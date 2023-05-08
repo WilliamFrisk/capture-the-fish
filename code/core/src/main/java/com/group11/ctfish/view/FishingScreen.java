@@ -25,10 +25,9 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     // Graphics
     private final Texture background;
     private final SpriteBatch batch;
-    private final UserRender scoreBoard;
 
-    private FishRender fishRenderer;
-    private UserRender lifeRenderer;
+    private final FishRender fishRenderer;
+    private final UserRender lifeRenderer;
 
     final CtFish game;
     private final ModelFacade facade = ModelFacade.getInstance();
@@ -39,7 +38,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     private final HookController hookController = new HookController(facade.getHookObject());
 
-    private String username;
+    private final String username;
     private int score;
     BitmapFont font = new BitmapFont();
 
@@ -62,7 +61,6 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
         fishRenderer = new FishRender(batch);
         lifeRenderer = new UserRender();
-        scoreBoard = new UserRender();
         this.username = username;
 
     }
@@ -103,12 +101,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            try {
-                facade.moveToNextQuestion();
-                game.setScreen(new QuestionScreen(game, this));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            facade.moveToNextQuestion();
+            game.setScreen(new QuestionScreen(game, this));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
             facade.getUser().removeLife();

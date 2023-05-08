@@ -8,7 +8,6 @@ public class Collectable implements FishProperty{
 
     private final int score;
     private static final User player = ModelFacade.getInstance().getUser();
-    private final ModelFacade modelFacade = ModelFacade.getInstance();
 
 
     public Collectable(int points){
@@ -19,8 +18,5 @@ public class Collectable implements FishProperty{
     public void applyProperty() {
         player.updateScore(this.score);
     }
-
-    public void applyScore(){
-        player.updateScore(this.score);
-    }
+    
 }

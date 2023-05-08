@@ -16,7 +16,7 @@ public class Fish implements Object2D {
     private final ModelFacade modelFacade = ModelFacade.getInstance();
     private final Hook hook = modelFacade.getHookObject();
 
-    private FishProperty property;
+    private final FishProperty property;
 
     private final Size size;
     private final Sprite sprite;
@@ -144,10 +144,6 @@ public class Fish implements Object2D {
         return steering;
     }
 
-    public void hooked(){
-        this.setVector(hook.getX(), hook.getY());
-    }
-
     public void followVector(Vector2 vector) {
         onHook = true;
         pos = vector;
@@ -167,10 +163,6 @@ public class Fish implements Object2D {
 
     public Vector2 getPos() {
         return new Vector2(pos);
-    }
-
-    public int getScore(){
-        return this.getScore();
     }
 
     public Sprite getSprite(){
