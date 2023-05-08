@@ -144,10 +144,6 @@ public class Fish implements Object2D {
         return steering;
     }
 
-    public void hooked(){
-        this.setVector(hook.getX(), hook.getY());
-    }
-
     public void followVector(Vector2 vector) {
         onHook = true;
         pos = vector;
