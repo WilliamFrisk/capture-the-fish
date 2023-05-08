@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -44,21 +42,14 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private int score;
     BitmapFont font = new BitmapFont();
 
-    boolean underSurface = false;
-
     Hookline hookline;
 
 
     public FishingScreen(final CtFish game, String username) {
         Music music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
-        Music waves = Gdx.audio.newMusic(Gdx.files.internal("waves.mp3"));
 
         // start the playback of the background music immediately
         music.setLooping(true);
-        music.setVolume(1/2);
-        waves.setLooping(true);
-        waves.setVolume(1);
-        //waves.play();
         //music.play();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
@@ -106,7 +97,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         fishRenderer.render(facade.getFishes());
         batch.end();
         hookline = new Hookline(facade.getHookObject().getY());
-        splashSoundGenerator();
+
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
@@ -126,17 +117,6 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         if (Gdx.input.isKeyPressed(Input.Keys.M)) {
             facade.getUser().updateScore(100);
             System.out.println(facade.getUser().getScore());
-        }
-    }
-
-    private void splashSoundGenerator() {
-        Sound splash = Gdx.audio.newSound(Gdx.files.internal("splashsound.mp3"));
-        if (facade.getHookObject().getY() < 490 && !underSurface){
-            splash.play();
-            underSurface = true;
-        }
-        if (facade.getHookObject().getY() > 490 && underSurface){
-            underSurface = false;
         }
     }
 
