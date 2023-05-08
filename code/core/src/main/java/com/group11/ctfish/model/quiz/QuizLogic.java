@@ -16,11 +16,10 @@ public class QuizLogic {
     private boolean rightAnswer;
 
     private final ModelFacade facade;
-    private final User currentUser;
+
 
     public QuizLogic(ModelFacade facade) {
         this.facade = facade;
-        currentUser = facade.getUser();
 
         try {
             questions = db.readQuestions();
@@ -64,8 +63,8 @@ public class QuizLogic {
     }
 
     public void addLives(String answer){
-        if (Objects.equals(getRightAnswer(), answer) && currentUser.getLives() < 3){
-            currentUser.addLife();
+        if (Objects.equals(getRightAnswer(), answer) && facade.getUser().getLives() < 3){
+            facade.getUser().addLife();
             System.out.println("RIGHT ANSWER");
             rightAnswer = true;
         }
