@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FishRender {
 
-    private SpriteBatch batch;
+    private final SpriteBatch batch;
 
     public FishRender(SpriteBatch batch) {
         this.batch = batch;
