@@ -64,12 +64,10 @@ public class QuizLogic {
     }
 
     public void addLives(String answer){
-        currentUser = facade.getUser();
         if (Objects.equals(getRightAnswer(), answer) && currentUser.getLives() < 3){
             currentUser.addLife();
             System.out.println("RIGHT ANSWER");
             rightAnswer = true;
-
         }
     }
 
