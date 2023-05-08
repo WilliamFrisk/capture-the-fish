@@ -1,6 +1,5 @@
 package com.group11.ctfish.model.fish;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.properties.Endangered;
@@ -37,7 +36,7 @@ public class FishFactory {
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300 ) + 1),
                 new Collectable(1),
                 Size.MEDIUM,
-                new Texture("tuna.png"),
+                "tuna.png",
                 Direction.LEFT
                 );
     }
@@ -48,7 +47,7 @@ public class FishFactory {
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
                 new Collectable(1),
                 Size.MEDIUM,
-                new Texture("tuna.png"),
+                "tuna.png",
                 Direction.RIGHT
         );
     }
@@ -62,7 +61,7 @@ public class FishFactory {
                 random.nextInt((CtFish.SCREEN_HEIGHT - 300) + 1),
                 TEXTURE_PROPERTY_LIST.get(type).getRight().get(),
                 Size.getRandomSize(),
-                new Texture(TEXTURE_PROPERTY_LIST.get(type).getLeft()),
+                TEXTURE_PROPERTY_LIST.get(type).getLeft(),
                 dir
         );
 

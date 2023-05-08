@@ -1,5 +1,6 @@
 package com.group11.ctfish.model.fish;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,7 @@ public class Fish implements Object2D {
     private final FishProperty property;
 
     private final Size size;
+    private final String textureName;
     private final Sprite sprite;
     private final Direction direction;
 
@@ -36,13 +38,15 @@ public class Fish implements Object2D {
                 int y,
                 FishProperty property,
                 Size size,
-                Texture texture,
+                String textureName,
                 Direction direction) {
 
         this.pos = new Vector2(x, y);
         this.property = property;
         this.size = size;
 
+        this.textureName = textureName;
+        Texture texture = new Texture(Gdx.files.internal(textureName));
         this.sprite = new Sprite(texture);
         sprite.setSize(
                 texture.getWidth() * size.getScaleFactor() * 0.2f,
@@ -147,6 +151,17 @@ public class Fish implements Object2D {
     public void followVector(Vector2 vector) {
         onHook = true;
         pos = vector;
+        setDeadTexture();
+    }
+
+    private void setDeadTexture() {
+        String[] split = textureName.split("-|/");
+        String output = "fish/dead-" + split[1] + "-fish.png";
+        Texture texture = new Texture(Gdx.files.internal(output));
+        sprite.setSize(sprite.getHeight(), sprite.getWidth());
+        sprite.setTexture(texture);
+        sprite.setCenter(pos.x, pos.y);
+        sprite.setRotation(0);
     }
 
     public void setVector(float x, float y){
