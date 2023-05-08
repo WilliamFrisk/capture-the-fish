@@ -27,8 +27,6 @@ public class QuestionScreen implements Screen {
 
     ModelFacade facade = ModelFacade.getInstance();
 
-
-
     public QuestionScreen(final CtFish game, final Screen parent) throws IOException {
 
         this.game = game;
