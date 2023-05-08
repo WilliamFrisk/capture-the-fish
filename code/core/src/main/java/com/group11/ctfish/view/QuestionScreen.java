@@ -19,12 +19,12 @@ public class QuestionScreen implements Screen {
 
     private final CtFish game;
     private final Stage stage;
-
     private final Screen parent;
 
     private final ModelFacade facade = ModelFacade.getInstance();
 
-    public QuestionScreen(final CtFish game, final Screen parent) {
+
+    public QuestionScreen(final CtFish game, final Screen parent) throws IOException {
 
         this.game = game;
         this.stage = new Stage();

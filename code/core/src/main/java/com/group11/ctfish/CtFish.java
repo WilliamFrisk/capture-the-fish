@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.view.FrontScreen;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.group11.ctfish.view.LosingScreen;
 
 public class CtFish extends Game {
 
@@ -25,6 +26,7 @@ public class CtFish extends Game {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		this.setScreen(new FrontScreen(this));
+		//this.setScreen(new LosingScreen(this, 100));// (för testing av losingScreen)
 		shape = new ShapeRenderer();
 	}
 
