@@ -9,11 +9,9 @@ public class Endangered implements FishProperty {
 
     private static final User player = ModelFacade.getInstance().getUser();
     @Override
-    public void applyProperty(Fish fish) {
-        fish.hooked();
-        if (fish.collected()) {
-            removeLife();
-        }
+    public void applyProperty() {
+        removeLife();
+
     }
 
     public void removeLife(){

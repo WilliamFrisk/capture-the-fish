@@ -5,6 +5,7 @@ import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.properties.FishProperty;
+import com.group11.ctfish.model.fish.properties.QuestionFish;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;

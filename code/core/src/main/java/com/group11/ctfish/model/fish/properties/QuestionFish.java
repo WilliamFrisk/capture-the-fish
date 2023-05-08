@@ -6,12 +6,10 @@ public class QuestionFish implements FishProperty{
 
 
     @Override
-    public void applyProperty(Fish fish) {
-        fish.hooked();
-        if (fish.collected()) {
-            System.out.println("FÅNGAD");
-        }
+    public void applyProperty() {
+
     }
 
 
 }
+
