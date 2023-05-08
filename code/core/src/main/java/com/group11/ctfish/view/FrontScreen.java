@@ -3,6 +3,7 @@ package com.group11.ctfish.view;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.group11.ctfish.CtFish;
 
@@ -19,8 +20,6 @@ public class FrontScreen implements Screen {
     private Stage stage;
     private TextField usernameField;
     private Texture background;
-
-
     ModelFacade facade = ModelFacade.getInstance();
 
 
@@ -28,18 +27,15 @@ public class FrontScreen implements Screen {
         this.game = game;
         this.stage = new Stage();
 
+        //setup background
+        this.background = new Texture("frontPage.png");
+        Image image = new Image(background);
+        image.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        stage.addActor(image);
+
+        // setup usernamefield
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-
-        /*
-        //Started with creating a title, but not finished
-        Label title = new Label("Fish", skin);
-        title.setFontScale(3);
-        title.setPosition(Gdx.graphics.getWidth() / 2 - title.getWidth() / 2, Gdx.graphics.getHeight() - 50);
-        stage.addActor(title);
-        */
-
-        // Create username input field
-
         usernameField = new TextField("", skin);
         usernameField.setMessageText("Enter your username");
         usernameField.setWidth(200f); // set minimum width for usernameField;
@@ -48,8 +44,7 @@ public class FrontScreen implements Screen {
 
         stage.addActor(usernameField);
 
-
-        // Create play button
+        // Setup play button
         TextButton.TextButtonStyle playButtonStyle = new TextButton.TextButtonStyle();
         playButtonStyle.font = skin.getFont("default-font");
         playButtonStyle.fontColor = Color.WHITE;
@@ -73,6 +68,7 @@ public class FrontScreen implements Screen {
         playButton.setColor(Color.GREEN);
         playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 50);
 
+        //add listener
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -87,6 +83,7 @@ public class FrontScreen implements Screen {
 
             }
         });
+
         stage.addActor(playButton);
 
         Gdx.input.setInputProcessor(stage);
@@ -99,11 +96,15 @@ public class FrontScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
+
+        // setup background
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
         stage.draw();
+
+
     }
 
     @Override
