@@ -8,6 +8,7 @@ import com.group11.ctfish.model.user.ScoreObserver;
 import com.group11.ctfish.model.user.User;
 import com.group11.ctfish.model.util.Utils;
 
+
 import java.util.List;
 
 public class ModelFacade {
@@ -20,6 +21,8 @@ public class ModelFacade {
     private final FishFacade fishFacade = FishFacade.getInstance();
     private final Hook hook = new Hook();
 
+
+
     private ModelFacade() {
         QL = new QuizLogic(this);
     }
@@ -28,17 +31,20 @@ public class ModelFacade {
         return INSTANCE;
     }
 
+
     public void update() {
         fishFacade.update();
         collisionUpdate();
     }
 
     public void collisionUpdate(){
-        for(Fish i : getFishes()) {
-            if (Utils.collides(i, hook)) {
-                i.setTextureWhite();
-                i.onCaught();
-                System.out.println(user.getScore());
+        if (!hook.isFishOn()) {
+            for(Fish fish : getFishes()) {
+                if (Utils.collides(fish, hook)) {
+                    hook.fishOn();
+                    fish.followVector(hook.getVectorInstance());
+                    break;
+                }
             }
         }
     }
