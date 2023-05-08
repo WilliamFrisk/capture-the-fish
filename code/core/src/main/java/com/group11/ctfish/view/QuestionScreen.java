@@ -17,19 +17,14 @@ import java.io.IOException;
 
 public class QuestionScreen implements Screen {
 
-    // Graphics
-
     private final CtFish game;
-    private Stage stage;
-    private TextArea questionArea;
+    private final Stage stage;
 
-    final Screen parent;
+    private final Screen parent;
 
-    ModelFacade facade = ModelFacade.getInstance();
+    private final ModelFacade facade = ModelFacade.getInstance();
 
-
-
-    public QuestionScreen(final CtFish game, final Screen parent) throws IOException {
+    public QuestionScreen(final CtFish game, final Screen parent) {
 
         this.game = game;
         this.stage = new Stage();
@@ -39,10 +34,10 @@ public class QuestionScreen implements Screen {
 
         // Create text field for question
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        questionArea = new TextArea(facade.getQuestion(), skin);
+        TextArea questionArea = new TextArea(facade.getQuestion(), skin);
         questionArea.setWidth(200);
         questionArea.setHeight(150);
-        questionArea.setPosition(Gdx.graphics.getWidth() / 2 - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2 + questionArea.getHeight()/2);
+        questionArea.setPosition(Gdx.graphics.getWidth() / 2f - questionArea.getWidth() / 2, Gdx.graphics.getHeight() / 2f + questionArea.getHeight()/2);
         stage.addActor(questionArea);
 
 
@@ -52,7 +47,7 @@ public class QuestionScreen implements Screen {
         TextButton A1Button = new TextButton(facade.getSpecificAnswer(1), skin, "default");
         A1Button.setWidth(200);
         A1Button.setHeight(100);
-        A1Button.setPosition(Gdx.graphics.getWidth() / 2 - A1Button.getWidth() - 20, Gdx.graphics.getHeight() / 2 - 75);
+        A1Button.setPosition(Gdx.graphics.getWidth() / 2f - A1Button.getWidth() - 20, Gdx.graphics.getHeight() / 2f - 75);
         A1Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 facade.addLife(facade.getSpecificAnswer(1));
@@ -61,7 +56,7 @@ public class QuestionScreen implements Screen {
         TextButton A2Button = new TextButton(facade.getSpecificAnswer(2), skin, "default");
         A2Button.setWidth(200);
         A2Button.setHeight(100);
-        A2Button.setPosition(Gdx.graphics.getWidth() / 2 + 20 , Gdx.graphics.getHeight() / 2 - 75);
+        A2Button.setPosition(Gdx.graphics.getWidth() / 2f + 20 , Gdx.graphics.getHeight() / 2f - 75);
         A2Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 facade.addLife(facade.getSpecificAnswer(2));
@@ -70,7 +65,7 @@ public class QuestionScreen implements Screen {
         TextButton A3Button = new TextButton(facade.getSpecificAnswer(3), skin, "default");
         A3Button.setWidth(200);
         A3Button.setHeight(100);
-        A3Button.setPosition(Gdx.graphics.getWidth() / 2 - A3Button.getWidth() - 20, Gdx.graphics.getHeight() / 2 -200);
+        A3Button.setPosition(Gdx.graphics.getWidth() / 2f - A3Button.getWidth() - 20, Gdx.graphics.getHeight() / 2f -200);
         A3Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 facade.addLife(facade.getSpecificAnswer(3));}});
@@ -78,7 +73,7 @@ public class QuestionScreen implements Screen {
         TextButton A4Button = new TextButton(facade.getSpecificAnswer(4), skin, "default");
         A4Button.setWidth(200);
         A4Button.setHeight(100);
-        A4Button.setPosition(Gdx.graphics.getWidth() / 2  + 20, Gdx.graphics.getHeight() / 2 - 200);
+        A4Button.setPosition(Gdx.graphics.getWidth() / 2f  + 20, Gdx.graphics.getHeight() / 2f - 200);
         A4Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 facade.addLife(facade.getSpecificAnswer(4));
