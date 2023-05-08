@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.Hook;
-import com.group11.ctfish.model.ModelFacade;
+
 
 public class HookController {
 
