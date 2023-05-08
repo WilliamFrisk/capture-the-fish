@@ -1,30 +1,29 @@
 package com.group11.ctfish.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.group11.ctfish.CtFish;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
 
 public class FrontScreen implements Screen {
-    private final CtFish game;
-    private Stage stage;
-    private TextField usernameField;
-    private Texture background;
-    ModelFacade facade = ModelFacade.getInstance();
 
+    private final Texture background;
+    private final Stage stage;
+    private final TextField usernameField;
+
+    private final ModelFacade facade = ModelFacade.getInstance();
 
     public FrontScreen(final CtFish game) {
-        this.game = game;
         this.stage = new Stage();
 
         //setup background
@@ -36,11 +35,13 @@ public class FrontScreen implements Screen {
 
         // setup usernamefield
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+        // Create username input field
         usernameField = new TextField("", skin);
         usernameField.setMessageText("Enter your username");
         usernameField.setWidth(200f); // set minimum width for usernameField;
         usernameField.setHeight(50f); // set minimum height for usernameField;
-        usernameField.setPosition(Gdx.graphics.getWidth() / 2 - usernameField.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        usernameField.setPosition(Gdx.graphics.getWidth() / 2f - usernameField.getWidth() / 2, Gdx.graphics.getHeight() / 2f);
 
         stage.addActor(usernameField);
 
@@ -56,7 +57,6 @@ public class FrontScreen implements Screen {
         playButtonStyle.overFontColor = Color.GREEN;
         playButtonStyle.checkedFontColor = Color.GREEN;
         playButtonStyle.downFontColor = Color.GREEN;
-        //playButtonStyle.checkedFontColor = Color.GREEN;
 
         playButtonStyle.up.setMinWidth(200f); // set minimum width for button
         playButtonStyle.up.setMinHeight(50f); // set minimum height for button
@@ -66,7 +66,7 @@ public class FrontScreen implements Screen {
 
         TextButton playButton = new TextButton("Play", playButtonStyle);
         playButton.setColor(Color.GREEN);
-        playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 50);
+        playButton.setPosition(Gdx.graphics.getWidth() / 2f - playButton.getWidth() / 2, Gdx.graphics.getHeight() / 2f - 50);
 
         //add listener
         playButton.addListener(new ChangeListener() {

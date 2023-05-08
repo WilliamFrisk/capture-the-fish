@@ -9,19 +9,20 @@ import java.util.Set;
 
 public class QuizLogic {
 
-    DatabaseConnection db = new DatabaseConnection("questions.json");
-    int index = randomizeNumber();
-    Question[] questions;
-    Question currentQuestion;
-    boolean rightAnswer;
+    private final DatabaseConnection db = new DatabaseConnection("questions.json");
+    private int index = randomizeNumber();
+    private Question[] questions;
+    private Question currentQuestion;
+    private boolean rightAnswer;
 
-    ModelFacade facade;
-    User currentUser;
+    private final ModelFacade facade;
+    private final User currentUser;
 
     public QuizLogic(ModelFacade facade) {
+        this.facade = facade;
+        currentUser = facade.getUser();
+
         try {
-            this.facade = facade;
-            currentUser = facade.getUser();
             questions = db.readQuestions();
             currentQuestion = questions[index];
             rightAnswer = false;
@@ -31,15 +32,11 @@ public class QuizLogic {
 
     }
 
-
     public int randomizeNumber(){
-
         Random r = new Random();
         int low = 0;
         int high = 9;
-        int result = r.nextInt(high-low) + low;
-
-        return result;
+        return r.nextInt(high-low) + low;
     }
 
     public String getQuestion(){
@@ -67,12 +64,10 @@ public class QuizLogic {
     }
 
     public void addLives(String answer){
-        currentUser = facade.getUser();
         if (Objects.equals(getRightAnswer(), answer) && currentUser.getLives() < 3){
             currentUser.addLife();
             System.out.println("RIGHT ANSWER");
             rightAnswer = true;
-
         }
     }
 
