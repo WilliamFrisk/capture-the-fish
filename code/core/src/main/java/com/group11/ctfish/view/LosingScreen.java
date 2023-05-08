@@ -26,13 +26,15 @@ public class LosingScreen implements Screen {
 
     private int score;
 
-    public LosingScreen(final CtFish game, int score) {
+    private String username;
+
+    public LosingScreen(final CtFish game, int score, String username) {
         this.game = game;
         this.stage = new Stage();
         this.score = score;
 
         // set background
-        this.background = new Texture("frontPage.png");
+        this.background = new Texture("endPage.png");
         Image image = new Image(background);
         image.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -40,36 +42,45 @@ public class LosingScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
         // set result text
-        Label output = new Label("Your score: "+ score + "\nBetter luck next time..." , skin);
+        Label output = new Label("Your score: "+ score, skin);
         output.setPosition(Gdx.graphics.getWidth() / 2 - output.getWidth()/2, Gdx.graphics.getHeight() / 2+30);
         output.setColor(Color.BLACK);
         stage.addActor(output);
 
-
-
         // Create quiz button
-        TextButton.TextButtonStyle answerQuiz = new TextButton.TextButtonStyle();
-        answerQuiz.font = skin.getFont("default-font");
-        answerQuiz.fontColor = Color.WHITE;
-        answerQuiz.up = skin.getDrawable("default-round");
-        answerQuiz.over = skin.getDrawable("default-round-down");
-        answerQuiz.down = skin.getDrawable("default-round-down");
-        answerQuiz.checked = skin.getDrawable("default-round");
+        TextButton.TextButtonStyle playAgain = new TextButton.TextButtonStyle();
+        playAgain.font = skin.getFont("default-font");
+        playAgain.fontColor = Color.WHITE;
+        playAgain.up = skin.getDrawable("default-round");
+        playAgain.over = skin.getDrawable("default-round-down");
+        playAgain.down = skin.getDrawable("default-round-down");
+        playAgain.checked = skin.getDrawable("default-round");
 
-        answerQuiz.overFontColor = Color.GREEN;
-        answerQuiz.checkedFontColor = Color.GREEN;
-        answerQuiz.downFontColor = Color.GREEN;
+        playAgain.overFontColor = Color.GREEN;
+        playAgain.checkedFontColor = Color.GREEN;
+        playAgain.downFontColor = Color.GREEN;
 
-        answerQuiz.up.setMinWidth(200f); // set minimum width for button
-        answerQuiz.up.setMinHeight(50f); // set minimum height for button
-        answerQuiz.up.setTopHeight(10f); // set padding on top of the button
-        answerQuiz.up.setBottomHeight(10f); // set padding at the bottom of the button
+        playAgain.up.setMinWidth(200f); // set minimum width for button
+        playAgain.up.setMinHeight(50f); // set minimum height for button
+        playAgain.up.setTopHeight(10f); // set padding on top of the button
+        playAgain.up.setBottomHeight(10f); // set padding at the bottom of the button
 
-        TextButton quizButton = new TextButton("Answer quiz questions", answerQuiz);
-        quizButton.setColor(Color.BLUE);
-        quizButton.setPosition(Gdx.graphics.getWidth() / 2 - quizButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 50);
+        TextButton playButton = new TextButton("Play again!", playAgain);
+        playButton.setColor(Color.BLUE);
+        playButton.setPosition(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 50);
+        playButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                facade.createUser(username);
+                FishingScreen fishingScreen = new FishingScreen(game, username);
+                facade.subscribeToLives(fishingScreen);
+                facade.subscribeToScores(fishingScreen);
+                game.setScreen(fishingScreen);
 
-        stage.addActor(quizButton);
+            }
+        });
+
+        stage.addActor(playButton);
 
         Gdx.input.setInputProcessor(stage);
     }
