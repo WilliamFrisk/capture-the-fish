@@ -3,12 +3,18 @@ package com.group11.ctfish.model.fish;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.group11.ctfish.model.Hook;
+import com.group11.ctfish.model.ModelFacade;
 import com.group11.ctfish.model.fish.properties.FishProperty;
 import com.group11.ctfish.model.util.Object2D;
 
 import java.util.List;
 
+
+
 public class Fish implements Object2D {
+    private final ModelFacade modelFacade = ModelFacade.getInstance();
+    private final Hook hook = modelFacade.getHookObject();
 
     private FishProperty property;
 
@@ -16,7 +22,9 @@ public class Fish implements Object2D {
     private final Sprite sprite;
     private final Direction direction;
 
-    private final Vector2 pos;
+
+
+    private Vector2 pos;
     private final Vector2 vel = new Vector2();
     private final Vector2 acc = new Vector2();
 
@@ -49,9 +57,18 @@ public class Fish implements Object2D {
         }
     }
 
-    public void onCaught() {
-        property.applyProperty();
+    public void onCaught(Fish fish) {
+        property.applyProperty(fish);
     }
+
+    public boolean collected(){
+        if (this.getY() >= 519){
+            return true;
+        }
+        return false;
+    }
+
+
 
     public void update(List<Fish> others) {
         acc.add(moveTowardsEdge());
@@ -124,6 +141,12 @@ public class Fish implements Object2D {
         return steering;
     }
 
+    public void hooked(){
+        this.setVector(hook.getX(),hook.getY());
+    }
+
+    public void setVector(float x, float y){this.pos = new Vector2(x,y);}
+
     public float getX() {
         return pos.x;
     }
@@ -155,4 +178,5 @@ public class Fish implements Object2D {
     public int getHeight() {
         return (int) sprite.getHeight();
     }
+
 }

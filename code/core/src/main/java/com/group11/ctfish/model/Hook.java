@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.util.Object2D;
 
+import java.util.TreeMap;
+
 public class Hook implements Object2D {
 
     private final Texture texture;
@@ -15,13 +17,24 @@ public class Hook implements Object2D {
     private final float width;
     private final float height;
 
+    private boolean catched;
+
     public Hook() {
         x = CtFish.SCREEN_WIDTH - 515;
         y = CtFish.SCREEN_HEIGHT;
         width = 64;
         height = 64;
         texture = new Texture("hookImage.png");
+        catched = true;
     }
+
+
+
+    public void setCatchedTrue(){
+        this.catched = true;
+    }
+
+
 
     public float getX(){
         return x;
