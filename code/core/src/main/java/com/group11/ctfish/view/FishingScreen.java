@@ -103,14 +103,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            try {
-                facade.moveToNextQuestion();
-                game.setScreen(new QuestionScreen(game, this));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
             facade.getUser().removeLife();
             System.out.println(hearts);
@@ -134,7 +127,6 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
             @Override
             public void run() {
                 try {
-
                     game.setScreen(new QuestionScreen(game, fishingScreenInstance));
                 } catch (IOException e) {
                     throw new RuntimeException(e);

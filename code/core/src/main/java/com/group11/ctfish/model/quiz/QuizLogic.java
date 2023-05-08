@@ -70,13 +70,15 @@ public class QuizLogic {
         }
     }
 
-    public boolean getAnswerBoolean(){return rightAnswer;}
+    public boolean getAnswerBoolean(){
+        return rightAnswer;
+    }
 
     public void moveToNextQuestion(){
         try {
-            index++;
-            currentQuestion = questions[index];
             rightAnswer = false;
+            currentQuestion = questions[index];
+            index++;
         }
         catch (IndexOutOfBoundsException e){
             index = 0;

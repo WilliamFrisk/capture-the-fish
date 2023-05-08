@@ -84,8 +84,6 @@ public class QuestionScreen implements Screen, LifeObserver {
                 else {
                     if (hearts == 0) {
                         System.out.println("game over");
-
-
                     }
                 }
 
