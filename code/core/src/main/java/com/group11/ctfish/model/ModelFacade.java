@@ -35,22 +35,20 @@ public class ModelFacade {
 
     public void update() {
         fishFacade.update();
-
         collisionUpdate();
-
-
     }
 
     public void collisionUpdate(){
-        for(Fish i : getFishes()) {
-            if (Utils.collides(i, hook)) {
-                i.onCaught(i);
+        if (!hook.isFishOn()) {
+            for(Fish fish : getFishes()) {
+                if (Utils.collides(fish, hook)) {
+                    hook.fishOn();
+                    fish.followVector(hook.getVectorInstance());
+                    break;
+                }
             }
         }
     }
-
-
-
 
     public void createUser(String username){
         user = new User(username);

@@ -40,7 +40,7 @@ public class FishFacade {
         while (iterator.hasNext()) {
             Fish fish = iterator.next();
 
-            if (fish.getX() < -200 || fish.getX() > CtFish.SCREEN_WIDTH | fish.collected()) {
+            if (fish.getX() < -200 || fish.getX() > CtFish.SCREEN_WIDTH || fish.collected()) {
                 iterator.remove();
             } else {
                 fish.update(fishes);

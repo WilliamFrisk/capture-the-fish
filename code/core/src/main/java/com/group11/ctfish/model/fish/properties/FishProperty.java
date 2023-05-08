@@ -5,7 +5,7 @@ import com.group11.ctfish.model.fish.Fish;
 
 public interface FishProperty {
 
-    void applyProperty(Fish fish);
+    void applyProperty();
 
 
 }

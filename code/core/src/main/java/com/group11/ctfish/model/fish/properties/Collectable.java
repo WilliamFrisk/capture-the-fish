@@ -16,11 +16,8 @@ public class Collectable implements FishProperty{
     }
 
     @Override
-    public void applyProperty(Fish fish) {
-        fish.hooked();
-        if (fish.collected()){
-            applyScore();
-        }
+    public void applyProperty() {
+        player.updateScore(this.score);
     }
 
     public void applyScore(){
