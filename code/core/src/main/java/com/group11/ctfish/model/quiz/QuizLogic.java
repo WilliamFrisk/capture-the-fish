@@ -15,12 +15,13 @@ public class QuizLogic {
     private Question currentQuestion;
     private boolean rightAnswer;
 
+    private boolean fishCaught;
+
     private final ModelFacade facade;
-    private final User currentUser;
+
 
     public QuizLogic(ModelFacade facade) {
         this.facade = facade;
-        currentUser = facade.getUser();
 
         try {
             questions = db.readQuestions();
@@ -64,25 +65,37 @@ public class QuizLogic {
     }
 
     public void addLives(String answer){
-        if (Objects.equals(getRightAnswer(), answer) && currentUser.getLives() < 3){
-            currentUser.addLife();
+        if (Objects.equals(getRightAnswer(), answer) && facade.getUser().getLives() < 3){
+            facade.getUser().addLife();
             System.out.println("RIGHT ANSWER");
             rightAnswer = true;
         }
     }
 
-    public boolean getAnswerBoolean(){return rightAnswer;}
+    public boolean getAnswerBoolean(){
+        return rightAnswer;
+    }
 
     public void moveToNextQuestion(){
         try {
-            index++;
-            currentQuestion = questions[index];
             rightAnswer = false;
+            currentQuestion = questions[index];
+            index++;
+            fishCaught = false;
         }
         catch (IndexOutOfBoundsException e){
             index = 0;
         }
     }
+
+    public void questionFishCaught(){
+        if (facade.getUser().getLives() < 3){
+            fishCaught = true;
+        }
+
+    }
+
+    public boolean getFishBoolean(){return fishCaught;}
 
 
 }

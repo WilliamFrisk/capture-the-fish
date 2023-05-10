@@ -5,6 +5,7 @@ import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.fish.properties.Collectable;
 import com.group11.ctfish.model.fish.properties.Endangered;
 import com.group11.ctfish.model.fish.properties.FishProperty;
+import com.group11.ctfish.model.fish.properties.QuestionFish;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ public class FishFactory {
     private static final List<Pair<String, Supplier<FishProperty>>> TEXTURE_PROPERTY_LIST = new ArrayList<>();
 
     static {
-        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/red-fish/red-fish-left.png", () -> new Collectable(1)));
-        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/sword-fish/sword-fish-left.png", Endangered::new));
-        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly-fish/ugly-fish-left.png", () -> new Collectable(2)));
+        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/red-fish/red-fish-left.png",  () -> new Collectable(2) ));
+        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/sword-fish/sword-fish-left.png", QuestionFish::new));
+        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly-fish/ugly-fish-left.png", Endangered::new));
     }
 
     static Fish createStandardLeftFish() {
@@ -46,6 +47,7 @@ public class FishFactory {
     }
 
     public static Fish createRandomFish() {
+
         int type = random.nextInt(TEXTURE_PROPERTY_LIST.size());
         Direction dir = Direction.getRandomDirection();
         return new Fish(
