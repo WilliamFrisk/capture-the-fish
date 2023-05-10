@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class QuestionScreen implements Screen, LifeObserver {
+public class QuestionScreen implements Screen {
 
     // Graphics
 
@@ -32,8 +32,6 @@ public class QuestionScreen implements Screen, LifeObserver {
     private TextArea questionArea;
 
     final Screen parent;
-
-    private int hearts;
 
     ModelFacade facade = ModelFacade.getInstance();
 
@@ -60,10 +58,6 @@ public class QuestionScreen implements Screen, LifeObserver {
 
 
         // Create buttons for answers
-
-
-
-
         TextButton A1Button = new TextButton("", skin, "default");
         Label label =  new Label(facade.getSpecificAnswer(1), skin);
         label.setWrap(true);
@@ -77,16 +71,24 @@ public class QuestionScreen implements Screen, LifeObserver {
         A1Button.setPosition(Gdx.graphics.getWidth() / 2 - A1Button.getWidth() - 20, Gdx.graphics.getHeight() / 2 - 75);
         A1Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                if (facade.getSpecificAnswer(1).equalsIgnoreCase(facade.getCorrectAnswer())){
-                    System.out.println("NU DÅ");
+                if (facade.getSpecificAnswer(1).equals(facade.getCorrectAnswer())){
                     A1Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(1));
                 }
                 else {
-                    if (hearts == 0) {
-                        System.out.println(hearts);
-                        System.out.println("game over");
-                        game.setScreen(new LosingScreen(game, 0, parent));
+                    if (facade.getUser().getLives() == 0) {
+                        game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                    }
+                    else{
+
+                        A1Button.setColor(Color.RED);
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                game.setScreen(parent);
+
+                            }
+                        }, 1f);
                     }
                 }
 
@@ -112,8 +114,19 @@ public class QuestionScreen implements Screen, LifeObserver {
                     facade.addLife(facade.getSpecificAnswer(2));
                 }
                 else {
-                    if (hearts == 0) {
+                    if (facade.getUser().getLives() == 0) {
                         game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                    }
+                    else{
+
+                        A2Button.setColor(Color.RED);
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                game.setScreen(parent);
+
+                            }
+                        }, 1f);
                     }
                 }
 
@@ -133,15 +146,26 @@ public class QuestionScreen implements Screen, LifeObserver {
         label3.setPosition((A3Button.getWidth() - label3.getWidth()) / 2f, (A3Button.getHeight() - label3.getHeight()) / 2f);
         A3Button.setPosition(Gdx.graphics.getWidth() / 2 - A3Button.getWidth() - 20, Gdx.graphics.getHeight() / 2 -200);
         A3Button.addListener( new ClickListener(){
-            public void clicked(InputEvent event, float x, float y){
-                if (facade.getSpecificAnswer(3).equalsIgnoreCase(facade.getCorrectAnswer())){
+            public void clicked(InputEvent event, float x, float y) {
+                if (facade.getSpecificAnswer(3).equalsIgnoreCase(facade.getCorrectAnswer())) {
                     System.out.println("NU DÅ");
                     A3Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(3));
-//                }else if(hearts == 0){
-//                    System.out.println("game over");
-//                    game.setScreen(new FrontScreen(game));
-//
+                } else {
+                    if (facade.getUser().getLives() == 0) {
+                        game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                    }
+                    else{
+
+                        A3Button.setColor(Color.RED);
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                game.setScreen(parent);
+
+                            }
+                        }, 1f);
+                    }
                 }
 
 
@@ -165,10 +189,22 @@ public class QuestionScreen implements Screen, LifeObserver {
                 if (facade.getSpecificAnswer(4).equalsIgnoreCase(facade.getCorrectAnswer())){
                     A4Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(4));
-//                }else if(hearts == 0){
-//                    System.out.println("game over");
-//                    game.setScreen(new FrontScreen(game));
-//
+                 }
+                else {
+                    if (facade.getUser().getLives() == 0) {
+                        game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                    }
+                    else{
+
+                        A4Button.setColor(Color.RED);
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                game.setScreen(parent);
+
+                            }
+                        }, 1f);
+                    }
                 }
 
             }});
@@ -235,11 +271,6 @@ public class QuestionScreen implements Screen, LifeObserver {
 
     @Override
     public void dispose() {
-
-    }
-    @Override
-    public void update(int lives) {
-        hearts = lives;
 
     }
 }
