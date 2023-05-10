@@ -1,5 +1,8 @@
 package com.group11.ctfish.model.user;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,7 @@ public class User {
 
     public void updateScore(int score){
         this.score += score;
+        scoreSoundGenerator();
         updateScoreObservers();
     }
 
@@ -56,6 +60,7 @@ public class User {
     public void removeLife(){
         if(lives >= 1) {
             this.lives--;
+            heartLostSoundGenerator();
             updateLifeObservers();
         }
     }
@@ -77,4 +82,17 @@ public class User {
         scoreObservers.add(observer);
 
     }
+
+    //Sound is implemented in both view and model...
+    // I am Grateful for any assistance regarding possible solutions to this problem :)
+    private static void heartLostSoundGenerator() {
+        Sound heartlost = Gdx.audio.newSound(Gdx.files.internal("heartlost.mp3"));
+        heartlost.play();
+    }
+
+    private static void scoreSoundGenerator() {
+        Sound score = Gdx.audio.newSound(Gdx.files.internal("scoresound.mp3"));
+        score.play();
+    }
+
 }
