@@ -96,4 +96,7 @@ public class ModelFacade {
 
     public void moveToNextQuestion(){ QL.moveToNextQuestion(); }
 
+    public void questionFishCaught(){ QL.questionFishCaught();}
+    public boolean getFishBoolean(){ return QL.getFishBoolean();}
+
 }

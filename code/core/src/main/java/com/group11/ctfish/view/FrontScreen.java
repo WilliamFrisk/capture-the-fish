@@ -24,6 +24,7 @@ public class FrontScreen implements Screen {
     private final ModelFacade facade = ModelFacade.getInstance();
 
     public FrontScreen(final CtFish game) {
+
         this.stage = new Stage();
 
         //setup background
@@ -75,7 +76,7 @@ public class FrontScreen implements Screen {
                 String username = usernameField.getText();
                 facade.createUser(username);
 
-                FishingScreen fishingScreen = new FishingScreen(game, username);
+                FishingScreen fishingScreen = new FishingScreen(game, stage, username);
                 facade.subscribeToLives(fishingScreen);
                 facade.subscribeToScores(fishingScreen);
                 
@@ -130,5 +131,6 @@ public class FrontScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+
     }
 }

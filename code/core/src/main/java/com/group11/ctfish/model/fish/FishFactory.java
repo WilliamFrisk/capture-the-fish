@@ -47,6 +47,7 @@ public class FishFactory {
     }
 
     public static Fish createRandomFish() {
+
         int type = random.nextInt(TEXTURE_PROPERTY_LIST.size());
         Direction dir = Direction.getRandomDirection();
         return new Fish(

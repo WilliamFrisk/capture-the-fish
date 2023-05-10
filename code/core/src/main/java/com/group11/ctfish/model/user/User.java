@@ -65,6 +65,8 @@ public class User {
         }
         lives= 3;
         score = 0;
+        updateLifeObservers();
+        updateScoreObservers();
     }
 
     public void observeLife(LifeObserver observer) {

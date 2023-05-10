@@ -48,6 +48,7 @@ public class QuestionScreen implements Screen, LifeObserver {
 
 
 
+
         // Create text field for question
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         questionArea = new TextArea(facade.getQuestion(), skin);
@@ -83,7 +84,9 @@ public class QuestionScreen implements Screen, LifeObserver {
                 }
                 else {
                     if (hearts == 0) {
+                        System.out.println(hearts);
                         System.out.println("game over");
+                        game.setScreen(new LosingScreen(game, 0, parent));
                     }
                 }
 
@@ -108,11 +111,11 @@ public class QuestionScreen implements Screen, LifeObserver {
                     A2Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(2));
                 }
-//                else if(hearts == 0){
-//                    System.out.println("game over");
-//                    game.setScreen(new FrontScreen(game));
-//
-//                }
+                else {
+                    if (hearts == 0) {
+                        game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                    }
+                }
 
 
             }});
@@ -237,5 +240,6 @@ public class QuestionScreen implements Screen, LifeObserver {
     @Override
     public void update(int lives) {
         hearts = lives;
+
     }
 }

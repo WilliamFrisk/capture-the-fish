@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.controller.HookController;
@@ -33,6 +34,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private final UserRender lifeRenderer;
 
     final CtFish game;
+
+    private final Stage stage;
     private final ModelFacade facade = ModelFacade.getInstance();
 
     private int hearts;
@@ -43,6 +46,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     private final String username;
     private int score;
+
+    Music music;
     BitmapFont font = new BitmapFont();
 
     boolean underSurface = false;
@@ -50,17 +55,18 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     Hookline hookline;
 
 
-    public FishingScreen(final CtFish game, String username) {
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
+    public FishingScreen(final CtFish game, Stage stage, String username) {
+        this.stage = stage;
+        music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
         music.setLooping(true);
-        //music.play();
+        music.play();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
 
         this.game = game;
-        background = new Texture("background.jpg");
+        background = new Texture("background2.png");
 
         batch = new SpriteBatch();
 
@@ -106,6 +112,15 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
 
         //PLACEHOLDER-KOD FÖR ATT BYTA TILL QUIZSCREEN
+
+        if (facade.getFishBoolean()){
+            try{
+                facade.moveToNextQuestion();
+                game.setScreen(new QuestionScreen(game, this));
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
 
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
             facade.getUser().removeLife();
@@ -177,6 +192,9 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     @Override
     public void dispose() {
+        music.dispose();
+        stage.dispose();
+
 
     }
 

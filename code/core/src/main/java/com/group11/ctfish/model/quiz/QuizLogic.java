@@ -15,6 +15,8 @@ public class QuizLogic {
     private Question currentQuestion;
     private boolean rightAnswer;
 
+    private boolean fishCaught;
+
     private final ModelFacade facade;
 
 
@@ -79,11 +81,21 @@ public class QuizLogic {
             rightAnswer = false;
             currentQuestion = questions[index];
             index++;
+            fishCaught = false;
         }
         catch (IndexOutOfBoundsException e){
             index = 0;
         }
     }
+
+    public void questionFishCaught(){
+        if (facade.getUser().getLives() < 3){
+            fishCaught = true;
+        }
+
+    }
+
+    public boolean getFishBoolean(){return fishCaught;}
 
 
 }

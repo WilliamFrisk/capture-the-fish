@@ -4,7 +4,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.group11.ctfish.CtFish;
 
 import com.badlogic.gdx.Gdx;
@@ -19,6 +21,8 @@ import java.io.IOException;
 
 public class LosingScreen implements Screen {
     private final CtFish game;
+
+    private Screen backScreen;
     private Stage stage;
     private Texture background;
     private BitmapFont font = new BitmapFont();
@@ -26,10 +30,11 @@ public class LosingScreen implements Screen {
 
     private int score;
 
-    public LosingScreen(final CtFish game, int score) {
+    public LosingScreen(final CtFish game, int score, Screen screen) {
         this.game = game;
         this.stage = new Stage();
         this.score = score;
+        this.backScreen = screen;
 
         // set background
         this.background = new Texture("frontPage.png");
@@ -65,9 +70,16 @@ public class LosingScreen implements Screen {
         answerQuiz.up.setTopHeight(10f); // set padding on top of the button
         answerQuiz.up.setBottomHeight(10f); // set padding at the bottom of the button
 
-        TextButton quizButton = new TextButton("Answer quiz questions", answerQuiz);
+        TextButton quizButton = new TextButton("Play Again", answerQuiz);
         quizButton.setColor(Color.BLUE);
         quizButton.setPosition(Gdx.graphics.getWidth() / 2 - quizButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 50);
+
+        quizButton.addListener( new ClickListener(){
+            public void clicked(InputEvent event, float x, float y){
+                game.setScreen(backScreen);
+                facade.getUser().resetGame();
+                }
+        });
 
         stage.addActor(quizButton);
 
