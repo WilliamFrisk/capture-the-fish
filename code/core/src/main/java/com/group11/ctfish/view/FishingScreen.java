@@ -66,7 +66,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         camera.setToOrtho(false, CtFish.SCREEN_WIDTH, CtFish.SCREEN_HEIGHT);
 
         this.game = game;
-        background = new Texture("background2.png");
+        background = new Texture("background.png");
 
         batch = new SpriteBatch();
 

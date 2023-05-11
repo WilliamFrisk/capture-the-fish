@@ -47,6 +47,7 @@ public class QuestionScreen implements Screen {
 
 
 
+
         // Create text field for question
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         questionArea = new TextArea(facade.getQuestion(), skin);
