@@ -1,0 +1,12 @@
+This week the workload was a little lighter. The project is almost finished with only a couple of 
+small details missing. I contributed by fixing some bugs in the code for catching the fish, helping 
+with writing the team reflection. Moreover I started a pull request on solving some performance 
+issues.
+
+Since we're approaching the end of the course I feel like I understand the agile workflow. Something 
+I do want to learn however is what to do when the backlog starts to get empty.
+
+I feel like the biggest improvement on my part is my contribution to the written deliverables this 
+week. Throughout the project it's been quite lacking but this week I took an active part. My aim for 
+next sprint is to continue with this and be a helpful team member when writing the final report and 
+making the presentation video.
