@@ -19,6 +19,7 @@ public class FishFactory {
     private static final List<Pair<String, Supplier<FishProperty>>> TEXTURE_PROPERTY_LIST = new ArrayList<>();
 
     static {
+
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/red-fish/red-fish-left.png",  () -> new Collectable(2) ));
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/red-fish/red-fish-left.png",  () -> new Collectable(2) ));
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/red-fish/red-fish-left.png",  () -> new Collectable(2) ));
@@ -27,6 +28,7 @@ public class FishFactory {
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly-fish/ugly-fish-left.png", Endangered::new));
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly-fish/ugly-fish-left.png", Endangered::new));
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly-fish/ugly-fish-left.png", Endangered::new));
+
     }
 
     static Fish createStandardLeftFish() {
