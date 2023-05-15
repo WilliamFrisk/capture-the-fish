@@ -15,12 +15,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.ModelFacade;
-import com.group11.ctfish.model.fish.properties.QuestionFish;
-import com.group11.ctfish.model.user.LifeObserver;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class QuestionScreen implements Screen {
@@ -28,10 +24,9 @@ public class QuestionScreen implements Screen {
     // Graphics
 
     private final CtFish game;
-    private Stage stage;
-    private TextArea questionArea;
+    private final Stage stage;
 
-    final Screen parent;
+    private final Screen parent;
 
     ModelFacade facade = ModelFacade.getInstance();
 
@@ -50,7 +45,7 @@ public class QuestionScreen implements Screen {
 
         // Create text field for question
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        questionArea = new TextArea(facade.getQuestion(), skin);
+        TextArea questionArea = new TextArea(facade.getQuestion(), skin);
         questionArea.setDisabled(true);
         questionArea.setWidth(200);
         questionArea.setHeight(150);
@@ -110,7 +105,6 @@ public class QuestionScreen implements Screen {
         A2Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 if (facade.getSpecificAnswer(2).equalsIgnoreCase(facade.getCorrectAnswer())){
-                    System.out.println("NU DÅ");
                     A2Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(2));
                 }
@@ -130,8 +124,6 @@ public class QuestionScreen implements Screen {
                         }, 1f);
                     }
                 }
-
-
             }});
 
         TextButton A3Button = new TextButton("", skin, "default");
@@ -149,12 +141,12 @@ public class QuestionScreen implements Screen {
         A3Button.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 if (facade.getSpecificAnswer(3).equalsIgnoreCase(facade.getCorrectAnswer())) {
-                    System.out.println("NU DÅ");
                     A3Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(3));
                 } else {
                     if (facade.getUser().getLives() == 0) {
                         game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                        dispose();
                     }
                     else{
 
@@ -179,7 +171,6 @@ public class QuestionScreen implements Screen {
 
         label4.setWidth(150);
 
-
         A4Button.setWidth(200);
         A4Button.setHeight(100);
         A4Button.addActor(label4);
@@ -194,6 +185,7 @@ public class QuestionScreen implements Screen {
                 else {
                     if (facade.getUser().getLives() == 0) {
                         game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
+                        dispose();
                     }
                     else{
 
@@ -272,6 +264,7 @@ public class QuestionScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
 
     }
 }

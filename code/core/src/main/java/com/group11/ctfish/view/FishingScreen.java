@@ -9,7 +9,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.group11.ctfish.CtFish;
@@ -52,11 +54,12 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
     boolean underSurface = false;
 
-    Hookline hookline;
+    private final Hookline hookline = new Hookline();
 
 
-    public FishingScreen(final CtFish game, Stage stage, String username) {
-        this.stage = stage;
+
+    public FishingScreen(final CtFish game, String username) {
+        this.stage = new Stage();
         music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack.mp3"));
 
         // start the playback of the background music immediately
@@ -107,7 +110,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
         facade.update();
         fishRenderer.render(facade.getFishes());
         batch.end();
-        hookline = new Hookline(facade.getHookObject().getY());
+        hookline.drawLine(facade.getHookObject().getY());
         splashSoundGenerator();
 
 
@@ -147,7 +150,8 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     private void hookRender() {
         hookController.update();
         Hook hook = facade.getHookObject();
-        batch.draw(hook.getTexture(), hook.getX(), hook.getY(), hook.getWidth(), hook.getHeight());
+        Sprite hookTexture = facade.getHookObject().getSprite();
+        batch.draw(hookTexture, hook.getX(), hook.getY(), hook.getSprite().getWidth(), hook.getSprite().getHeight());
     }
 
     public void switchScreen() throws IOException {
@@ -194,7 +198,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
     public void dispose() {
         music.dispose();
         stage.dispose();
-
+        font.dispose();
 
     }
 

@@ -78,6 +78,7 @@ public class LosingScreen implements Screen {
             public void clicked(InputEvent event, float x, float y){
                 game.setScreen(backScreen);
                 facade.getUser().resetGame();
+                dispose();
                 }
         });
 
@@ -123,5 +124,9 @@ public class LosingScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        background.dispose();
+        background.dispose();
+        font.dispose();
+
     }
 }
