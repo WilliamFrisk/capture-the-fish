@@ -53,8 +53,8 @@ public class User {
     public void addLife(){
         if(lives < 3) {
             this.lives++;
+            updateLifeObservers();
         }
-        updateLifeObservers();
     }
 
     public void removeLife(){
@@ -68,8 +68,10 @@ public class User {
         if(score >= highScore){
             highScore = score;
         }
-        lives= 3;
-        score = 0;
+        this.lives= 3;
+        this.score = 0;
+        updateLifeObservers();
+        updateScoreObservers();
     }
 
     public void observeLife(LifeObserver observer) {

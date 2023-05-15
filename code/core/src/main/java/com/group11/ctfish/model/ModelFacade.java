@@ -9,6 +9,7 @@ import com.group11.ctfish.model.user.User;
 import com.group11.ctfish.model.util.Utils;
 
 
+import java.security.Key;
 import java.util.List;
 
 public class ModelFacade {
@@ -87,8 +88,15 @@ public class ModelFacade {
         QL.addLives(answer);
     }
 
+    public String getCorrectAnswer(){
+        return QL.getRightAnswer();
+    }
+
     public boolean getAnswerBoolean() { return QL.getAnswerBoolean();}
 
     public void moveToNextQuestion(){ QL.moveToNextQuestion(); }
+
+    public void questionFishCaught(){ QL.questionFishCaught();}
+    public boolean getFishBoolean(){ return QL.getFishBoolean();}
 
 }
