@@ -37,7 +37,7 @@ public class LosingScreen implements Screen {
         this.backScreen = screen;
 
         // set background
-        this.background = new Texture("frontPage.png");
+        this.background = new Texture("endPage.png");
         Image image = new Image(background);
         image.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -45,8 +45,8 @@ public class LosingScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
         // set result text
-        Label output = new Label("Your score: "+ score + "\nBetter luck next time..." , skin);
-        output.setPosition(Gdx.graphics.getWidth() / 2 - output.getWidth()/2, Gdx.graphics.getHeight() / 2+30);
+        Label output = new Label("Your score: "+ score , skin);
+        output.setPosition(Gdx.graphics.getWidth() / 2 - output.getWidth()/2, Gdx.graphics.getHeight() / 2+25);
         output.setColor(Color.BLACK);
         stage.addActor(output);
 
