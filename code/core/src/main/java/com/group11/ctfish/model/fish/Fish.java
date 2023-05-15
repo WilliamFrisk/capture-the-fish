@@ -84,7 +84,6 @@ public class Fish implements Object2D {
             sprite.setRotation(vel.angleDeg());
             acc.scl(0);
             sprite.setPosition(pos.x, pos.y);
-
         } else if (pos.y >= 519) {
             onCaught();
             caught = true;

@@ -21,27 +21,18 @@ import java.io.IOException;
 
 public class QuestionScreen implements Screen {
 
-    // Graphics
-
     private final CtFish game;
     private final Stage stage;
 
     private final Screen parent;
 
-    ModelFacade facade = ModelFacade.getInstance();
+    private final ModelFacade facade = ModelFacade.getInstance();
 
-
-
-    public QuestionScreen(final CtFish game, final Screen parent) throws IOException {
-
+    public QuestionScreen(final CtFish game, final Screen parent) {
         this.game = game;
         this.stage = new Stage();
         this.parent = parent;
         facade.moveToNextQuestion();
-
-
-
-
 
         // Create text field for question
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -55,7 +46,7 @@ public class QuestionScreen implements Screen {
 
         // Create buttons for answers
         TextButton A1Button = new TextButton("", skin, "default");
-        Label label =  new Label(facade.getSpecificAnswer(1), skin);
+        Label label = new Label(facade.getSpecificAnswer(1), skin);
         label.setWrap(true);
         label.setAlignment(Align.center);
         label.setWidth(150);
@@ -70,8 +61,7 @@ public class QuestionScreen implements Screen {
                 if (facade.getSpecificAnswer(1).equals(facade.getCorrectAnswer())){
                     A1Button.setColor(Color.GREEN);
                     facade.addLife(facade.getSpecificAnswer(1));
-                }
-                else {
+                } else {
                     if (facade.getUser().getLives() == 0) {
                         game.setScreen(new LosingScreen(game, facade.getUser().getScore(), parent));
                     }
@@ -87,7 +77,6 @@ public class QuestionScreen implements Screen {
                         }, 1f);
                     }
                 }
-
         }});
 
         TextButton A2Button = new TextButton("", skin, "default");
@@ -208,8 +197,6 @@ public class QuestionScreen implements Screen {
         stage.addActor(A4Button);
 
         Gdx.input.setInputProcessor(stage);
-
-
     }
 
 
@@ -265,6 +252,5 @@ public class QuestionScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-
     }
 }

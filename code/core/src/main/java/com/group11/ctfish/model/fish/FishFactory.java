@@ -25,9 +25,6 @@ public class FishFactory {
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/red_fish.png",  () -> new Collectable(2) ));
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/sword_fish.png", QuestionFish::new));
         TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly_fish.png", Endangered::new));
-        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly_fish.png", Endangered::new));
-        TEXTURE_PROPERTY_LIST.add(Pair.of("fish/ugly_fish.png", Endangered::new));
-
     }
 
     static Fish createStandardLeftFish() {

@@ -68,7 +68,7 @@ public class User {
         if(score >= highScore){
             highScore = score;
         }
-        this.lives= 3;
+        this.lives = 3;
         this.score = 0;
         updateLifeObservers();
         updateScoreObservers();
