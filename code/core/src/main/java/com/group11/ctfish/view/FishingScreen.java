@@ -94,7 +94,7 @@ public class FishingScreen implements Screen, LifeObserver, ScoreObserver {
 
         int posX = 50;
         for (int i = 1; i<=hearts; i++) {
-            batch.draw(new Texture("heart.png"), posX,630,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
+            batch.draw(new Texture("heart.png"), posX,623,  lifeRenderer.getWidth(),lifeRenderer.getHeight());
             posX += 70;
         }
 

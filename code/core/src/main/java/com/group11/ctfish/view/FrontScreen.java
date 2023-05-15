@@ -28,7 +28,7 @@ public class FrontScreen implements Screen {
         this.stage = new Stage();
 
         //setup background
-        this.background = new Texture("frontPage.png");
+        this.background = new Texture("frontPage2.png");
         Image image = new Image(background);
         image.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
