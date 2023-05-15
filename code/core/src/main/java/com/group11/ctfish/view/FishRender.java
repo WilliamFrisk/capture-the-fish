@@ -1,6 +1,7 @@
 package com.group11.ctfish.view;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.model.fish.Fish;
 
 import java.util.List;
@@ -14,7 +15,6 @@ public class FishRender {
     }
 
     public void render(List<Fish> fishes){
-
         for (Fish fish : fishes) {
             fish.getSprite().draw(batch);
         }

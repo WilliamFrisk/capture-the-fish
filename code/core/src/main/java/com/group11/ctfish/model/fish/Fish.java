@@ -1,5 +1,6 @@
 package com.group11.ctfish.model.fish;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -13,12 +14,11 @@ import java.util.List;
 
 
 public class Fish implements Object2D {
-    private final ModelFacade modelFacade = ModelFacade.getInstance();
-    private final Hook hook = modelFacade.getHookObject();
 
     private final FishProperty property;
 
     private final Size size;
+    private final String textureName;
     private final Sprite sprite;
     private final Direction direction;
 
@@ -36,13 +36,15 @@ public class Fish implements Object2D {
                 int y,
                 FishProperty property,
                 Size size,
-                Texture texture,
+                String textureName,
                 Direction direction) {
 
         this.pos = new Vector2(x, y);
         this.property = property;
         this.size = size;
 
+        this.textureName = textureName;
+        Texture texture = new Texture(Gdx.files.internal(textureName));
         this.sprite = new Sprite(texture);
         sprite.setSize(
                 texture.getWidth() * size.getScaleFactor() * 0.2f,
@@ -81,12 +83,19 @@ public class Fish implements Object2D {
             vel.limit(maxSpeed);
             sprite.setRotation(vel.angleDeg());
             acc.scl(0);
+            sprite.setPosition(pos.x, pos.y);
+
         } else if (pos.y >= 519) {
             onCaught();
             caught = true;
+            sprite.getTexture().dispose();
+        } else {
+            if (direction == Direction.RIGHT) {
+                sprite.setPosition(pos.x, pos.y - sprite.getHeight() + 50);
+            } else {
+                sprite.setPosition(pos.x - sprite.getWidth(), pos.y - sprite.getHeight() / 2);
+            }
         }
-
-        sprite.setPosition(pos.x, pos.y);
     }
 
     private Vector2 moveTowardsEdge() {
@@ -99,7 +108,7 @@ public class Fish implements Object2D {
         Vector2 posCopy = new Vector2(pos);
 
         double dToBottom = posCopy.y;
-        double dToTop = 500 - posCopy.y;
+        double dToTop = 450 - posCopy.y;
 
         if (dToBottom < 100) {
             Vector2 diff = new Vector2(0, 100);
@@ -147,6 +156,16 @@ public class Fish implements Object2D {
     public void followVector(Vector2 vector) {
         onHook = true;
         pos = vector;
+        setDeadTexture();
+    }
+
+    private void setDeadTexture() {
+        String[] split = textureName.split("-|/");
+        String output = "fish/dead_" + split[1];
+        Texture texture = new Texture(Gdx.files.internal(output));
+        sprite.setSize(sprite.getHeight(), sprite.getWidth());
+        sprite.setTexture(texture);
+        sprite.setRotation(direction == Direction.RIGHT ? 0 : 180);
     }
 
     public void setVector(float x, float y){

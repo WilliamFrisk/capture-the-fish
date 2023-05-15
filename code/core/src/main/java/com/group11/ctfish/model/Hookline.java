@@ -6,13 +6,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.group11.ctfish.CtFish;
 
 public class Hookline {
-
-    public Hookline(float y) {
-        drawLine(y);
-    }
+    private final ShapeRenderer sr  = new ShapeRenderer();
 
     public void drawLine(float y) {
-        ShapeRenderer sr = new ShapeRenderer();
         sr.setColor(Color.BROWN);
         Gdx.gl.glLineWidth(3);
         sr.begin(ShapeRenderer.ShapeType.Line);

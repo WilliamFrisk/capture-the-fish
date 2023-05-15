@@ -2,15 +2,14 @@ package com.group11.ctfish.model;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.group11.ctfish.CtFish;
 import com.group11.ctfish.model.util.Object2D;
 
-import java.util.TreeMap;
-
 public class Hook implements Object2D {
 
-    private final Texture texture;
+    private final Sprite texture;
 
     private Vector2 pos;
 
@@ -21,9 +20,10 @@ public class Hook implements Object2D {
 
     public Hook() {
         pos = new Vector2( CtFish.SCREEN_WIDTH - 515, CtFish.SCREEN_HEIGHT);
-        width = 64;
+        width = 32;
         height = 64;
-        texture = new Texture("hookImage.png");
+        texture = new Sprite(new Texture("hookImage.png"));
+        texture.setSize(64, 64);
     }
 
     Vector2 getVectorInstance() {
@@ -61,7 +61,7 @@ public class Hook implements Object2D {
             fishOn = false;
     }
 
-    public Texture getTexture() {
+    public Sprite getSprite() {
         return texture;
     }
 
