@@ -3,6 +3,7 @@ package com.group11.ctfish.model.fish;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.group11.ctfish.model.Hook;
 import com.group11.ctfish.model.ModelFacade;
@@ -19,7 +20,7 @@ public class Fish implements Object2D {
 
     private final Size size;
     private final String textureName;
-    private final Sprite sprite;
+    private Sprite sprite;
     private final Direction direction;
 
     private Vector2 pos;
@@ -89,11 +90,7 @@ public class Fish implements Object2D {
             caught = true;
             sprite.getTexture().dispose();
         } else {
-            if (direction == Direction.RIGHT) {
-                sprite.setPosition(pos.x, pos.y - sprite.getHeight() + 50);
-            } else {
-                sprite.setPosition(pos.x - sprite.getWidth(), pos.y - sprite.getHeight() / 2);
-            }
+            sprite.setPosition(pos.x, pos.y - sprite.getHeight() * 0.8f);
         }
     }
 
@@ -107,7 +104,7 @@ public class Fish implements Object2D {
         Vector2 posCopy = new Vector2(pos);
 
         double dToBottom = posCopy.y;
-        double dToTop = 450 - posCopy.y;
+        double dToTop = 400 - posCopy.y;
 
         if (dToBottom < 100) {
             Vector2 diff = new Vector2(0, 100);
@@ -162,9 +159,9 @@ public class Fish implements Object2D {
         String[] split = textureName.split("-|/");
         String output = "fish/dead_" + split[1];
         Texture texture = new Texture(Gdx.files.internal(output));
-        sprite.setSize(sprite.getHeight(), sprite.getWidth());
-        sprite.setTexture(texture);
-        sprite.setRotation(direction == Direction.RIGHT ? 0 : 180);
+        sprite = new Sprite(texture);
+        sprite.setSize(texture.getWidth() * size.getScaleFactor() * 0.2f,
+                texture.getHeight() * size.getScaleFactor() * 0.2f);
     }
 
     public void setVector(float x, float y){
